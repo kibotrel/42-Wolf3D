@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/04/02 15:32:54 by kibotrel         ###   ########.fr       */
+/*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
+/*   Updated: 2019/04/02 15:45:49 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF3D_H
-# define WOLF3D_H
+#include "libft.h"
+#include "wolf3d.h"
 
-/*
-**	usage/usage.c
-*/
-
-void	usage(void);
-
-#endif
+int	main(int ac, char **av)
+{
+	if (ac == 2 && !ft_strcmp(av[0], "./wolf3d"))
+		ft_putendl("Parsing incoming");
+	else
+		usage();
+	return (0);
+}

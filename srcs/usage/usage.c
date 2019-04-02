@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*   usage.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/04/02 15:32:54 by kibotrel         ###   ########.fr       */
+/*   Created: 2019/04/02 15:30:44 by kibotrel          #+#    #+#             */
+/*   Updated: 2019/04/02 15:38:54 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF3D_H
-# define WOLF3D_H
+#include "libft.h"
 
-/*
-**	usage/usage.c
-*/
-
-void	usage(void);
-
-#endif
+void	usage(void)
+{
+	ft_putendl("usage:  ./wolf3d \'map.w3d\'");
+}

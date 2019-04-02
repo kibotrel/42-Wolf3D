@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/02 14:47:23 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/04/02 15:28:43 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME		= wolf3d
 # All the directories needed to know where files should be (Can be changed)
 
 OBJDIR		= objs/
-OBJSUBDIRS	=
+OBJSUBDIRS	= core usage
 SRCDIR		= srcs/
 LFTDIR		= libft/
 MLXDIR		= /usr/local/lib/
@@ -25,7 +25,9 @@ INCDIR		= ./incs/ ./libft/incs/
 
 # Source files (Can be changed)
 
-SRC			=
+SRC			= core/main.c		\
+								\
+			  usage/usage.c
 
 LFT			= ./libft/libft.a
 
