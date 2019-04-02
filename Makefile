@@ -6,13 +6,13 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/02 14:42:08 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/04/02 14:47:23 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Executable's name (Can be changed)
 
-NAME		=
+NAME		= wolf3d
 
 # All the directories needed to know where files should be (Can be changed)
 
