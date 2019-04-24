@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
+#    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/02 15:28:43 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/04/24 15:22:06 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ OBJDIR		= objs/
 OBJSUBDIRS	= core usage
 SRCDIR		= srcs/
 LFTDIR		= libft/
-MLXDIR		= /usr/local/lib/
-INCDIR		= ./incs/ ./libft/incs/
+SDLDIR		= SDL2-2.0.9/build/.libs/
+INCDIR		= ./incs/ ./libft/incs/ ./SDL2-2.0.9/include/
 
 # Source files (Can be changed)
 
@@ -31,7 +31,7 @@ SRC			= core/main.c		\
 
 LFT			= ./libft/libft.a
 
-TOOLS		= OpenGL AppKit
+TOOLS		=
 
 # Some tricks in order to get the makefile doing his job the way I want (Can't be changed)
 
@@ -45,7 +45,7 @@ FRAMEWORKS	= $(foreach framework, $(TOOLS), -framework $(framework))
 
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
-LIBS		= -L$(LFTDIR) -lft -L$(MLXDIR) -lmlx
+LIBS		= -L$(LFTDIR) -lft -L$(SDLDIR) -lSDL2
 CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror
 
 # Color codes
@@ -56,7 +56,7 @@ YELLOW		= \033[33m
 
 # Check if object directory exists, build libft and then the Project
 
-all: $(SUBDIRS) $(NAME)
+all: $(SDL) $(SUBDIRS) $(NAME)
 
 $(NAME): $(LFT) $(OBJDIR) $(COBJ)
 	@echo "$(YELLOW)\n      - Building $(RESET)$(NAME) $(YELLOW)...\n$(RESET)"
