@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/24 15:22:06 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/04/25 08:52:13 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ OBJDIR		= objs/
 OBJSUBDIRS	= core usage
 SRCDIR		= srcs/
 LFTDIR		= libft/
-SDLDIR		= SDL2-2.0.9/build/.libs/
-INCDIR		= ./incs/ ./libft/incs/ ./SDL2-2.0.9/include/
+SDLDIR		= $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
+INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 
 # Source files (Can be changed)
 
@@ -31,15 +31,12 @@ SRC			= core/main.c		\
 
 LFT			= ./libft/libft.a
 
-TOOLS		=
-
 # Some tricks in order to get the makefile doing his job the way I want (Can't be changed)
 
 CSRC		= $(addprefix $(SRCDIR), $(SRC))
 COBJ		= $(addprefix $(OBJDIR), $(OBJ))
 SUBDIRS		= $(foreach dir, $(OBJSUBDIRS), $(OBJDIR)$(dir))
 INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
-FRAMEWORKS	= $(foreach framework, $(TOOLS), -framework $(framework))
 
 # How files should be compiled with set flags (Can be changed)
 
@@ -47,7 +44,6 @@ CC			= gcc
 OBJ			= $(SRC:.c=.o)
 LIBS		= -L$(LFTDIR) -lft -L$(SDLDIR) -lSDL2
 CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror
-
 # Color codes
 
 RESET		= \033[0m
@@ -56,11 +52,14 @@ YELLOW		= \033[33m
 
 # Check if object directory exists, build libft and then the Project
 
-all: $(SDL) $(SUBDIRS) $(NAME)
+all:  $(SUBDIRS) $(NAME)
 
 $(NAME): $(LFT) $(OBJDIR) $(COBJ)
+	@if !(brew ls --versions sdl2) > /dev/null; then\
+		brew install sdl2;\
+	fi
 	@echo "$(YELLOW)\n      - Building $(RESET)$(NAME) $(YELLOW)...\n$(RESET)"
-	@$(CC) $(CFLAGS) $(LIBS) $(FRAMEWORKS) -o $(NAME) $(COBJ)
+	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(COBJ)
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
 
 $(OBJDIR):
