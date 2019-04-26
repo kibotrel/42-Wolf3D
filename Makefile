@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/25 10:24:26 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/04/26 13:16:31 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME		= wolf3d
 # All the directories needed to know where files should be (Can be changed)
 
 OBJDIR		= objs/
-OBJSUBDIRS	= core usage
+OBJSUBDIRS	= core usage ray_cast
 SRCDIR		= srcs/
 LFTDIR		= libft/
 SDLDIR		= $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
@@ -25,8 +25,9 @@ INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 
 # Source files (Can be changed)
 
-SRC			= core/main.c		\
-								\
+SRC			= core/main.c\
+			  ray_cast/ray_casting.c\
+			  ray_cast/tools.c\
 			  usage/usage.c
 
 LFT			= ./libft/libft.a
@@ -44,6 +45,7 @@ CC			= gcc
 OBJ			= $(SRC:.c=.o)
 LIBS		= -L$(LFTDIR) -lft -L$(SDLDIR) -lSDL2
 CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror
+
 # Color codes
 
 RESET		= \033[0m
