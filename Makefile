@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/26 13:16:31 by reda-con         ###   ########.fr        #
+#    Updated: 2019/04/29 09:32:24 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 
 SRC			= core/main.c\
 			  ray_cast/ray_casting.c\
-			  ray_cast/tools.c\
+			  ray_cast/raycast_tools.c\
+			  ray_cast/control.c \
 			  usage/usage.c
 
 LFT			= ./libft/libft.a

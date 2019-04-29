@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/04/26 14:18:32 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/04/29 11:01:54 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	main(void)
 {
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
-	SDL_Event		ev;
-	t_ptd			play_pos = {1.0, 1.0};
-	t_ptd			play_vec = {0, 1};
+	t_ray_cast		*all;
 /*	double			mov_speed;
 	double			rot_speed;
 	double			act_time = 0;
@@ -66,40 +64,12 @@ int	main(void)
 		{1,1,1,1,1,1,1,1,1,1}
 	};
 
+	all = (t_ray_cast*)malloc(sizeof(t_ray_cast));
 	SDL_Init(SDL_INIT_VIDEO);
-	if (SDL_CreateWindowAndRenderer(WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_RESIZABLE, &win, &ren) == -1)
+	if (SDL_CreateWindowAndRenderer(WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_RESIZABLE,
+	&win, &ren) == -1)
 		return (1);
-	while (42)
-	{
-/*		old_time = act_time;
-		act_time = (double)SDL_GetTicks();
-		frame_time = (act_time - old_time) / 1000.0;
-		printf("%f", 1.0 / frame_time);
-		mov_speed = frame_time * 5.0;
-		rot_speed = frame_time * 3.0;*/
-		SDL_PollEvent(&ev);
-		if (ev.type == SDL_QUIT)
-			fun_exit(ren, win);
-		// Read keys
-		/*	while (SDL_PollEvent(&ev))
-			{
-			if (ev.type == SDL_QUIT)
-			fun_exit(ren, win);
-			if (ev.type == SDL_KEYDOWN)
-			{
-			if (ev.key.keysym.scancode == SDL_SCANCODE_W)
-			{
-			if (worldMap[(int)(pos)][])
-			}
-			else if (ev.key.keysym.scancode == SDL_SCANCODE_S)
-			else if (ev.key.keysym.scancode == SDL_SCANCODE_A)
-			else if (ev.key.keysym.scancode == SDL_SCANCODE_D)
-
-
-
-			}
-			}*/
-		raycast(ren, worldMap, play_pos, play_vec);
-		SDL_RenderPresent(ren);
-	}
+	all = raycast(ren, worldMap, 1, all);
+	SDL_RenderPresent(ren);
+	control(all, worldMap, win ,ren);
 }
