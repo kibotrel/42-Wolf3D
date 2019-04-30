@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/04/30 14:50:29 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/04/30 15:55:18 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ void	true_raycast(int map[4][10])
 {
 	t_ptd	play_pos = {1.5, 3.5};
 	int		play_angle;
-	double	angle_between_ray;
 	double	distance_screen;
-	//int 	x = -1; 
+	int 	x = -1; 
 	t_ptd	dist_col_x;
 	t_ptd	dist_col_y;
 	t_ptd	coll_x;
@@ -53,74 +52,76 @@ void	true_raycast(int map[4][10])
 	int		hit_x;
 	int		hit_y;
 	double	dist_col;
+	double	act_angle;
 
 	hit_x = 0;
 	hit_y = 0;
 	distance_screen = (WIN_WIDTH / 2) / my_tan(rad_angle(30));
-	angle_between_ray = 60 / WIN_WIDTH;
 	play_angle = 60;
 	play_coor.x = floor(play_pos.x) * SQUARE_SIZE + (play_pos.x - floor(play_pos.x)) * SQUARE_SIZE;
 	play_coor.y = floor(play_pos.y) * SQUARE_SIZE + (play_pos.y - floor(play_pos.y)) * SQUARE_SIZE;
-
-
-
-	//	while (++x < WIN_WIDTH) // Pour chaque colonne de l'ecran
-	//	{
-	// Pour les collisions en Y
-	// Chercher premiere collisions avec un bord
-	if (play_angle > 0 && play_angle < 180)
-		coll_y.y = floor(play_coor.y / SQUARE_SIZE) * SQUARE_SIZE - 1;
+	play_angle = (play_angle == 360) ? 0 : play_angle;
+	if (play_angle < 30)
+		act_angle = play_angle + 330;
 	else
-		coll_y.y = floor(play_coor.y / SQUARE_SIZE) * SQUARE_SIZE + SQUARE_SIZE;
-	dist_col_y.y = (play_angle > 0 && play_angle < 180) ? -SQUARE_SIZE : SQUARE_SIZE;
-	// Chercher collision avec le mur
-	coll_y.x = play_coor.x + (play_coor.y - coll_y.y) / my_tan(rad_angle(play_angle));
-	dist_col_y.x = (play_angle < 90 || play_angle > 270) \
-				? SQUARE_SIZE / my_tan(rad_angle(play_angle)) : -(SQUARE_SIZE / my_tan(rad_angle(play_angle)));
+		act_angle = play_angle - 30;
 
-
-	printf("%f; %f\n", dist_col_y.x, dist_col_y.y);
-
-	// Pour les collisions en X
-	if (play_angle < 90 || play_angle > 270)
-		coll_x.x = floor(play_coor.x / SQUARE_SIZE) * SQUARE_SIZE + SQUARE_SIZE;
-	else
-		coll_x.x = floor(play_coor.x / SQUARE_SIZE) * SQUARE_SIZE - 1;
-	dist_col_x.x = (play_angle < 90 || play_angle > 270) ? SQUARE_SIZE : -SQUARE_SIZE;
-	coll_x.y = play_coor.y + (play_coor.x - coll_x.x) * my_tan(rad_angle(play_angle));
-	dist_col_x.y = (play_angle > 0 && play_angle < 180) \
-				? -(SQUARE_SIZE * my_tan(rad_angle(play_angle))) : SQUARE_SIZE * my_tan(rad_angle(play_angle));
-
-
-	printf("%f; %f\n", dist_col_x.x, dist_col_x.y);
-
-	while (hit_x == 0 && hit_y == 0)
+	while (++x < WIN_WIDTH) // Pour chaque colonne de l'ecran
 	{
-		if (map[(int)coll_x.y / SQUARE_SIZE][(int)coll_x.x / SQUARE_SIZE] != 0 && hit_x == 0)
-			hit_x = 1;
+		// Pour les collisions en Y
+		// Chercher premiere collisions avec un bord
+		if (act_angle > 0 && act_angle < 180)
+			coll_y.y = floor(play_coor.y / SQUARE_SIZE) * SQUARE_SIZE - 1;
 		else
-		{
-			coll_x.x += dist_col_x.x;
-			coll_x.y += dist_col_x.y;
-		}
-		if (map[(int)coll_y.y / SQUARE_SIZE][(int)coll_y.x / SQUARE_SIZE] != 0 && hit_y == 0)
-			hit_y = 1;
+			coll_y.y = floor(play_coor.y / SQUARE_SIZE) * SQUARE_SIZE + SQUARE_SIZE;
+		dist_col_y.y = (act_angle > 0 && act_angle < 180) ? -SQUARE_SIZE : SQUARE_SIZE;
+		// Chercher collision avec le mur
+		coll_y.x = play_coor.x + (play_coor.y - coll_y.y) / my_tan(rad_angle(act_angle));
+		dist_col_y.x = (act_angle < 90 || act_angle > 270) \
+					   ? SQUARE_SIZE / my_tan(rad_angle(act_angle)) : -(SQUARE_SIZE / my_tan(rad_angle(act_angle)));
+
+
+
+		// Pour les collisions en X
+		if (act_angle < 90 || act_angle > 270)
+			coll_x.x = floor(play_coor.x / SQUARE_SIZE) * SQUARE_SIZE + SQUARE_SIZE;
 		else
+			coll_x.x = floor(play_coor.x / SQUARE_SIZE) * SQUARE_SIZE - 1;
+		dist_col_x.x = (act_angle < 90 || act_angle > 270) ? SQUARE_SIZE : -SQUARE_SIZE;
+		coll_x.y = play_coor.y + (play_coor.x - coll_x.x) * my_tan(rad_angle(act_angle));
+		dist_col_x.y = (act_angle > 0 && act_angle < 180) \
+					   ? -(SQUARE_SIZE * my_tan(rad_angle(act_angle))) : SQUARE_SIZE * my_tan(rad_angle(act_angle));
+
+
+
+		while (hit_x == 0 && hit_y == 0)
 		{
-			coll_y.x += dist_col_y.x;
-			coll_y.y += dist_col_y.y;
+			if (map[(int)coll_x.y / SQUARE_SIZE][(int)coll_x.x / SQUARE_SIZE] != 0 && hit_x == 0)
+				hit_x = 1;
+			else
+			{
+				coll_x.x += dist_col_x.x;
+				coll_x.y += dist_col_x.y;
+			}
+			if (map[(int)coll_y.y / SQUARE_SIZE][(int)coll_y.x / SQUARE_SIZE] != 0 && hit_y == 0)
+				hit_y = 1;
+			else
+			{
+				coll_y.x += dist_col_y.x;
+				coll_y.y += dist_col_y.y;
+			}
 		}
+
+
+
+		dist_col = sqrt(pow(coll_x.x/64 - play_pos.x, 2) + pow(coll_x.y/64 - play_pos.y, 2));
+		if (dist_col > sqrt(pow(coll_y.x/64 - play_pos.x, 2) + pow(coll_y.y/64 - play_pos.y, 2)))
+			dist_col = sqrt(pow(coll_y.x/64 - play_pos.x, 2) + pow(coll_y.y/64 - play_pos.y, 2));
+		printf("X: %f; %f ", coll_x.x/64, coll_x.y/64);
+		printf("Y: %f; %f ", coll_y.x/64, coll_y.y/64);
+		printf("DISTANCE DE TA RACE: %f\n", dist_col);
+		act_angle += 60.0 / WIN_WIDTH;
 	}
-
-
-
-	dist_col = sqrt(pow(coll_x.x/64 - play_pos.x, 2) + pow(coll_x.y/64 - play_pos.y, 2));
-	if (dist_col > sqrt(pow(coll_y.x/64 - play_pos.x, 2) + pow(coll_y.y/64 - play_pos.y, 2)))
-		dist_col = sqrt(pow(coll_y.x/64 - play_pos.x, 2) + pow(coll_y.y/64 - play_pos.y, 2));
-	printf("X: %f; %f\n", coll_x.x/64, coll_x.y/64);
-	printf("Y: %f; %f\n", coll_y.x/64, coll_y.y/64);
-	printf("DISTANCE DE TA RACE: %f\n", dist_col);
-	//	}
 }
 
 int		main(void)
