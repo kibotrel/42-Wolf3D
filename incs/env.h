@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/04/24 16:40:09 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/04/26 16:33:04 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@
 # define ERR_MALLOC		"\033[31;1mError:\033[0m Can't allocate memory."
 # define ERR_FILENAME	"\033[31;1mError:\033[0m Incorrect filename."
 # define ERR_EMPTY_ROW	"\033[31;1mError:\033[0m Empty row within the map."
+# define ERR_EMPTY_FILE	"\033[31;1mError:\033[0m Empty file."
 
 #endif
