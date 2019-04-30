@@ -1,8 +1,18 @@
+# Objects directories - files
+objs
 *.o
+
+# Static libraries - Headers
 *.a
-.*.swp
-.DS_Store
+*.gch
+
+# Executables
 a.out
-*.dSYM
-test*
 wolf3d
+
+# Debug
+*.dSYM
+
+# Recovery
+*.swp
+.DS_Store
