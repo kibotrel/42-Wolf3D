@@ -1,51 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/04/30 08:58:35 by kibotrel         ###   ########.fr       */
+/*   Created: 2019/04/26 16:24:06 by kibotrel          #+#    #+#             */
+/*   Updated: 2019/04/26 17:35:41 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <wolf3d.h>
+#include "libft.h"
+#include "env.h"
+#include "wolf3d.h"
 
-void	free_split(char **coords)
+int		row_size(char **coords)
 {
 	int	y;
 
 	y = 0;
 	while (coords[y])
-		free(coords[y++]);
-	free(coords);
+		y++;
+	return (y);
 }
 
-void	free_parsemap(char *row, char **coords, t_env *env, int code)
+void	check_row(char *row, t_env *env)
 {
-	if (code > 1)
-		free_split(coords);
-	if (code > 0)
-		free(row);
-	if (code < 3)
-		free_switch(env, code);
-}
+	int	i;
 
-void	free_switch(t_env *env, int code)
-{
-	int	y;
-
-	y = 0;
-	if (code)
+	i = 0;
+	env->height++;
+	if (!*row)
 	{
-		if (env->height > 1)
+		free_parsemap(row, NULL, env, 1);
+		ft_print_error(ERR_EMPTY_ROW, 6);
+	}
+	while (row[i])
+	{
+		if (ft_isdigit(row[i]) || row[i] == ' ')
+			i++;
+		else
 		{
-			while (y < env->height - 1)
-				free(env->map[y++]);
-			free(env->map);
+			free_parsemap(row, NULL, env, 1);
+			ft_print_error(ERR_FORMAT, 7);
 		}
 	}
-	free(env);
 }

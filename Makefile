@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/24 16:51:27 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/04/30 09:23:08 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME		= wolf3d
 # All the directories needed to know where files should be (Can be changed)
 
 OBJDIR		= objs/
-OBJSUBDIRS	= core usage parsing
+OBJSUBDIRS	= core usage parsing utils
 SRCDIR		= srcs/
 LFTDIR		= libft/
 MLXDIR		= /usr/local/lib/
@@ -30,6 +30,7 @@ SRC			= core/main.c		\
 			  parsing/map.c		\
 								\
 			  utils/clean.c		\
+			  utils/parsing.c	\
 								\
 			  usage/usage.c
 

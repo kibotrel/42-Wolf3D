@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/04/26 16:28:04 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/04/30 11:12:43 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,27 @@ typedef struct	s_env
 **	usage/usage.c
 */
 
-void	usage(void);
+void			usage(void);
 
 /*
 **	parsing/map.c
 */
 
-void	parse_file(char *file, t_env *env);
+void			parse_file(char *file, t_env *env);
 
 /*
 **	utils/clean.c
 */
 
-void	free_split(char **coords);
-void	free_switch(t_env *env, int code);
-void	free_parsemap(char *row, char **coords, t_env *env, int code);
+void			free_split(char **coords);
+void			free_switch(t_env *env, int code);
+void			free_parsemap(char *row, char **coords, t_env *env, int code);
 
 /*
 **	utils/parsing.c
 */
 
-int		row_size(char **coords);
-void	check_row(char *row, t_env *env);
+int				row_size(char **coords);
+void			check_row(char *row, t_env *env);
 
 #endif
