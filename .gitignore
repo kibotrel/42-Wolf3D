@@ -1,4 +1,4 @@
-# Objects directories - files
+# Objects directories - Files
 objs
 *.o
 
@@ -6,9 +6,10 @@ objs
 *.a
 *.gch
 
-# Executables
+# Executables - Scripts
 a.out
 wolf3d
+*.sh
 
 # Debug
 *.dSYM
