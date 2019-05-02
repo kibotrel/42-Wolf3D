@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/04/29 10:32:37 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/02 10:56:21 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,22 @@ typedef struct	s_ptd
 	double	y;
 }				t_ptd;
 
+typedef struct	s_player
+{
+	t_ptd	play_pos;
+	int		play_angle;
+	t_ptd	play_coor;
+}				t_player;
+
 typedef struct	s_ray_cast
 {
-	double 	cam_x;
-	int		wall_side;
-	int		wall_dist;
-	int		line_height;
-	t_ptd	line_draw;
-	t_ptd	step;
-	t_ptd	len_next_side;
-	t_ptd	ray_dir;
-	t_ptd	map_co;
-	t_ptd	delta_dist;
-	t_ptd	cam_plane;
-	t_ptd	play_vec;
-	t_ptd	play_pos;
+	double	distance_screen;
+	t_ptd	dist_col_x;
+	t_ptd	dist_col_y;
+	t_ptd	coll_x;
+	t_ptd	coll_y;
+	double	dist_col;
+	double	act_angle;
 }				t_ray_cast;
 
 void	fun_exit(SDL_Renderer *ren, SDL_Window *win);
