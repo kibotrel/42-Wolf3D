@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/02 10:56:21 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/03 15:38:38 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_player
 
 typedef struct	s_ray_cast
 {
-	double	distance_screen;
+	double	dist_screen;
 	t_ptd	dist_col_x;
 	t_ptd	dist_col_y;
 	t_ptd	coll_x;
