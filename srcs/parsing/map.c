@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 15:16:20 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/04/30 11:14:46 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:59:21 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ static void	expand_map(int **map, t_env *env)
 	free(env->map);
 }
 
-static void	array_to_map(char **coords, t_env *env)
+static void	array_to_map(char *row, char **coords, t_env *env)
 {
 	int		y;
 	int		x;
 	int		**map;
 
+	limits(row, coords, env);
 	if (!(map = (int**)malloc(sizeof(int*) * env->height)))
 	{
 		free_switch(env, 0);
@@ -66,26 +67,17 @@ static void	build_map(const int fd, char *row, t_env *env)
 	while (ft_get_next_line(fd, &row))
 	{
 		check_row(row, env);
-		if (!(coords = ft_strsplit(row, ' ')))// Need to secure strsplit
-		{
-			free_parsemap(row, NULL, env, 1);
+		if (!(coords = ft_strsplit(row, ' ')) && free_parse(row, NULL, env, 1))
 			ft_print_error(ERR_SPLIT, 8);
-		}
 		if (env->height == 1)
-			env->width = row_size(coords);
-		else if (row_size(coords) != env->width)
-		{
-			free_parsemap(row, coords, env, 2);
+			env->width = size(coords);
+		else if (size(coords) != env->width && free_parse(row, coords, env, 2))
 			ft_print_error(ERR_WIDTH, 9);
-		}
-		array_to_map(coords, env);
-		free_parsemap(row, coords, env, 3);
+		array_to_map(row, coords, env);
+		free_parse(row, coords, env, 3);
 	}
-	if (!env->height)
-	{
-		free_switch(env, 0);
+	if (!env->height && free_switch(env, 0))
 		ft_print_error(ERR_EMPTY_FILE, 10);
-	}
 }
 
 void		parse_file(char *file, t_env *env)
@@ -95,20 +87,12 @@ void		parse_file(char *file, t_env *env)
 
 	env->height = 0;
 	row = NULL;
-	if (!ft_isvalidname(file, ".w3d"))
-	{
-		free_switch(env, 0);
+	if (!ft_isvalidname(file, ".w3d") && free_switch(env, 0))
 		ft_print_error(ERR_FILENAME, 2);
-	}
-	if ((fd = open(file, O_RDONLY)) < 0)
-	{
-		free_switch(env, 0);
+	if ((fd = open(file, O_RDONLY)) < 0 && free_switch(env, 0))
 		ft_print_error(ERR_OPEN, 3);
-	}
 	build_map(fd, row, env);
-	if (close(fd))
-	{
-		free_switch(env, 1);
+	if (close(fd) && free_switch(env, 1))
 		ft_print_error(ERR_CLOSE, 4);
-	}
+	bottom_border(env);
 }

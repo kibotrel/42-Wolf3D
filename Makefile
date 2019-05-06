@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
+#    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/25 08:52:13 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/04/30 11:58:41 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME		= wolf3d
 # All the directories needed to know where files should be (Can be changed)
 
 OBJDIR		= objs/
-OBJSUBDIRS	= core usage
+OBJSUBDIRS	= core usage parsing utils
 SRCDIR		= srcs/
 LFTDIR		= libft/
 SDLDIR		= $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
@@ -26,6 +26,11 @@ INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 # Source files (Can be changed)
 
 SRC			= core/main.c		\
+								\
+			  parsing/map.c		\
+								\
+			  utils/clean.c		\
+			  utils/parsing.c	\
 								\
 			  usage/usage.c
 

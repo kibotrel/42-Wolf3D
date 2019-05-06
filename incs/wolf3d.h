@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/04/30 11:12:43 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:45:00 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,17 @@ void			parse_file(char *file, t_env *env);
 **	utils/clean.c
 */
 
-void			free_split(char **coords);
-void			free_switch(t_env *env, int code);
-void			free_parsemap(char *row, char **coords, t_env *env, int code);
+int			free_switch(t_env *env, int code);
+int			free_parse(char *row, char **coords, t_env *env, int code);
+void		free_split(char **coords);
 
 /*
 **	utils/parsing.c
 */
 
-int				row_size(char **coords);
+int				size(char **coords);
+void			bottom_border(t_env *env);
 void			check_row(char *row, t_env *env);
+void			limits(char *row, char **coords, t_env *env);
 
 #endif

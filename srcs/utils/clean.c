@@ -6,24 +6,14 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/04/30 08:58:35 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/06 17:22:21 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <wolf3d.h>
 
-void	free_split(char **coords)
-{
-	int	y;
-
-	y = 0;
-	while (coords[y])
-		free(coords[y++]);
-	free(coords);
-}
-
-void	free_parsemap(char *row, char **coords, t_env *env, int code)
+int		free_parse(char *row, char **coords, t_env *env, int code)
 {
 	if (code > 1)
 		free_split(coords);
@@ -31,14 +21,14 @@ void	free_parsemap(char *row, char **coords, t_env *env, int code)
 		free(row);
 	if (code < 3)
 		free_switch(env, code);
+	return (1);
 }
 
-void	free_switch(t_env *env, int code)
+int		free_switch(t_env *env, int code)
 {
 	int	y;
 
-	y = 0;
-	if (code)
+	if (!(y = 0) && code)
 	{
 		if (env->height > 1)
 		{
@@ -48,4 +38,15 @@ void	free_switch(t_env *env, int code)
 		}
 	}
 	free(env);
+	return (1);
+}
+
+void	free_split(char **coords)
+{
+	int	y;
+
+	y = 0;
+	while (coords[y])
+		free(coords[y++]);
+	free(coords);
 }
