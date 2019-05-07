@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/04/26 09:21:47 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:45:21 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define WIN_WIDTH	1000
 # define WIN_HEIGHT	1000
+# define SQUARE_SIZE 64
 
 /*
 **	Basic colors

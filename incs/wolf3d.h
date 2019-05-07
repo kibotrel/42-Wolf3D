@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/03 15:38:38 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:47:11 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ void		check_wall_color(SDL_Renderer *ren, int wall, int wall_side);
 void		control(t_ray_cast *all, int worldMap[4][10], SDL_Window *win, SDL_Renderer *ren);
 double		double_abs(double i);
 t_ptd		init_ptd(double x, double y);
+double		my_tan(double angle);
+double		rad_angle(double angle);
+t_player	init_player(void);
+t_ray_cast	init_rc(t_player plau);
 
 #endif

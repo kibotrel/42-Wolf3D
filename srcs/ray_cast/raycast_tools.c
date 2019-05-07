@@ -6,12 +6,13 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/04/29 11:12:57 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:47:52 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SDL.h"
 #include "wolf3d.h"
+#include <math.h>
 
 void	fun_exit(SDL_Renderer *ren, SDL_Window *win)
 {
@@ -29,7 +30,7 @@ void	draw_line(t_ptd a, t_ptd b, SDL_Renderer *ren)
 {
 	t_ptd	delta;
 	t_ptd	sign;
-	t_ptd 	curr;
+	t_ptd	curr;
 	int		tab[2];
 
 	delta.x = double_abs((int)b.x - (int)a.x);
@@ -63,23 +64,12 @@ t_ptd	init_ptd(double x, double y)
 	return (new);
 }
 
-void	check_wall_color(SDL_Renderer *ren, int wall, int wall_side)
+double	rad_angle(double angle)
 {
-	int		darker;
+	return (angle * M_PI / 180);
+}
 
-	darker = 1;
-	if (wall_side == 1)
-		darker = 2;
-	/*if (wall == 0)
-		SDL_SetRenderDrawColor(ren, 255 / darker, 0 / darker, 0 / darker, 255);
-	else */if (wall == 1)
-		SDL_SetRenderDrawColor(ren, 0 / darker, 255 / darker, 0 / darker, 255);
-	else if (wall == 2)
-		SDL_SetRenderDrawColor(ren, 0 / darker, 0 / darker, 255 / darker, 255);
-	else if (wall == 3)
-		SDL_SetRenderDrawColor(ren, 255 / darker, 255 / darker,\
-				0 / darker, 255);
-	else if (wall == 4)
-		SDL_SetRenderDrawColor(ren, 255 / darker, 0 / darker,\
-				255 / darker, 255);
+double	my_tan(double angle)
+{
+	return (sin(angle) / cos(angle));
 }
