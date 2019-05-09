@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/06 17:28:33 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:23:55 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include <stdio.h>//
 
+
+// PENSER A PROTECT LE MOVE DU BINAIRE !!!
 int	main(int ac, char **av)
 {
 	t_env	*env;
