@@ -6,23 +6,23 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/09 13:52:26 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:20:55 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "wolf3d.h"
 
-static t_ray_cast	y_collisions(t_ray_cast all, t_player play)
+static t_ray_cast	y_collisions(t_ray_cast all, t_player *play)
 {
 	if (all.act_angle > 0 && all.act_angle < 180)
-		all.coll_y.y = floor(play.play_coor.y / SQUARE_SIZE) * SQUARE_SIZE - 1;
+		all.coll_y.y = floor(play->play_coor.y / SQUARE_SIZE) * SQUARE_SIZE - 1;
 	else
-		all.coll_y.y = floor(play.play_coor.y / SQUARE_SIZE)\
+		all.coll_y.y = floor(play->play_coor.y / SQUARE_SIZE)\
 			* SQUARE_SIZE + SQUARE_SIZE;
 	all.dist_col_y.y = (all.act_angle > 0 && all.act_angle < 180)\
 		? -SQUARE_SIZE : SQUARE_SIZE;
-	all.coll_y.x = play.play_coor.x + (play.play_coor.y - all.coll_y.y)\
+	all.coll_y.x = play->play_coor.x + (play->play_coor.y - all.coll_y.y)\
 		/ my_tan(rad_angle(all.act_angle));
 	all.dist_col_y.x = SQUARE_SIZE / my_tan(rad_angle(all.act_angle));
 	all.dist_col_y.x = (all.act_angle > 180 && all.act_angle < 270)\
@@ -30,16 +30,16 @@ static t_ray_cast	y_collisions(t_ray_cast all, t_player play)
 	return (all);
 }
 
-static t_ray_cast	x_collisions(t_ray_cast all, t_player play)
+static t_ray_cast	x_collisions(t_ray_cast all, t_player *play)
 {
 	if (all.act_angle < 90 || all.act_angle > 270)
-		all.coll_x.x = floor(play.play_coor.x / SQUARE_SIZE)\
+		all.coll_x.x = floor(play->play_coor.x / SQUARE_SIZE)\
 			* SQUARE_SIZE + SQUARE_SIZE;
 	else
-		all.coll_x.x = floor(play.play_coor.x / SQUARE_SIZE) * SQUARE_SIZE - 1;
+		all.coll_x.x = floor(play->play_coor.x / SQUARE_SIZE) * SQUARE_SIZE - 1;
 	all.dist_col_x.x = (all.act_angle < 90 || all.act_angle > 270)\
 		? SQUARE_SIZE : -SQUARE_SIZE;
-	all.coll_x.y = play.play_coor.y + (play.play_coor.x - all.coll_x.x)\
+	all.coll_x.y = play->play_coor.y + (play->play_coor.x - all.coll_x.x)\
 		* my_tan(rad_angle(all.act_angle));
 	all.dist_col_x.y = SQUARE_SIZE * my_tan(rad_angle(all.act_angle));
 	all.dist_col_x.y = (all.act_angle > 0 && all.act_angle < 90)\
@@ -95,7 +95,7 @@ static t_ray_cast	check_coll(t_ray_cast all, int **map)
 
 int					check_color(double angle)
 {
-	if (angle <= 45 && angle > 315)
+	if (angle <= 45 || angle > 315)
 		return (RED);
 	else if (angle <= 315 && angle > 225)
 		return (GREEN);
@@ -105,20 +105,20 @@ int					check_color(double angle)
 		return (YELLOW);
 }
 
-void				true_raycast(int **map, SDL_Renderer *ren, t_player play)
+void				true_raycast(int **map, SDL_Renderer *ren, t_player *play)
 {
 	int			x;
 	t_ray_cast	all;
-	all = init_rc(play);
 
+	all = init_rc(*play);
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
 		all = y_collisions(all, play);
 		all = x_collisions(all, play);
 		all = check_coll(all, map);
-		all.dist_col = length(all.coll_x, all.coll_y, play.play_coor);
-		all.dist_col *= cos(rad_angle(play.play_angle - all.act_angle));
+		all.dist_col = length(all.coll_x, all.coll_y, play->play_coor);
+		all.dist_col *= cos(rad_angle(play->play_angle - all.act_angle));
 		all.wall_size = ceil((SQUARE_SIZE / all.dist_col) * all.dist_screen);
 		all.wall_start.x = WIN_WIDTH - x;
 		all.wall_start.y = (WIN_HEIGHT / 2) - (all.wall_size / 2);
@@ -130,13 +130,17 @@ void				true_raycast(int **map, SDL_Renderer *ren, t_player play)
 	SDL_RenderPresent(ren);
 }
 
-void	change_mouse(SDL_MouseMotionEvent move, t_mouse *mouse, t_player *play)
+void	change_angle(t_player *play, SDL_Keysym key)
 {
-	mouse->prev.x = mouse->act.x;
-	mouse->prev.y = mouse->act.y;
-	mouse->act.x = move.x;
-	mouse->act.y = move.y;
-	if (mouse->act.x < mouse->prev.x)
+	if (key.sym == SDLK_COMMA)
+		++play->play_angle;
+	else
+		--play->play_angle;
+}
+
+void	change_mouse_angle(int chg, t_player *play)
+{
+	if (chg > 0)
 		--play->play_angle;
 	else
 		++play->play_angle;
@@ -152,6 +156,7 @@ int					main(void)
 	int				y;
 	int				wait;
 	t_player	play;
+	int				neg;
 
 	x = 0;
 	SDL_Init(SDL_INIT_VIDEO);
@@ -169,17 +174,54 @@ int					main(void)
 	}
 	play = init_player();
 	worldmap[6][6] = 1;
-	true_raycast(worldmap, ren, play);
+	true_raycast(worldmap, ren, &play);
 	wait = 1;
-//	SDL_WarpMouse(WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	SDL_WarpMouseInWindow(win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	while (wait)
 	{
 		SDL_PollEvent(&ev);
 		if (ev.window.event == SDL_WINDOWEVENT_CLOSE || ev.key.keysym.sym == SDLK_ESCAPE)
 			wait = 0;
-//		else if (ev.type == SDL_MOUSEMOTION)
-//			change_mouse(ev.motion, &mouse, &play);
-//		true_raycast(worldmap, ren, play);
+		else if (ev.type == SDL_KEYDOWN)
+		{
+			if (ev.key.keysym.sym == SDLK_COMMA || ev.key.keysym.sym == SDLK_PERIOD)
+				change_angle(&play, ev.key.keysym);
+			else if (ev.key.keysym.sym == SDLK_w)
+			{
+				neg = ((play.play_angle < 90 && play.play_angle > 0)\
+						|| (play.play_angle > 180 && play.play_angle < 270)) ? -1 : 1;
+				play.play_coor.x += cos(rad_angle(play.play_angle)) * 10 * neg;
+				play.play_coor.y -= sin(rad_angle(play.play_angle)) * 10;
+			}
+			else if (ev.key.keysym.sym == SDLK_s)
+			{
+				neg = ((play.play_angle < 90 && play.play_angle > 0)\
+						|| (play.play_angle > 180 && play.play_angle < 270)) ? -1 : 1;
+				play.play_coor.x -= cos(rad_angle(play.play_angle)) * 10 * neg;
+				play.play_coor.y += sin(rad_angle(play.play_angle)) * 10;
+			}
+			else if (ev.key.keysym.sym == SDLK_a)
+			{
+				neg = ((play.play_angle + 90 < 90 && play.play_angle + 90 > 0)\
+						|| (play.play_angle + 90 > 180 && play.play_angle + 90 < 270)) ? -1 : 1;
+				play.play_coor.x += cos(rad_angle(play.play_angle + 90)) * 10;
+				play.play_coor.y -= sin(rad_angle(play.play_angle + 90)) * 10;
+			}
+			else if (ev.key.keysym.sym == SDLK_d)
+			{
+				neg = ((play.play_angle + 90 < 90 && play.play_angle + 90 > 0)\
+						|| (play.play_angle + 90 > 180 && play.play_angle + 90 < 270)) ? -1 : 1;
+				play.play_coor.x -= cos(rad_angle(play.play_angle + 90)) * 10;
+				play.play_coor.y += sin(rad_angle(play.play_angle + 90)) * 10;
+			}
+		}
+/*		else if (ev.type == SDL_MOUSEMOTION)
+		{
+			printf("%i; %i\n", ev.motion.x, ev.motion.xrel);
+			change_mouse_angle(ev.motion.xrel, &play);
+		}*/
+		true_raycast(worldmap, ren, &play);
+//		SDL_WarpMouseInWindow(win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	}
 	fun_exit(ren, win);
 	return (0);
