@@ -6,12 +6,13 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/09 10:43:42 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/09 13:59:45 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SDL.h"
 #include "wolf3d.h"
+#include "env.h"
 #include <math.h>
 
 void	fun_exit(SDL_Renderer *ren, SDL_Window *win)
@@ -26,32 +27,30 @@ double	double_abs(double i)
 	return ((i > 0) ? i : -i);
 }
 
-void	draw_line(t_ptd a, t_ptd b, SDL_Renderer *ren)
+void	draw_rc(t_ptd a, t_ptd b, SDL_Renderer *ren, int clr)
 {
-	t_ptd	delta;
-	t_ptd	sign;
-	t_ptd	curr;
-	int		tab[2];
+	t_ptd	cur;
 
-	delta.x = double_abs((int)b.x - (int)a.x);
-	delta.y = double_abs((int)b.y - (int)a.y);
-	sign.x = (int)a.x < (int)b.x ? 1 : -1;
-	sign.y = (int)a.y < (int)b.y ? 1 : -1;
-	tab[0] = (int)delta.x - (int)delta.y;
-	curr = a;
-	while ((int)curr.x != (int)b.x || (int)curr.y != (int)b.y)
+	cur.x = a.x;
+	cur.y = 0;
+	while (cur.y < WIN_HEIGHT)
 	{
-		SDL_RenderDrawPoint(ren, (int)curr.x, (int)curr.y);
-		if ((tab[1] = tab[0] * 2) > (int)-delta.y)
+		if (cur.y < a.y)
 		{
-			tab[0] -= (int)delta.y;
-			curr.x += (int)sign.x;
+			SDL_SetRenderDrawColor(ren, 0, 255, 255, 255);
+			SDL_RenderDrawPoint(ren, (int)cur.x, (int)cur.y);
 		}
-		if (tab[1] < (int)delta.x)
+		else if (cur.y >= a.y && cur.y <= b.y)
 		{
-			tab[0] += (int)delta.x;
-			curr.y += (int)sign.y;
+			SDL_SetRenderDrawColor(ren, clr >> 16, clr >> 8, clr, 255);
+			SDL_RenderDrawPoint(ren, (int)cur.x, (int)cur.y);
 		}
+		else
+		{
+			SDL_SetRenderDrawColor(ren, 200, 200, 200, 255);
+			SDL_RenderDrawPoint(ren, (int)cur.x, (int)cur.y);
+		}
+		++cur.y;
 	}
 }
 

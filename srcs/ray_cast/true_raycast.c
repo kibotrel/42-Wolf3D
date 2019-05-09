@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/09 11:38:27 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/09 13:52:26 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,15 +93,25 @@ static t_ray_cast	check_coll(t_ray_cast all, int **map)
 	return (all);
 }
 
-void				true_raycast(int **map, SDL_Renderer *ren)
+int					check_color(double angle)
+{
+	if (angle <= 45 && angle > 315)
+		return (RED);
+	else if (angle <= 315 && angle > 225)
+		return (GREEN);
+	else if (angle <= 225 && angle > 135)
+		return (BLUE);
+	else
+		return (YELLOW);
+}
+
+void				true_raycast(int **map, SDL_Renderer *ren, t_player play)
 {
 	int			x;
-	t_player	play;
 	t_ray_cast	all;
+	all = init_rc(play);
 
 	x = -1;
-	play = init_player();
-	all = init_rc(play);
 	while (++x < WIN_WIDTH)
 	{
 		all = y_collisions(all, play);
@@ -114,10 +124,22 @@ void				true_raycast(int **map, SDL_Renderer *ren)
 		all.wall_start.y = (WIN_HEIGHT / 2) - (all.wall_size / 2);
 		all.wall_end.x = WIN_WIDTH - x;
 		all.wall_end.y = all.wall_start.y + all.wall_size;
-		draw_line(all.wall_start, all.wall_end, ren);
+		draw_rc(all.wall_start, all.wall_end, ren, check_color(all.act_angle));
 		all.act_angle += 60.0 / WIN_WIDTH;
 	}
 	SDL_RenderPresent(ren);
+}
+
+void	change_mouse(SDL_MouseMotionEvent move, t_mouse *mouse, t_player *play)
+{
+	mouse->prev.x = mouse->act.x;
+	mouse->prev.y = mouse->act.y;
+	mouse->act.x = move.x;
+	mouse->act.y = move.y;
+	if (mouse->act.x < mouse->prev.x)
+		--play->play_angle;
+	else
+		++play->play_angle;
 }
 
 int					main(void)
@@ -128,6 +150,8 @@ int					main(void)
 	SDL_Event		ev;
 	int				x;
 	int				y;
+	int				wait;
+	t_player	play;
 
 	x = 0;
 	SDL_Init(SDL_INIT_VIDEO);
@@ -143,14 +167,20 @@ int					main(void)
 		while (++y < 10)
 			worldmap[x][y] = ((x == 0 || y == 0 || x == 9 || y == 9) ? 1 : 0);
 	}
-	worldmap[3][3] = 1;
-	SDL_SetRenderDrawColor(ren, 0, 255, 0, 255);
-	true_raycast(worldmap, ren);
-	while (42)
+	play = init_player();
+	worldmap[6][6] = 1;
+	true_raycast(worldmap, ren, play);
+	wait = 1;
+//	SDL_WarpMouse(WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	while (wait)
 	{
 		SDL_PollEvent(&ev);
-		if (ev.window.event == SDL_WINDOWEVENT_CLOSE)
-			exit(0);
+		if (ev.window.event == SDL_WINDOWEVENT_CLOSE || ev.key.keysym.sym == SDLK_ESCAPE)
+			wait = 0;
+//		else if (ev.type == SDL_MOUSEMOTION)
+//			change_mouse(ev.motion, &mouse, &play);
+//		true_raycast(worldmap, ren, play);
 	}
+	fun_exit(ren, win);
 	return (0);
 }
