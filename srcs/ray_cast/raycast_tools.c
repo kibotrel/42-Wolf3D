@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/07 16:47:52 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/09 10:43:42 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,6 @@ void	draw_line(t_ptd a, t_ptd b, SDL_Renderer *ren)
 			curr.y += (int)sign.y;
 		}
 	}
-}
-
-t_ptd	init_ptd(double x, double y)
-{
-	t_ptd	new;
-
-	new.x = x;
-	new.y = y;
-	return (new);
 }
 
 double	rad_angle(double angle)
