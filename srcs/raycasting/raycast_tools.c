@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: reda-con <reda-con@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/10 10:57:27 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/10 18:47:39 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,4 @@ void	draw_rc(t_ptd a, t_ptd b, SDL_Renderer *ren, int clr)
 		SDL_RenderDrawPoint(ren, (int)cur.x, (int)cur.y);
 		++cur.y;
 	}
-}
-
-double	rad_angle(double angle)
-{
-	return (angle * M_PI / 180);
-}
-
-double	my_tan(double angle)
-{
-	return (sin(angle) / cos(angle));
 }

@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/10 16:27:14 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/10 17:25:31 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,12 @@
 #include "libft.h"
 #include "env.h"
 #include "wolf3d.h"
-#include "SDL.h"
-
-#include <stdio.h>//
-
 
 // PENSER A PROTECT LE MOVE DU BINAIRE !!!
+
 int	main(int ac, char **av)
 {
 	t_env	*env;
-
-	int x, y;//
-	y = -1;//
 
 	if (ac == 2)
 	{
@@ -34,13 +28,7 @@ int	main(int ac, char **av)
 		if (!(env = (t_env*)malloc(sizeof(t_env))))
 			ft_print_error(ERR_MALLOC, 5);
 		parse_file(av[1], env);
-		while (++y < env->height)//
-		{//
-			x = -1;//
-			while (++x < env->width)//
-				printf("%d ", env->map[y][x]);//
-			printf("\n");//
-		}//
+		setup(env);
 	}
 	else
 		usage();

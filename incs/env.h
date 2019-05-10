@@ -6,33 +6,44 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/10 16:27:15 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:08:40 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-/*
-**	Window parameters
-*/
-
-# define WIN_WIDTH	1000
-# define WIN_HEIGHT	1000
-# define SQUARE_SIZE 64
+# include <math.h>
 
 /*
-**	Basic colors
+**	Window parameters macros
 */
 
-# define RED		0xFF0000
-# define BLUE		0x0000FF
-# define CYAN		0x00FFFF
-# define BLACK		0x000000
-# define GREEN		0x00FF00
-# define WHITE		0xFFFFFF
-# define YELLOW		0xFFFF00
-# define MAGENTA	0xFF00FF
+# define WIDTH			1000
+# define HEIGHT			1000
+
+/*
+**	Maths macros
+*/
+
+# define R_E			0
+# define R_N			M_PI_2
+# define R_W			M_PI
+# define R_S			3 * M_PI / 2
+# define RADIAN			M_PI / 180
+
+/*
+**	Useful macros
+*/
+
+# define RESIZE			0x00000200
+# define SQUARE_SIZE	64
+
+/*
+**	Color macros
+*/
+
+# define DARK_GRAY		0x646464
 
 /*
 **	Error codes
