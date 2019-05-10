@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 16:44:05 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/10 11:03:40 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:22:24 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_player	init_player(void)
 		+ (ret.play_pos.x - floor(ret.play_pos.x)) * SQUARE_SIZE;
 	ret.play_coor.y = floor(ret.play_pos.y) * SQUARE_SIZE\
 		+ (ret.play_pos.y - floor(ret.play_pos.y)) * SQUARE_SIZE;
-	ret.play_angle = 315;
+	ret.play_angle = 0;
 	ret.play_angle = (ret.play_angle == 360) ? 0 : ret.play_angle;
 	return (ret);
 }
