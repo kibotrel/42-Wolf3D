@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/09 17:20:55 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:07:05 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,15 @@ void				true_raycast(int **map, SDL_Renderer *ren, t_player *play)
 {
 	int			x;
 	t_ray_cast	all;
+	SDL_Texture	*tex;
+	SDL_Rect	rect;
 
 	all = init_rc(*play);
+	rect.x = 0;
+	rect.y = 0;
 	x = -1;
+	tex = SDL_CreateTexture(ren, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT);
+	SDL_SetRenderTarget(ren, tex);
 	while (++x < WIN_WIDTH)
 	{
 		all = y_collisions(all, play);
@@ -124,18 +130,22 @@ void				true_raycast(int **map, SDL_Renderer *ren, t_player *play)
 		all.wall_start.y = (WIN_HEIGHT / 2) - (all.wall_size / 2);
 		all.wall_end.x = WIN_WIDTH - x;
 		all.wall_end.y = all.wall_start.y + all.wall_size;
-		draw_rc(all.wall_start, all.wall_end, ren, check_color(all.act_angle));
+		draw_rc(all.wall_start, all.wall_end, ren, 0x646464);
 		all.act_angle += 60.0 / WIN_WIDTH;
 	}
+	SDL_SetRenderTarget(ren, NULL);
+	SDL_QueryTexture(tex, NULL, NULL, &rect.w, &rect.h);
+	SDL_RenderCopy(ren, tex, NULL, &rect);
 	SDL_RenderPresent(ren);
+	SDL_DestroyTexture(tex);
 }
 
 void	change_angle(t_player *play, SDL_Keysym key)
 {
 	if (key.sym == SDLK_COMMA)
-		++play->play_angle;
+		play->play_angle += 2;
 	else
-		--play->play_angle;
+		play->play_angle -= 2;
 }
 
 void	change_mouse_angle(int chg, t_player *play)
@@ -154,9 +164,9 @@ int					main(void)
 	SDL_Event		ev;
 	int				x;
 	int				y;
-	int				wait;
-	t_player	play;
+	t_player		play;
 	int				neg;
+	int				wait;
 
 	x = 0;
 	SDL_Init(SDL_INIT_VIDEO);
@@ -175,8 +185,8 @@ int					main(void)
 	play = init_player();
 	worldmap[6][6] = 1;
 	true_raycast(worldmap, ren, &play);
-	wait = 1;
 	SDL_WarpMouseInWindow(win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	wait = 1;
 	while (wait)
 	{
 		SDL_PollEvent(&ev);
@@ -185,13 +195,17 @@ int					main(void)
 		else if (ev.type == SDL_KEYDOWN)
 		{
 			if (ev.key.keysym.sym == SDLK_COMMA || ev.key.keysym.sym == SDLK_PERIOD)
+			{
 				change_angle(&play, ev.key.keysym);
+				true_raycast(worldmap, ren, &play);
+			}
 			else if (ev.key.keysym.sym == SDLK_w)
 			{
 				neg = ((play.play_angle < 90 && play.play_angle > 0)\
 						|| (play.play_angle > 180 && play.play_angle < 270)) ? -1 : 1;
 				play.play_coor.x += cos(rad_angle(play.play_angle)) * 10 * neg;
 				play.play_coor.y -= sin(rad_angle(play.play_angle)) * 10;
+				true_raycast(worldmap, ren, &play);
 			}
 			else if (ev.key.keysym.sym == SDLK_s)
 			{
@@ -199,6 +213,7 @@ int					main(void)
 						|| (play.play_angle > 180 && play.play_angle < 270)) ? -1 : 1;
 				play.play_coor.x -= cos(rad_angle(play.play_angle)) * 10 * neg;
 				play.play_coor.y += sin(rad_angle(play.play_angle)) * 10;
+				true_raycast(worldmap, ren, &play);
 			}
 			else if (ev.key.keysym.sym == SDLK_a)
 			{
@@ -206,6 +221,7 @@ int					main(void)
 						|| (play.play_angle + 90 > 180 && play.play_angle + 90 < 270)) ? -1 : 1;
 				play.play_coor.x += cos(rad_angle(play.play_angle + 90)) * 10;
 				play.play_coor.y -= sin(rad_angle(play.play_angle + 90)) * 10;
+				true_raycast(worldmap, ren, &play);
 			}
 			else if (ev.key.keysym.sym == SDLK_d)
 			{
@@ -213,6 +229,7 @@ int					main(void)
 						|| (play.play_angle + 90 > 180 && play.play_angle + 90 < 270)) ? -1 : 1;
 				play.play_coor.x -= cos(rad_angle(play.play_angle + 90)) * 10;
 				play.play_coor.y += sin(rad_angle(play.play_angle + 90)) * 10;
+				true_raycast(worldmap, ren, &play);
 			}
 		}
 /*		else if (ev.type == SDL_MOUSEMOTION)
@@ -220,7 +237,6 @@ int					main(void)
 			printf("%i; %i\n", ev.motion.x, ev.motion.xrel);
 			change_mouse_angle(ev.motion.xrel, &play);
 		}*/
-		true_raycast(worldmap, ren, &play);
 //		SDL_WarpMouseInWindow(win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	}
 	fun_exit(ren, win);
