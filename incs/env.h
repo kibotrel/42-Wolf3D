@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/06 17:57:17 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:27:15 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 **	Window parameters
 */
 
-# define WIN_WIDTH	1920
-# define WIN_HEIGHT	1080
+# define WIN_WIDTH	1000
+# define WIN_HEIGHT	1000
+# define SQUARE_SIZE 64
 
 /*
 **	Basic colors

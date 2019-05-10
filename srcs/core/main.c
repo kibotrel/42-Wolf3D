@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/09 17:23:55 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:27:14 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "env.h"
 #include "wolf3d.h"
+#include "SDL.h"
 
 #include <stdio.h>//
 

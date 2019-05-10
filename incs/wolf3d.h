@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/06 17:45:00 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:26:34 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,20 @@ int				size(char **coords);
 void			bottom_border(t_env *env);
 void			check_row(char *row, t_env *env);
 void			limits(char *row, char **coords, t_env *env);
+
+/*
+**	Raycasting side-functions
+*/
+
+t_ray_cast		*raycast(SDL_Renderer *ren, int map[4][10], int start, t_ray_cast *all);
+double			double_abs(double i);
+t_ptd			init_ptd(double x, double y);
+double			my_tan(double angle);
+double			rad_angle(double angle);
+t_player		init_player(void);
+t_ray_cast		init_rc(t_player plau);
+double			sq(double n);
+double			length(t_ptd coll_x, t_ptd coll_y, t_ptd play_coor);
+void			draw_rc(t_ptd a, t_ptd b, SDL_Renderer *ren, int clr);
 
 #endif
