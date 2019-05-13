@@ -6,144 +6,77 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/10 19:16:07 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:29:58 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "SDL.h"
 #include "env.h"
 #include "wolf3d.h"
 
-static void	check_bounds(t_ray_cast *all)
+static void	check_bounds(t_ray *ray)
 {
-	all->coll_y.x = (all->coll_y.x < 0) ? 0 : all->coll_y.x;
-	all->coll_y.y = (all->coll_y.y < 0) ? 0 : all->coll_y.y;
-	all->coll_x.x = (all->coll_x.x < 0) ? 0 : all->coll_x.x;
-	all->coll_x.y = (all->coll_x.y < 0) ? 0 : all->coll_x.y;
-	all->coll_y.x = (all->coll_y.x > 9 * SQUARE_SIZE) ? 9 * SQUARE_SIZE : all->coll_y.x;
-	all->coll_y.y = (all->coll_y.y > 9 * SQUARE_SIZE) ? 9 * SQUARE_SIZE : all->coll_y.y;
-	all->coll_x.x = (all->coll_x.x > 9 * SQUARE_SIZE) ? 9 * SQUARE_SIZE : all->coll_x.x;
-	all->coll_x.y = (all->coll_x.y > 9 * SQUARE_SIZE) ? 9 * SQUARE_SIZE : all->coll_x.y;
+	ray->hit_y.x = (ray->hit_y.x < 0) ? 0 : ray->hit_y.x;
+	ray->hit_y.y = (ray->hit_y.y < 0) ? 0 : ray->hit_y.y;
+	ray->hit_x.x = (ray->hit_x.x < 0) ? 0 : ray->hit_x.x;
+	ray->hit_x.y = (ray->hit_x.y < 0) ? 0 : ray->hit_x.y;
+	ray->hit_y.x = (ray->hit_y.x > 6 * CELL) ? 6 * CELL : ray->hit_y.x;
+	ray->hit_y.y = (ray->hit_y.y > 6 * CELL) ? 6 * CELL : ray->hit_y.y;
+	ray->hit_x.x = (ray->hit_x.x > 6 * CELL) ? 6 * CELL : ray->hit_x.x;
+	ray->hit_x.y = (ray->hit_x.y > 6 * CELL) ? 6 * CELL : ray->hit_x.y;
 }
 
-static void	check_collisions(t_ray_cast *all, int **map)
+static void	check_collisions(t_ray *rc, int **map)
 {
-	t_ptd	hit;
+	t_pos	hit;
 
 	hit.x = 0;
 	hit.y = 0;
 	while (hit.x == 0 || hit.y == 0)
 	{
-		check_bounds(all);
-		if (hit.x == 0 && map[(int)all->coll_x.y / SQUARE_SIZE][(int)all->coll_x.x / SQUARE_SIZE])
+		check_bounds(rc);
+		if (hit.x == 0 && map[(int)rc->hit_x.y / CELL][(int)rc->hit_x.x / CELL])
 			hit.x = 1;
 		else if (hit.x == 0)
 		{
-			all->coll_x.x += all->dist_col_x.x;
-			all->coll_x.y += all->dist_col_x.y;
+			rc->hit_x.x += rc->gap_x.x;
+			rc->hit_x.y += rc->gap_x.y;
 		}
-		if (hit.y == 0 && map[(int)all->coll_y.y / SQUARE_SIZE][(int)all->coll_y.x / SQUARE_SIZE])
+		if (hit.y == 0 && map[(int)rc->hit_y.y / CELL][(int)rc->hit_y.x / CELL])
 			hit.y = 1;
 		else if (hit.y == 0)
 		{
-			all->coll_y.x += all->dist_col_y.x;
-			all-.coll_y.y += all->dist_col_y.y;
+			rc->hit_y.x += rc->gap_y.x;
+			rc->hit_y.y += rc->gap_y.y;
 		}
 	}
-	return (all);
 }
 
-static void	setup_line(t_ray_cast *all, t_player *all, int x)
+static void	setup_line(t_ray *ray, t_cam *cam, int x)
 {
-	all->dist_col = length(all->coll_x, all->coll_y, play->play_coor);
-	all->dist_col *= cos(play->play_angle - all->act_angle);
-	all->wall_size = ceil((SQUARE_SIZE / all->dist_col) * all->dist_screen);
-	all->wall_start.x = WIN_WIDTH - x;
-	all->wall_start.y = (WIN_HEIGHT / 2) - (all->wall_size / 2);
-	all->wall_end.x = WIN_WIDTH - x;
-	all->wall_end.y = all->wall_start.y + all->wall_size;
+	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord);
+	ray->dist *= cos(cam->angle - ray->angle);
+	ray->wall.size = ceil((CELL / ray->dist) * ray->screen);
+	ray->wall.start.x = WIDTH - x;
+	ray->wall.start.y = (HEIGHT / 2) - (ray->wall.size / 2);
+	ray->wall.end.x = WIDTH - x;
+	ray->wall.end.y = ray->wall.start.y + ray->wall.size;
 }
 
-void		raycast(int **map, t_sdl *sdl, t_player *play, t_ray_cast *all)
+void		raycast(int **map, t_sdl *sdl, t_cam *cam, t_ray *ray)
 {
-	int			x;
+	int		x;
 
 	x = -1;
-	setup_raycasting(play, all);
+	setup_raycasting(cam, ray);
 	while (++x < WIDTH)
 	{
-		y_collisions(all, play);
-		x_collisions(all, play);
-		check_collisions(all, map);
-		setup_line(all, play, x);
-		draw_rc(all.wall_start, all.wall_end, sdl->ren, DARK_GRAY);
-		all.act_angle += (60.0 * RADIAN) / WIN_WIDTH;
+		y_collisions(&ray->hit_y, &ray->gap_y, ray->angle, *cam);
+		x_collisions(&ray->hit_x, &ray->gap_x, ray->angle, *cam);
+		check_collisions(ray, map);
+		setup_line(ray, cam, x);
+		draw_rc(ray->wall.start, ray->wall.end, sdl->ren, DARK_GRAY);
+		ray->angle += (60.0 * RADIAN) / WIDTH;
 	}
-	SDL_RenderPresent(ren);
-}
-
-// CA BOUGE
-void		change_angle(t_player *play, SDL_Keysym key)
-{
-	if (key.sym == SDLK_COMMA)
-		play->play_angle += 2 * RADIAN;
-	else
-		play->play_angle -= 2 * RADIAN;
-}
-
-// BYE BYE
-int					main(void)
-{
-	// int				neg;
-	int				wait;
-	t_ray_cast		all;
-
-	all.dist_screen = (WIN_WIDTH / 2) / tan(30 * RADIAN);
-	raycast(env->map, env->sdl->ren, env->player , &all);
-
-	wait = 1;
-	// event loop (NEED TO DEAL WITH RADIAN ANGLES)
-	while (wait)
-	{
-		SDL_PollEvent(&env->sdl->event); // ev = event
-		if (ev.window.event == SDL_WINDOWEVENT_CLOSE || ev.key.keysym.sym == SDLK_ESCAPE)
-			wait = 0;
-		// else if (ev.type == SDL_KEYDOWN)
-		// {
-		// 	if (ev.key.keysym.sym == SDLK_COMMA || ev.key.keysym.sym == SDLK_PERIOD)
-		// 	{
-		// 		change_angle(&play, ev.key.keysym);
-		// 		true_raycast(worldmap, ren, &play);
-		// 	}
-		// 	else if (ev.key.keysym.sym == SDLK_w)
-		// 	{
-		// 		neg = ((play.play_angle < 90 && play.play_angle > 0) || (play.play_angle > 180 && play.play_angle < 270)) ? -1 : 1;
-		// 		play.play_coor.x += cos(rad_angle(play.play_angle)) * 10 * neg;
-		// 		play.play_coor.y -= sin(rad_angle(play.play_angle)) * 10;
-		// 		true_raycast(worldmap, ren, &play);
-		// 	}
-		// 	else if (ev.key.keysym.sym == SDLK_s)
-		// 	{
-		// 		neg = ((play.play_angle < 90 && play.play_angle > 0) || (play.play_angle > 180 && play.play_angle < 270)) ? -1 : 1;
-		// 		play.play_coor.x -= cos(rad_angle(play.play_angle)) * 10 * neg;
-		// 		play.play_coor.y += sin(rad_angle(play.play_angle)) * 10;
-		// 		true_raycast(worldmap, ren, &play);
-		// 	}
-		// 	else if (ev.key.keysym.sym == SDLK_a)
-		// 	{
-		// 		neg = ((play.play_angle + 90 < 90 && play.play_angle + 90 > 0) || (play.play_angle + 90 > 180 && play.play_angle + 90 < 270)) ? -1 : 1;
-		// 		play.play_coor.x += cos(rad_angle(play.play_angle + 90)) * 10;
-		// 		play.play_coor.y -= sin(rad_angle(play.play_angle + 90)) * 10;
-		// 		true_raycast(worldmap, ren, &play);
-		// 	}
-		// 	else if (ev.key.keysym.sym == SDLK_d)
-		// 	{
-		// 		neg = ((play.play_angle + 90 < 90 && play.play_angle + 90 > 0) || (play.play_angle + 90 > 180 && play.play_angle + 90 < 270)) ? -1 : 1;
-		// 		play.play_coor.x -= cos(rad_angle(play.play_angle + 90)) * 10;
-		// 		play.play_coor.y += sin(rad_angle(play.play_angle + 90)) * 10;
-		// 		true_raycast(worldmap, ren, &play);
-		// 	}
-		// }
-	}
-	fun_exit(ren, win);
-	return (0);
+	SDL_RenderPresent(sdl->ren);
 }

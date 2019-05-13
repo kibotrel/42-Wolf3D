@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 18:16:08 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/10 18:47:25 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:52:08 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 #include "env.h"
 #include "wolf3d.h"
 
-void	y_collisions(t_ray_cast *all, t_player *play)
+void	y_collisions(t_pos *hit_y, t_pos *gap_y, double angle, t_cam cam)
 {
-	if (all->act_angle > R_E && all->act_angle < R_O)
-		all->coll_y.y = (int)(play->play_coor.y / SQUARE_SIZE) * SQUARE_SIZE - 1;
+	if (angle > R_E && angle < R_W)
+		hit_y->y = (int)(cam.coord.y / CELL) * CELL - 1;
 	else
-		all->coll_y.y = (int)(play->play_coor.y / SQUARE_SIZE) * SQUARE_SIZE + SQUARE_SIZE;
-	all->dist_col_y.y = (all->act_angle > R_E && all->act_angle < R_O) ? -SQUARE_SIZE : SQUARE_SIZE;
-	all->coll_y.x = play->play_coor.x + (play->play_coor.y - all->coll_y.y) / tan(all->act_angle);
-	all->dist_col_y.x = SQUARE_SIZE / tan(all->act_angle);
-	all->dist_col_y.x = (all->act_angle > R_O && all->act_angle < R_S) ? -all->dist_col_y.x : all->dist_col_y.x;
+		hit_y->y = (int)(cam.coord.y / CELL) * CELL + CELL;
+	gap_y->y = (angle > R_E && angle < R_W) ? -CELL : CELL;
+	hit_y->x = cam.coord.x + (cam.coord.y - hit_y->y) / tan(angle);
+	gap_y->x = CELL / tan(angle);
+	gap_y->x = (angle > R_W && angle < R_S) ? -gap_y->x : gap_y->x;
 }
 
-void	x_collisions(t_ray_cast *all, t_player *play)
+void	x_collisions(t_pos *hit_x, t_pos *gap_x, double angle, t_cam cam)
 {
-	if (all.act_angle < R_N || all.act_angle > R_S)
-		all.coll_x.x = (int)(play->play_coor.x / SQUARE_SIZE) * SQUARE_SIZE + SQUARE_SIZE;
+	if (angle < R_N || angle > R_S)
+		hit_x->x = (int)(cam.coord.x / CELL) * CELL + CELL;
 	else
-		all.coll_x.x = (int)(play->play_coor.x / SQUARE_SIZE) * SQUARE_SIZE - 1;
-	all.dist_col_x.x = (all.act_angle < R_N || all.act_angle > R_S) ? SQUARE_SIZE : -SQUARE_SIZE;
-	all.coll_x.y = play->play_coor.y + (play->play_coor.x - all.coll_x.x) * tan((all.act_angle);
-	all.dist_col_x.y = SQUARE_SIZE * tan(all.act_angle);
-	all.dist_col_x.y = (all.act_angle > R_E && all.act_angle < R_N) ? -(all.dist_col_x.y) : all.dist_col_x.y;
+		hit_x->x = (int)(cam.coord.x / CELL) * CELL - 1;
+	gap_x->x = (angle < R_N || angle > R_S) ? CELL : -CELL;
+	hit_x->y = cam.coord.y + (cam.coord.x - hit_x->x) * tan(angle);
+	gap_x->y = CELL * tan(angle);
+	gap_x->y = (angle > R_E && angle < R_N) ? -gap_x->y : gap_x->y;
 }

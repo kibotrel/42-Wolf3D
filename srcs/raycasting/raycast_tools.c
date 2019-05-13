@@ -6,7 +6,7 @@
 /*   By: reda-con <reda-con@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/10 18:47:39 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/13 17:55:13 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ double	double_abs(double i)
 	return ((i > 0) ? i : -i);
 }
 
-void	draw_rc(t_ptd a, t_ptd b, SDL_Renderer *ren, int clr)
+void	draw_rc(t_pos start, t_pos end, SDL_Renderer *ren, int clr)
 {
-	t_ptd	cur;
+	t_pos	current;
 
-	cur.x = a.x;
-	cur.y = 0;
-	while (cur.y < WIN_HEIGHT)
+	current.x = start.x;
+	current.y = 0;
+	while (current.y < HEIGHT)
 	{
-		if (cur.y < a.y)
+		if (current.y < start.y)
 			SDL_SetRenderDrawColor(ren, 0, 255, 255, 255);
-		else if (cur.y >= a.y && cur.y <= b.y)
+		else if (current.y >= start.y && current.y <= end.y)
 			SDL_SetRenderDrawColor(ren, clr >> 16, clr >> 8, clr, 255);
 		else
 			SDL_SetRenderDrawColor(ren, 200, 200, 200, 255);
-		SDL_RenderDrawPoint(ren, (int)cur.x, (int)cur.y);
-		++cur.y;
+		SDL_RenderDrawPoint(ren, (int)current.x, (int)current.y);
+		++current.y;
 	}
 }

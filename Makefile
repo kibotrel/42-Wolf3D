@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/10 18:15:59 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/05/13 18:29:30 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME		= wolf3d
 # All the directories needed to know where files should be (Can be changed)
 
 OBJDIR		= objs/
-OBJSUBDIRS	= core usage parsing utils raycasting
+OBJSUBDIRS	= core usage parsing utils raycasting setup events
 SRCDIR		= srcs/
 LFTDIR		= libft/
 SDLDIR		= $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
@@ -25,17 +25,20 @@ INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 
 # Source files (Can be changed)
 
-SRC			= core/main.c														\
+SRC			= core/main.c					core/hooks.c						\
+																				\
+			  raycasting/raycast_tools.c	raycasting/raycast_tools2.c			\
+			  raycasting/true_raycast.c		raycasting/collisions.c				\
+																				\
+			  events/update_cam.c												\
+																				\
+			  setup/setup.c														\
 																				\
 			  parsing/map.c														\
 																				\
 			  utils/clean.c					utils/parsing.c						\
 																				\
-			  usage/usage.c														\
-																				\
-			  raycasting/init_rc				raycasting/raycast_tools.c		\
-			  raycasting/raycast_tools2.c		raycasting/true_raycast.c		\
-			  raycasting/collisions.c
+			  usage/usage.c
 
 LFT			= ./libft/libft.a
 

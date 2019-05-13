@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/10 19:08:40 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/13 16:18:06 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 **	Useful macros
 */
 
+# define CELL			64
 # define RESIZE			0x00000200
-# define SQUARE_SIZE	64
 
 /*
 **	Color macros

@@ -6,39 +6,47 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/10 18:27:15 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/13 18:07:12 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-typedef struct		s_ptd
+# include "SDL.h"
+
+typedef struct		s_pos
 {
 	double			x;
 	double			y;
-}					t_ptd;
+}					t_pos;
 
-typedef struct		s_player
+typedef struct		s_cam
 {
-	t_ptd			play_pos; // Position in **map
-	t_ptd			play_coor; // Position of player in the scene
-	double			play_angle;
-}					t_player;
+	t_pos			pos;	// Position in **map
+	t_pos			coord;	// Position of player in the scene
+	double			angle;	// Direction
+}					t_cam;
 
-typedef struct		s_ray_cast
+typedef struct		s_wall
 {
-	int				wall_size;
-	t_ptd			coll_x;
-	t_ptd			coll_y;
-	t_ptd			wall_end;
-	t_ptd			wall_start;
-	t_ptd			dist_col_x;
-	t_ptd			dist_col_y;
-	double			dist_col;
-	double			act_angle; // Angle of the ray at instant t
-	double			dist_screen;
-}					t_ray_cast;
+	int				size;
+	t_pos			end;
+	t_pos			start;
+}					t_wall;
+
+
+typedef struct		s_ray
+{
+	t_pos			gap_x;	// Shift to the next collumn
+	t_pos			gap_y;	// Shift to the next row
+	t_pos			hit_x;	// Collisions on columns
+	t_pos			hit_y;	// Collisions on rows
+	t_wall			wall;
+	double			dist;	// True distance between player and nearest wall
+	double			angle;	// Angle of the ray at instant t
+	double			screen;
+}					t_ray;
 
 typedef struct		s_sdl
 {
@@ -53,20 +61,29 @@ typedef struct		s_env
 	int				height;
 	int				width;
 	t_sdl			sdl;
-	t_player		player;
+	t_cam			cam;
+	t_ray			ray;
 }					t_env;
 
 /*
-**	usage/usage.c
+**	core/hooks.c
 */
 
-void				usage(void);
+void				hooks(t_env *env, int *loop);
 
 /*
 **	parsing/map.c
 */
 
 void				parse_file(char *file, t_env *env);
+
+/*
+**	setup/setup.c
+*/
+
+void				setup(t_env *env);
+void				setup_raycasting(t_cam *cam, t_ray *ray);
+
 
 /*
 **	utils/clean.c
@@ -86,18 +103,23 @@ void				check_row(char *row, t_env *env);
 void				limits(char *row, char **coords, t_env *env);
 
 /*
+**	usage/usage.c
+*/
+
+void				usage(void);
+
+
+/*
 **	Raycasting side-functions
 */
 
-void				draw_rc(t_ptd a, t_ptd b, SDL_Renderer *ren, int clr);
-t_ptd				init_ptd(double x, double y);
+void				draw_rc(t_pos a, t_pos b, SDL_Renderer *ren, int clr);
 double				sq(double n);
 double				double_abs(double i);
-double				my_tan(double angle);
-double				rad_angle(double angle);
-double				length(t_ptd coll_x, t_ptd coll_y, t_ptd play_coor);
-t_player			init_player(void);
-t_ray_cast			init_rc(t_player play);
-t_ray_cast			*raycast(SDL_Renderer *ren, int map[4][10], int start, t_ray_cast *all);
-
+double				length(t_pos coll_x, t_pos coll_y, t_pos play_coor);
+void				raycast(int **map, t_sdl *sdl, t_cam *cam, t_ray *all);
+void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
+void				y_collisions(t_pos *hit_y, t_pos *gap_y, double angle, t_cam cam);
+void				x_collisions(t_pos *hit_x, t_pos *gap_x, double angle, t_cam cam);
+void				change_angle(t_cam *cam, SDL_Keysym key);
 #endif
