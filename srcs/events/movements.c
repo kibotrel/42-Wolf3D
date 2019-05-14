@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/14 09:15:35 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:19:00 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	move_forward(t_env *env, int neg)
 {
 	neg = ((env->cam.angle < R_N && env->cam.angle > R_E) || (env->cam.angle > R_W && env->cam.angle < R_S)) ? -1 : 1;
-		env->cam.coord.x += cos(env->cam.angle) * 16 * neg;
+	env->cam.coord.x += cos(env->cam.angle) * 16 * neg;
 	env->cam.coord.y -= sin(env->cam.angle) * 16;
 	raycast(env->map, &env->sdl, &env->cam , &env->ray);
 }
@@ -24,23 +24,25 @@ void	move_forward(t_env *env, int neg)
 void	move_backward(t_env	*env, int neg)
 {
 	neg = ((env->cam.angle < R_N && env->cam.angle > R_E) || (env->cam.angle > R_W && env->cam.angle < R_S)) ? -1 : 1;
-		env->cam.coord.x -= cos(env->cam.angle) * 16 * neg;
+	env->cam.coord.x -= cos(env->cam.angle) * 16 * neg;
 	env->cam.coord.y += sin(env->cam.angle) * 16;
 	raycast(env->map, &env->sdl, &env->cam , &env->ray);
 }
 
 void	move_left(t_env	*env, int neg)
 {
-	neg = ((env->cam.angle + R_N < R_N && env->cam.angle + R_N > R_E) || (env->cam.angle + R_N > R_W && env->cam.angle + R_N < R_S)) ? -1 : 1;
-		env->cam.coord.x += cos(env->cam.angle + R_N) * 10;
+	neg = ((env->cam.angle + R_N < R_N && env->cam.angle + R_N > R_E)
+		|| (env->cam.angle + R_N > R_W && env->cam.angle + R_N < R_S)) ? -1 : 1;
+	env->cam.coord.x += cos(env->cam.angle + R_N) * 10;
 	env->cam.coord.y -= sin(env->cam.angle + R_N) * 10;
 	raycast(env->map, &env->sdl, &env->cam , &env->ray);
 }
 
 void	move_right(t_env *env, int neg)
 {
-	neg = ((env->cam.angle + R_N < R_N && env->cam.angle + R_N > R_E) || (env->cam.angle + R_N > R_W && env->cam.angle + R_N < R_S)) ? -1 : 1;
-		env->cam.coord.x -= cos(env->cam.angle + R_N) * 10;
+	neg = ((env->cam.angle + R_N < R_N && env->cam.angle + R_N > R_E)
+		|| (env->cam.angle + R_N > R_W && env->cam.angle + R_N < R_S)) ? -1 : 1;
+	env->cam.coord.x -= cos(env->cam.angle + R_N) * 10;
 	env->cam.coord.y += sin(env->cam.angle + R_N) * 10;
 	raycast(env->map, &env->sdl, &env->cam , &env->ray);
 }
