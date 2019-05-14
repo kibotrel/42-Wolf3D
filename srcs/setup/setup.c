@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 13:17:56 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 16:16:02 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	cam_setup(t_cam *cam)
 	cam->pos.y = 2.5;
 	cam->coord.x = cam->pos.x * CELL + (cam->pos.x - cam->pos.x) * CELL;
 	cam->coord.y = cam->pos.y * CELL + (cam->pos.y - cam->pos.y) * CELL;
-	cam->angle = to_rad(90);
+	cam->angle = to_rad(0);
 }
 
 void		setup_raycasting(t_cam *cam, t_ray *ray)
@@ -49,6 +49,4 @@ void		setup(t_env *env)
 	sdl_setup(&env->sdl);
 	cam_setup(&env->cam);
 	env->ray.screen = (WIDTH / 2) / tan(to_rad(30));
-	--env->height;
-	--env->width;
 }

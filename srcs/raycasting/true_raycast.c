@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/14 17:42:55 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/14 21:36:21 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 static void	check_bounds(double *x, double *y, int max_x, int max_y)
 {
-	if (*x > max_x * CELL)
-		*x = max_x * CELL;
+	if (*x > (max_x - 1) * CELL)
+		*x = (max_x - 1) * CELL;
 	else if (*x < 0)
 		*x = 0;
-	if (*y > max_y * CELL)
-		*y = max_y * CELL;
+	if (*y > (max_y - 1) * CELL)
+		*y = (max_y - 1) * CELL;
 	else if (*y < 0)
 		*y = 0;
 }
@@ -78,6 +78,8 @@ void		raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 		setup_line(ray, cam, x);
 		draw_rc(ray->wall.start, ray->wall.end, env->sdl, DARK_GRAY);
 		ray->angle += (to_rad(60.0) / WIDTH);
+		if (ray->angle >= 6.283185)
+			ray->angle -= 6.283185;
 	}
 	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, WIDTH * S_UINT);
 	SDL_RenderCopy(env->sdl.ren, env->sdl.text, NULL, NULL);
