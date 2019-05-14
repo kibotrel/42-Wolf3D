@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/13 18:29:58 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:26:33 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void	check_bounds(t_ray *ray)
+static void	check_bounds(t_ray *ray, int max_x, int max_y)
 {
 	ray->hit_y.x = (ray->hit_y.x < 0) ? 0 : ray->hit_y.x;
 	ray->hit_y.y = (ray->hit_y.y < 0) ? 0 : ray->hit_y.y;
 	ray->hit_x.x = (ray->hit_x.x < 0) ? 0 : ray->hit_x.x;
 	ray->hit_x.y = (ray->hit_x.y < 0) ? 0 : ray->hit_x.y;
-	ray->hit_y.x = (ray->hit_y.x > 6 * CELL) ? 6 * CELL : ray->hit_y.x;
-	ray->hit_y.y = (ray->hit_y.y > 6 * CELL) ? 6 * CELL : ray->hit_y.y;
-	ray->hit_x.x = (ray->hit_x.x > 6 * CELL) ? 6 * CELL : ray->hit_x.x;
-	ray->hit_x.y = (ray->hit_x.y > 6 * CELL) ? 6 * CELL : ray->hit_x.y;
+	ray->hit_y.x = (ray->hit_y.x > max_x * CELL) ? max_x * CELL : ray->hit_y.x;
+	ray->hit_y.y = (ray->hit_y.y > max_y * CELL) ? max_y * CELL : ray->hit_y.y;
+	ray->hit_x.x = (ray->hit_x.x > max_x * CELL) ? max_x * CELL : ray->hit_x.x;
+	ray->hit_x.y = (ray->hit_x.y > max_y * CELL) ? max_y * CELL : ray->hit_x.y;
 }
 
-static void	check_collisions(t_ray *rc, int **map)
+static void	check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 {
 	t_pos	hit;
 
@@ -34,7 +34,7 @@ static void	check_collisions(t_ray *rc, int **map)
 	hit.y = 0;
 	while (hit.x == 0 || hit.y == 0)
 	{
-		check_bounds(rc);
+		check_bounds(rc, max_x, max_y);
 		if (hit.x == 0 && map[(int)rc->hit_x.y / CELL][(int)rc->hit_x.x / CELL])
 			hit.x = 1;
 		else if (hit.x == 0)
@@ -63,7 +63,7 @@ static void	setup_line(t_ray *ray, t_cam *cam, int x)
 	ray->wall.end.y = ray->wall.start.y + ray->wall.size;
 }
 
-void		raycast(int **map, t_sdl *sdl, t_cam *cam, t_ray *ray)
+void		raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 {
 	int		x;
 
@@ -73,10 +73,10 @@ void		raycast(int **map, t_sdl *sdl, t_cam *cam, t_ray *ray)
 	{
 		y_collisions(&ray->hit_y, &ray->gap_y, ray->angle, *cam);
 		x_collisions(&ray->hit_x, &ray->gap_x, ray->angle, *cam);
-		check_collisions(ray, map);
+		check_collisions(ray, map, env->height, env->width);
 		setup_line(ray, cam, x);
-		draw_rc(ray->wall.start, ray->wall.end, sdl->ren, DARK_GRAY);
+		draw_rc(ray->wall.start, ray->wall.end, env->sdl.ren, DARK_GRAY);
 		ray->angle += (60.0 * RADIAN) / WIDTH;
 	}
-	SDL_RenderPresent(sdl->ren);
+	SDL_RenderPresent(env->sdl.ren);
 }
