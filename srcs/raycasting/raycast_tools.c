@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/14 13:56:55 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:08:18 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void		draw_rc(t_pos start, t_pos end, t_sdl sdl, int clr)
 			color = clr;
 		else
 			color = 0xc8c8c8ff;
-		// printf("%f\n", start.y);
-		// printf("%i\n",(int)(current.x + (current.y * (WIDTH))));
 		sdl.pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
 		++current.y;
 	}

@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 13:36:08 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:53:16 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	change_angle(t_env *env, SDL_Keysym key)
 	if (key.sym == SDLK_COMMA)
 	{
 		*tmp += to_rad(2);
-		*tmp = (*tmp > to_rad(360)) ? to_rad(360) - *tmp : *tmp;
+		*tmp = (*tmp >= to_rad(360)) ? to_rad(360) - *tmp : *tmp;
 	}
 	else
 	{
