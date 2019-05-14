@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 15:57:11 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 16:16:02 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,4 @@ void		setup(t_env *env)
 	sdl_setup(&env->sdl);
 	cam_setup(&env->cam);
 	env->ray.screen = (WIDTH / 2) / tan(to_rad(30));
-	--env->height;
-	--env->width;
 }
