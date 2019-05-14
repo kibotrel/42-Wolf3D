@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 09:33:27 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:39:53 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void	keypress(t_env *env, SDL_Keysym key)
+static void		keypress(t_env *env, SDL_Keysym key)
 {
 	int neg;
 
@@ -31,7 +31,7 @@ static void	keypress(t_env *env, SDL_Keysym key)
 		move_right(env, neg);
 }
 
-void	hooks(t_env *env, int *loop)
+void			hooks(t_env *env, int *loop)
 {
 	SDL_PollEvent(&env->sdl.event);
 	if (env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE

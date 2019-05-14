@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:30:44 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/09 16:05:38 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:43:49 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	file_format(void)
 	ft_putendl("\n\t- Empty cell in which you can move (0)");
 	ft_putendl("\t- Walls that you can't go through (1)");
 	ft_putendl("\n\tW.I.P\n");
-
 }
 
 static void	error_handling(void)

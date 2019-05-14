@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 10:13:51 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:35:52 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 **	Window parameters macros
 */
 
-	# define WIDTH			1000
-	# define HEIGHT			1000
+# define WIDTH			1000
+# define HEIGHT			1000
 
-	/*
-	**	Maths macros
-	*/
+/*
+**	Maths macros
+*/
 
-	# define R_E			0
-	# define R_N			M_PI_2
-	# define R_W			M_PI
-	# define R_S			3 * M_PI / 2
-	# define RADIAN			M_PI / 180
+# define R_E			0
+# define R_N			M_PI_2
+# define R_W			M_PI
+# define R_S			3 * M_PI / 2
+# define RADIAN			M_PI / 180
 
 /*
 **	Useful macros

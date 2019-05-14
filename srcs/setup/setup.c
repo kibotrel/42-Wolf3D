@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 09:14:08 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:43:15 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "SDL.h"
 #include "env.h"
 #include "wolf3d.h"
-
 
 static void	sdl_setup(t_sdl *sdl)
 {

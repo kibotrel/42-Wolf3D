@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 10:25:34 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:38:18 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct		s_wall
 	t_pos			end;
 	t_pos			start;
 }					t_wall;
-
 
 typedef struct		s_ray
 {
@@ -84,7 +83,6 @@ void				parse_file(char *file, t_env *env);
 void				setup(t_env *env);
 void				setup_raycasting(t_cam *cam, t_ray *ray);
 
-
 /*
 **	utils/clean.c
 */
@@ -108,7 +106,6 @@ void				limits(char *row, char **coords, t_env *env);
 
 void				usage(void);
 
-
 /*
 **	events/movements.c
 */
@@ -118,13 +115,11 @@ void				move_backward(t_env *env, int neg);
 void				move_left(t_env *env, int neg);
 void				move_right(t_env *env, int neg);
 
-
 /*
 **	events/update_cam.c
 */
 
 void	change_angle(t_env *env, SDL_Keysym key);
-
 
 /*
 **	Raycasting side-functions
@@ -136,6 +131,6 @@ double				double_abs(double i);
 double				length(t_pos coll_x, t_pos coll_y, t_pos play_coor);
 void				raycast(int **map, t_env *env, t_cam *cam, t_ray *all);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
-void				y_collisions(t_pos *hit_y, t_pos *gap_y, double angle, t_cam cam);
-void				x_collisions(t_pos *hit_x, t_pos *gap_x, double angle, t_cam cam);
+void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);
+void				x_collisions(t_pos *x, t_pos *px, double angle, t_cam cam);
 #endif

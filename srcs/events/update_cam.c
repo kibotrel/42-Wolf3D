@@ -6,15 +6,15 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 10:27:07 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/14 10:42:13 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SDL.h"
 #include "env.h"
 #include "wolf3d.h"
-#include <stdio.h>
 
+#include <stdio.h>
 void	change_angle(t_env *env, SDL_Keysym key)
 {
 	if (key.sym == SDLK_COMMA)
@@ -22,5 +22,5 @@ void	change_angle(t_env *env, SDL_Keysym key)
 	else
 		env->cam.angle -= 2 * RADIAN;
 	printf("%f\n", env->cam.angle);
-	raycast(env->map, env, &env->cam , &env->ray);
+	raycast(env->map, env, &env->cam, &env->ray);
 }
