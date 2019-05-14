@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/13 18:07:12 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/14 07:57:43 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,23 @@ void				usage(void);
 
 
 /*
+**	events/movements.c
+*/
+
+void				move_forward(t_env *env, int neg);
+void				move_backward(t_env *env, int neg);
+void				move_left(t_env *env, int neg);
+void				move_right(t_env *env, int neg);
+
+
+/*
+**	events/update_cam.c
+*/
+
+void	change_angle(t_env *env, SDL_Keysym key);
+
+
+/*
 **	Raycasting side-functions
 */
 
@@ -121,5 +138,4 @@ void				raycast(int **map, t_sdl *sdl, t_cam *cam, t_ray *all);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_pos *hit_y, t_pos *gap_y, double angle, t_cam cam);
 void				x_collisions(t_pos *hit_x, t_pos *gap_x, double angle, t_cam cam);
-void				change_angle(t_cam *cam, SDL_Keysym key);
 #endif
