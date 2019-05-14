@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/14 09:17:42 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/05/14 10:51:46 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 
 SRC			= core/main.c					core/hooks.c						\
 																				\
-			  raycasting/raycast_tools.c	raycasting/raycast_tools2.c			\
+			  raycasting/raycast_tools.c										\
 			  raycasting/true_raycast.c		raycasting/collisions.c				\
 																				\
 			  events/update_cam.c			events/movements.c					\
