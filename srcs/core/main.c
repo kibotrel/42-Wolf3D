@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 11:56:16 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:40:03 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
 // PENSER A PROTECT LE MOVE DU BINAIRE !!!
 // ADD SPAWNPOINT
 
+#include <stdio.h>
 int	main(int ac, char **av)
 {
 	int		loop;
 	t_env	*env;
 
 	loop = 1;
+	printf("%lu\n", sizeof(uint32_t));
 	if (ac == 2)
 	{
 		if (ft_strcmp(av[0], "./wolf3d"))

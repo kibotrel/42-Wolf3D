@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/14 13:57:10 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:42:55 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-extern inline double	to_rad(double degre)
-{
-	return (degre * M_PI / 180);
-}
-
-static void				check_bounds(double *x, double *y, int max_x, int max_y)
+static void	check_bounds(double *x, double *y, int max_x, int max_y)
 {
 	if (*x > max_x * CELL)
 		*x = max_x * CELL;
@@ -31,7 +26,7 @@ static void				check_bounds(double *x, double *y, int max_x, int max_y)
 		*y = 0;
 }
 
-static void				check_collisions(t_ray *rc, int **map, int max_y, int max_x)
+static void	check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 {
 	t_pos	hit;
 
@@ -57,20 +52,19 @@ static void				check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 		}
 	}
 }
-#include <stdio.h>
-static void				setup_line(t_ray *ray, t_cam *cam, int x)
+
+static void	setup_line(t_ray *ray, t_cam *cam, int x)
 {
 	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord);
 	ray->dist *= cos(cam->angle - ray->angle);
 	ray->wall.size = ceil((CELL / ray->dist) * ray->screen);
 	ray->wall.start.x = WIDTH - x;
 	ray->wall.start.y = (HEIGHT / 2) - (ray->wall.size / 2);
-	// printf("%f\n", ray->screen);
 	ray->wall.end.x = WIDTH - x;
 	ray->wall.end.y = ray->wall.start.y + ray->wall.size;
 }
 
-void					raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
+void		raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 {
 	int		x;
 
@@ -85,7 +79,7 @@ void					raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 		draw_rc(ray->wall.start, ray->wall.end, env->sdl, DARK_GRAY);
 		ray->angle += (to_rad(60.0) / WIDTH);
 	}
-	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, WIDTH * sizeof(uint32_t));
+	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, WIDTH * S_UINT);
 	SDL_RenderCopy(env->sdl.ren, env->sdl.text, NULL, NULL);
 	SDL_RenderPresent(env->sdl.ren);
 }

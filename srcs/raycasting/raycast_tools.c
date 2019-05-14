@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: reda-con <reda-con@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/14 13:56:55 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:40:23 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@ void		fun_exit(SDL_Renderer *ren, SDL_Window *win)
 	exit(0);
 }
 
-double	double_abs(double i)
-{
-	return ((i > 0) ? i : -i);
-}
-
-#include <unistd.h>
-#include <stdio.h>
 void		draw_rc(t_pos start, t_pos end, t_sdl sdl, int clr)
 {
 	t_pos	current;
@@ -43,19 +36,7 @@ void		draw_rc(t_pos start, t_pos end, t_sdl sdl, int clr)
 			color = clr;
 		else
 			color = 0xc8c8c8ff;
-		// printf("%f\n", start.y);
-		// printf("%i\n",(int)(current.x + (current.y * (WIDTH))));
 		sdl.pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
 		++current.y;
 	}
-}
-
-double		length(t_pos col_x, t_pos col_y, t_pos play_coor)
-{
-	double	is_y;
-	double	is_x;
-
-	is_x = sqrt(pow(col_x.x - play_coor.x, 2) + pow(col_x.y - play_coor.y, 2));
-	is_y = sqrt(pow(col_y.x - play_coor.x, 2) + pow(col_y.y - play_coor.y, 2));
-	return (is_x > is_y ? is_y : is_x);
 }

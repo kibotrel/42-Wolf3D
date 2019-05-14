@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 13:36:12 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:58:12 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@
 
 static void		keypress(t_env *env, SDL_Keysym key)
 {
-	int neg;
-
-	neg = 0;
 	if (key.sym == SDLK_COMMA || key.sym == SDLK_PERIOD)
-		change_angle(env, env->sdl.event.key.keysym);
+		change_angle(env, &env->cam.angle, env->sdl.event.key.keysym);
 	else if (key.sym == SDLK_w)
-		move_forward(env, neg);
+		move_forward(env, &env->cam);
 	else if (key.sym == SDLK_s)
-		move_backward(env, neg);
+		move_backward(env, &env->cam);
 	else if (key.sym == SDLK_a)
-		move_left(env, neg);
+		move_left(env, &env->cam);
 	else if (key.sym == SDLK_d)
-		move_right(env, neg);
+		move_right(env, &env->cam);
 }
 
 void			hooks(t_env *env, int *loop)

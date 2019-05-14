@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 13:42:50 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:58:27 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,16 @@ void				usage(void);
 **	events/movements.c
 */
 
-void				move_forward(t_env *env, int neg);
-void				move_backward(t_env *env, int neg);
-void				move_left(t_env *env, int neg);
-void				move_right(t_env *env, int neg);
+void				move_left(t_env *env, t_cam *cam);
+void				move_right(t_env *env, t_cam *cam);
+void				move_forward(t_env *env, t_cam *cam);
+void				move_backward(t_env *env, t_cam *cam);
 
 /*
 **	events/update_cam.c
 */
 
-void	change_angle(t_env *env, SDL_Keysym key);
+void				change_angle(t_env *env, double *angle, SDL_Keysym key);
 
 /*
 **	Raycasting side-functions

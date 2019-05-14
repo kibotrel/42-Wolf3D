@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 13:56:23 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 17:43:50 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 */
 
 # define CELL			64
-# define RESIZE			0x00000200
 # define RGBA			373694468
+# define RESIZE			0x00000200
+# define S_UINT			4
 # define STREAM			1
 /*
 **	Color macros
