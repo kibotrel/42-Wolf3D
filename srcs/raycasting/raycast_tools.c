@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda-con <reda-con@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/14 10:51:27 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/14 13:56:55 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,26 @@ double	double_abs(double i)
 	return ((i > 0) ? i : -i);
 }
 
-void		draw_rc(t_pos start, t_pos end, SDL_Renderer *ren, int clr)
+#include <unistd.h>
+#include <stdio.h>
+void		draw_rc(t_pos start, t_pos end, t_sdl sdl, int clr)
 {
 	t_pos	current;
+	int		color;
 
 	current.x = start.x;
 	current.y = 0;
 	while (current.y < HEIGHT)
 	{
 		if (current.y < start.y)
-			SDL_SetRenderDrawColor(ren, 0, 255, 255, 255);
+			color = 0x00ffffff;
 		else if (current.y >= start.y && current.y <= end.y)
-			SDL_SetRenderDrawColor(ren, clr >> 16, clr >> 8, clr, 255);
+			color = clr;
 		else
-			SDL_SetRenderDrawColor(ren, 200, 200, 200, 255);
-		SDL_RenderDrawPoint(ren, (int)current.x, (int)current.y);
+			color = 0xc8c8c8ff;
+		// printf("%f\n", start.y);
+		// printf("%i\n",(int)(current.x + (current.y * (WIDTH))));
+		sdl.pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
 		++current.y;
 	}
 }

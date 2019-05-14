@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 10:40:09 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/14 11:56:16 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "wolf3d.h"
 
 // PENSER A PROTECT LE MOVE DU BINAIRE !!!
-// CHECKBOUNDS ADD HEIGHT AND WIDTH
 // ADD SPAWNPOINT
 
 int	main(int ac, char **av)

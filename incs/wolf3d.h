@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 10:38:18 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/14 13:42:50 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_cam
 
 typedef struct		s_wall
 {
-	int				size;
+	double			size;
 	t_pos			end;
 	t_pos			start;
 }					t_wall;
@@ -51,7 +51,9 @@ typedef struct		s_sdl
 {
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
+	SDL_Texture		*text;
 	SDL_Event		event;
+	uint32_t		*pixels;
 }					t_sdl;
 
 typedef struct		s_env
@@ -125,7 +127,7 @@ void	change_angle(t_env *env, SDL_Keysym key);
 **	Raycasting side-functions
 */
 
-void				draw_rc(t_pos a, t_pos b, SDL_Renderer *ren, int clr);
+void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				double_abs(double i);
 double				length(t_pos coll_x, t_pos coll_y, t_pos play_coor);
@@ -133,4 +135,5 @@ void				raycast(int **map, t_env *env, t_cam *cam, t_ray *all);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);
 void				x_collisions(t_pos *x, t_pos *px, double angle, t_cam cam);
+double				to_rad(double degre);
 #endif

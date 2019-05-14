@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 10:42:13 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/14 13:36:08 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 #include "env.h"
 #include "wolf3d.h"
 
-#include <stdio.h>
 void	change_angle(t_env *env, SDL_Keysym key)
 {
+	double	*tmp;
+
+	tmp = &env->cam.angle;
 	if (key.sym == SDLK_COMMA)
-		env->cam.angle += 2 * RADIAN;
+	{
+		*tmp += to_rad(2);
+		*tmp = (*tmp > to_rad(360)) ? to_rad(360) - *tmp : *tmp;
+	}
 	else
-		env->cam.angle -= 2 * RADIAN;
-	printf("%f\n", env->cam.angle);
+	{
+		*tmp -= to_rad(2);
+		*tmp = (*tmp < 0) ? to_rad(360) + *tmp : *tmp;
+	}
 	raycast(env->map, env, &env->cam, &env->ray);
 }
