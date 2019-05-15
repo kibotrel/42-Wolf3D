@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 13:56:23 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:36:13 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define R_E			0
 # define R_N			M_PI_2
 # define R_W			M_PI
-# define R_S			4.71238898038
+# define R_S			3 * M_PI_2 // to change l8er
 
 /*
 **	Useful macros

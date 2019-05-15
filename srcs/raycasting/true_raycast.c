@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/14 16:26:42 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/15 13:33:51 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void				check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 
 	hit.x = 0;
 	hit.y = 0;
+//	(void)max_x;
+//	(void)max_y;
 	while (hit.x == 0 || hit.y == 0)
 	{
 		check_bounds(&rc->hit_x.x, &rc->hit_x.y, max_x, max_y);
@@ -56,6 +58,7 @@ static void				check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 			rc->hit_y.y += rc->gap_y.y;
 		}
 	}
+//	printf("x.x %f; x.y %f; y.x %f; y.y%f\n", rc->hit_x.x/64, rc->hit_x.y/64, rc->hit_y.x/64, rc->hit_y.y/64);
 }
 
 #include <stdio.h>
@@ -76,6 +79,7 @@ void					raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 
 	x = -1;
 	setup_raycasting(cam, ray);
+//	printf("new\n%f; %f; %f\n%f\n", cam->angle*180/M_PI, cam->coord.x/64, cam->coord.y/64, tan(cam->angle));
 	while (++x <= WIDTH)
 	{
 		y_collisions(&ray->hit_y, &ray->gap_y, ray->angle, *cam);
@@ -84,6 +88,7 @@ void					raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 		setup_line(ray, cam, x);
 		draw_rc(ray->wall.start, ray->wall.end, env->sdl, DARK_GRAY);
 		ray->angle += (to_rad(60.0) / WIDTH);
+	//	printf("%f\n", ray->dist);
 		if (ray->angle >= 6.283185)
 			ray->angle -= 6.283185;
 	}

@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 13:36:12 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/14 16:45:35 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@
 
 static void		keypress(t_env *env, SDL_Keysym key)
 {
-	int neg;
-
-	neg = 0;
 	if (key.sym == SDLK_COMMA || key.sym == SDLK_PERIOD)
 		change_angle(env, env->sdl.event.key.keysym);
 	else if (key.sym == SDLK_w)
-		move_forward(env, neg);
+		move_forward(env);
 	else if (key.sym == SDLK_s)
-		move_backward(env, neg);
+		move_backward(env);
 	else if (key.sym == SDLK_a)
-		move_left(env, neg);
+		move_left(env);
 	else if (key.sym == SDLK_d)
-		move_right(env, neg);
+		move_right(env);
 }
 
 void			hooks(t_env *env, int *loop)
