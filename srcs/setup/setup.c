@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/16 08:52:21 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/16 10:38:56 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	sdl_setup(t_sdl *sdl)
 		return ;
 }
 
-static void	cam_setup(t_cam *cam)
+void	cam_setup(t_cam *cam)
 {
 	cam->pos.x = 1.5;
 	cam->pos.y = 3.5;

@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/16 10:01:19 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/16 10:40:57 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static void		keypress(t_env *env, SDL_Keysym key)
 		change_height(env, key.sym, &env->cam.height);
 	else if (key.sym == SDLK_SPACE)
 		place_block(env);
+	else if (key.sym == SDLK_r)
+	{
+		cam_setup(&env->cam);
+		raycast(env->map, env, &env->cam, &env->ray);
+	}
 }
 
 void			hooks(t_env *env, int *loop)

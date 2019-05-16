@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/16 10:12:02 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/16 10:39:23 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void				parse_file(char *file, t_env *env);
 
 void				setup(t_env *env);
 void				setup_raycasting(t_cam *cam, t_ray *ray);
+void				cam_setup(t_cam *cam);
 
 /*
 **	utils/clean.c
