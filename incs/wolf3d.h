@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/15 15:03:50 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/16 10:12:02 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_cam
 	t_pos			pos;	// Position in **map
 	t_pos			coord;	// Position of player in the scene
 	double			angle;	// Direction
+	double			height;
 }					t_cam;
 
 typedef struct		s_wall
@@ -112,17 +113,19 @@ void				usage(void);
 /*
 **	events/movements.c
 */
-
-void				move_forward(t_env *env);
-void				move_backward(t_env *env);
-void				move_left(t_env *env);
-void				move_right(t_env *env);
-
+void				move(t_env *env, SDL_Keycode key);
 /*
 **	events/update_cam.c
 */
 
-void	change_angle(t_env *env, SDL_Keysym key);
+void				change_angle(t_env *env, SDL_Keycode key, double *angle);
+void				change_height(t_env *env, SDL_Keycode key, double *height);
+
+/*
+**	events/place_blocks.c
+*/
+
+void				place_block(t_env *env);
 
 /*
 **	Raycasting side-functions

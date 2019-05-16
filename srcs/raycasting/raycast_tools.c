@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/15 16:00:59 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/16 07:50:13 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ double		length(t_pos col_x, t_pos col_y, t_pos play_coor, t_ray *ray)
 			ray->wall.color = 0x33c47fff;
 		else
 			ray->wall.color = 0xff6950ff;
-		printf("penis %f; %f; %f\n", is_x, is_y, ray->angle*180/M_PI);
+		// printf("penis %f; %f; %f\n", is_x, is_y, ray->angle*180/M_PI);
 	}
 	else
 	{
@@ -69,7 +69,7 @@ double		length(t_pos col_x, t_pos col_y, t_pos play_coor, t_ray *ray)
 			ray->wall.color = 0x1c4f99ff;
 		else
 			ray->wall.color = 0xa061d1ff;
-		printf("vagin %f; %f; %f\n", is_x, is_y, ray->angle*180/M_PI);
+		// printf("vagin %f; %f; %f\n", is_x, is_y, ray->angle*180/M_PI);
 	}
 	return (is_x > is_y ? is_y : is_x);
 }

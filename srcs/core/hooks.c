@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 16:45:35 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/16 10:01:19 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include "env.h"
 #include "wolf3d.h"
 
+
 static void		keypress(t_env *env, SDL_Keysym key)
 {
 	if (key.sym == SDLK_COMMA || key.sym == SDLK_PERIOD)
-		change_angle(env, env->sdl.event.key.keysym);
-	else if (key.sym == SDLK_w)
-		move_forward(env);
-	else if (key.sym == SDLK_s)
-		move_backward(env);
-	else if (key.sym == SDLK_a)
-		move_left(env);
-	else if (key.sym == SDLK_d)
-		move_right(env);
+		change_angle(env, key.sym, &env->cam.angle);
+	if (key.sym == SDLK_w || key.sym == SDLK_s || key.sym == SDLK_a
+		|| key.sym == SDLK_d)
+		move(env, key.sym);
+	else if (key.sym == SDLK_PAGEUP || key.sym == SDLK_PAGEDOWN)
+		change_height(env, key.sym, &env->cam.height);
+	else if (key.sym == SDLK_SPACE)
+		place_block(env);
 }
 
 void			hooks(t_env *env, int *loop)

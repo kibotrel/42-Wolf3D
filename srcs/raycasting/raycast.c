@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   true_raycast.c                                     :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/15 15:04:15 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/16 09:56:06 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ static void				setup_line(t_ray *ray, t_cam *cam, int x)
 {
 	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, ray);
 	ray->dist *= cos(cam->angle - ray->angle);
-	ray->wall.size = ceil((CELL / ray->dist) * ray->screen);
+	ray->wall.size = ceil((CELL / ray->dist) * ray->screen - cam->height);
 	ray->wall.start.x = WIDTH - x;
-	ray->wall.start.y = (HEIGHT / 2) - (ray->wall.size / 2);
+	ray->wall.start.y = ((HEIGHT / 2) - (ray->wall.size / 2)) + cam->height;
 	ray->wall.end.x = WIDTH - x;
-	ray->wall.end.y = ray->wall.start.y + ray->wall.size;
+	ray->wall.end.y = (ray->wall.start.y + ray->wall.size) + cam->height;
 }
 
 void					raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)

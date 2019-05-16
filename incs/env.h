@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/15 15:50:40 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/16 09:08:23 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 */
 
 # define CELL			64
+# define HEIGHT_CAM		200
 # define RESIZE			0x00000200
 # define RGBA			373694468
 # define STREAM			1
