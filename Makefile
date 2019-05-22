@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/22 17:09:10 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/05/22 17:55:11 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ $(NAME): $(LFT) $(OBJDIR) $(COBJ)
 		brew install sdl2;\
 	fi
 	@echo "$(YELLOW)\n      - Building $(RESET)$(NAME) $(YELLOW)...\n$(RESET)"
-	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(COBJ)
+	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(COBJ) -O3 -Ofast -g
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
 
 $(OBJDIR):

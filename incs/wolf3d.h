@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/22 17:09:22 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:16:00 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void				place_block(t_env *env);
 void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				double_abs(double i);
-double				length(t_pos coll_x, t_pos coll_y, t_pos pos, t_ray *ray);
+double				length(t_pos col_x, t_pos col_y, t_pos coord, t_ray *ray);
 void				raycast(int **map, t_env *env, t_cam *cam, t_ray *all);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);
