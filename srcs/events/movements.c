@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/16 10:37:52 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/22 16:59:40 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	move(t_env *env, SDL_Keycode key)
 {
 	if (key == SDLK_w)
 	{
-		env->cam.coord.x += cos(env->cam.angle) * 10;
-		env->cam.coord.y -= sin(env->cam.angle) * 10;
+		env->cam.coord.x += cos(env->cam.angle) * 16;
+		env->cam.coord.y -= sin(env->cam.angle) * 16;
 	}
 	else if (key == SDLK_s)
 	{
-		env->cam.coord.x -= cos(env->cam.angle) * 10;
-		env->cam.coord.y += sin(env->cam.angle) * 10;
+		env->cam.coord.x -= cos(env->cam.angle) * 16;
+		env->cam.coord.y += sin(env->cam.angle) * 16;
 	}
 	else if (key == SDLK_a)
 	{

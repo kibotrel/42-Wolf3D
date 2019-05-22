@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/16 09:08:23 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/22 16:54:40 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 **	Window parameters macros
 */
 
-# define WIDTH			1000
-# define HEIGHT			1000
+# define WIDTH			1920
+# define HEIGHT			1080
 
 /*
 **	Maths macros

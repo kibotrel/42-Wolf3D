@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/16 10:39:23 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/21 10:57:49 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void				place_block(t_env *env);
 void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				double_abs(double i);
-double				length(t_pos coll_x, t_pos coll_y, t_pos play_coor, t_ray *ray);
+double				length(t_pos coll_x, t_pos coll_y, t_pos pos, t_ray *ray);
 void				raycast(int **map, t_env *env, t_cam *cam, t_ray *all);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);

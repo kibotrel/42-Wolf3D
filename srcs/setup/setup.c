@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/16 10:38:56 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/22 15:05:11 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	cam_setup(t_cam *cam)
 
 void		setup_raycasting(t_cam *cam, t_ray *ray)
 {
-	if (cam->angle < to_rad(30))
-		ray->angle = cam->angle + to_rad(330);
+	if (cam->angle >= to_rad(330))
+		ray->angle = cam->angle - to_rad(330);
 	else
-		ray->angle = cam->angle - to_rad(30);
+		ray->angle = cam->angle + to_rad(30);
 }
 
 void		setup(t_env *env)
