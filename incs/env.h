@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 17:43:50 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:09:08 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 **	Window parameters macros
 */
 
-# define WIDTH			1000
-# define HEIGHT			1000
+# define WIDTH			1920
+# define HEIGHT			1080
 
 /*
 **	Maths macros
@@ -29,13 +29,15 @@
 # define R_E			0
 # define R_N			M_PI_2
 # define R_W			M_PI
-# define R_S			4.71238898038
+# define R_S			3 * M_PI_2 // to change l8er
 
 /*
 **	Useful macros
 */
 
 # define CELL			64
+# define HEIGHT_CAM		200
+# define RESIZE			0x00000200
 # define RGBA			373694468
 # define RESIZE			0x00000200
 # define S_UINT			4

@@ -6,7 +6,7 @@
 /*   By: reda-con <reda-con@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/14 21:36:15 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:07:50 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,36 @@ void		draw_rc(t_pos start, t_pos end, t_sdl sdl, int clr)
 			color = 0xc8c8c8ff;
 		sdl.pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
 		++current.y;
+	}
+}
+
+double		length(t_pos col_x, t_pos col_y, t_pos play_coor, t_ray *ray)
+{
+	double	is_y;
+	double	is_x;
+
+	is_x = sqrt(pow(col_x.x - play_coor.x, 2) + pow(col_x.y - play_coor.y, 2));
+	is_y = sqrt(pow(col_y.x - play_coor.x, 2) + pow(col_y.y - play_coor.y, 2));
+	if (is_x > is_y)
+	{
+		if (ray->angle > R_E && ray->angle < R_W)
+		{
+			ray->wall.color = 0x33c47fff;
+		}
+		else
+		{
+			ray->wall.color = 0xff6950ff;
+		}
+//		printf("penis is x: %f; is y: %f; ray angle: %f\n", is_x, is_y, ray->angle*180/M_PI);
+		return (is_y);
+	}
+	else
+	{
+		if (ray->angle > R_N && ray->angle < R_S)
+			ray->wall.color = 0x1c4f99ff;
+		else
+			ray->wall.color = 0xa061d1ff;
+//		printf("vagin is x: %f; is y: %f; ray angle: %f\n", is_x, is_y, ray->angle*180/M_PI);
+		return (is_x);
 	}
 }

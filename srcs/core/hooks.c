@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 15:58:12 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:09:41 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 #include "env.h"
 #include "wolf3d.h"
 
+
 static void		keypress(t_env *env, SDL_Keysym key)
 {
 	if (key.sym == SDLK_COMMA || key.sym == SDLK_PERIOD)
-		change_angle(env, &env->cam.angle, env->sdl.event.key.keysym);
-	else if (key.sym == SDLK_w)
-		move_forward(env, &env->cam);
-	else if (key.sym == SDLK_s)
-		move_backward(env, &env->cam);
-	else if (key.sym == SDLK_a)
-		move_left(env, &env->cam);
-	else if (key.sym == SDLK_d)
-		move_right(env, &env->cam);
+		change_angle(env, key.sym, &env->cam.angle);
+	if (key.sym == SDLK_w || key.sym == SDLK_s || key.sym == SDLK_a
+		|| key.sym == SDLK_d)
+		move(env, key.sym);
+	else if (key.sym == SDLK_PAGEUP || key.sym == SDLK_PAGEDOWN)
+		change_height(env, key.sym, &env->cam.height);
+	else if (key.sym == SDLK_SPACE)
+		place_block(env);
+	else if (key.sym == SDLK_r)
+	{
+		cam_setup(&env->cam);
+		raycast(env->map, env, &env->cam, &env->ray);
+	}
 }
 
 void			hooks(t_env *env, int *loop)

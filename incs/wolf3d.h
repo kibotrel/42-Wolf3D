@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/14 15:58:27 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:09:22 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_cam
 	t_pos			pos;	// Position in **map
 	t_pos			coord;	// Position of player in the scene
 	double			angle;	// Direction
+	double			height;
 }					t_cam;
 
 typedef struct		s_wall
@@ -33,6 +34,7 @@ typedef struct		s_wall
 	double			size;
 	t_pos			end;
 	t_pos			start;
+	int				color;
 }					t_wall;
 
 typedef struct		s_ray
@@ -84,6 +86,7 @@ void				parse_file(char *file, t_env *env);
 
 void				setup(t_env *env);
 void				setup_raycasting(t_cam *cam, t_ray *ray);
+void				cam_setup(t_cam *cam);
 
 /*
 **	utils/clean.c
@@ -111,17 +114,19 @@ void				usage(void);
 /*
 **	events/movements.c
 */
-
-void				move_left(t_env *env, t_cam *cam);
-void				move_right(t_env *env, t_cam *cam);
-void				move_forward(t_env *env, t_cam *cam);
-void				move_backward(t_env *env, t_cam *cam);
-
+void				move(t_env *env, SDL_Keycode key);
 /*
 **	events/update_cam.c
 */
 
-void				change_angle(t_env *env, double *angle, SDL_Keysym key);
+void				change_angle(t_env *env, SDL_Keycode key, double *angle);
+void				change_height(t_env *env, SDL_Keycode key, double *height);
+
+/*
+**	events/place_blocks.c
+*/
+
+void				place_block(t_env *env);
 
 /*
 **	Raycasting side-functions
@@ -130,7 +135,7 @@ void				change_angle(t_env *env, double *angle, SDL_Keysym key);
 void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				double_abs(double i);
-double				length(t_pos coll_x, t_pos coll_y, t_pos play_coor);
+double				length(t_pos coll_x, t_pos coll_y, t_pos pos, t_ray *ray);
 void				raycast(int **map, t_env *env, t_cam *cam, t_ray *all);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);

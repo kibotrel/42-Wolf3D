@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 21:36:03 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:08:17 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,30 @@
 #include "env.h"
 #include "wolf3d.h"
 
-void	change_angle(t_env *env, double *angle, SDL_Keysym key)
+void	change_angle(t_env *env, SDL_Keycode key, double *angle)
 {
-	if (key.sym == SDLK_COMMA)
+	if (key == SDLK_COMMA)
 	{
 		*angle += to_rad(2);
-		*angle = (*angle > to_rad(360) ? to_rad(360) - *angle : *angle);
+		*angle = (*angle >= to_rad(360)) ? to_rad(360) - *angle : *angle;
 	}
 	else
 	{
 		*angle -= to_rad(2);
-		*angle = (angle < 0 ? to_rad(360) + *angle : *angle);
+		*angle = (*angle < 0) ? to_rad(360) + *angle : *angle;
 	}
+	raycast(env->map, env, &env->cam, &env->ray);
+}
+
+void	change_height(t_env *env, SDL_Keycode key, double *height)
+{
+	if (key == SDLK_PAGEUP)
+		*height += 2;
+	else
+		*height -= 2;
+	if (*height > HEIGHT_CAM)
+		*height = HEIGHT_CAM;
+	else if (*height < -HEIGHT_CAM)
+		*height = -HEIGHT_CAM;
 	raycast(env->map, env, &env->cam, &env->ray);
 }
