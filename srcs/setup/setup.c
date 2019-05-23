@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/22 15:05:11 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/23 08:12:37 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static void	sdl_setup(t_sdl *sdl)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 		//ERROR
-	SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, RESIZE, &sdl->win, &sdl->ren);
-		//ERROR
-	sdl->text = SDL_CreateTexture(sdl->ren, RGBA, STREAM, WIDTH, HEIGHT);
+	sdl->win = SDL_CreateWindow("Wolf3D", 0, 0, WIDTH, HEIGHT, RESIZE);
+	sdl->ren = SDL_CreateRenderer(sdl->win, -1, SDL_RENDERER_TARGETTEXTURE);
+		//ERRORS
+	sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, WIDTH, HEIGHT);
 	if (!(sdl->pixels = (uint32_t*)malloc(sizeof(uint32_t) * ((WIDTH + 1) * HEIGHT))))
 		return ;
 }
