@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/23 10:40:49 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:51:41 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ double					length(t_pos col_x, t_pos col_y, t_pos coor, t_ray *ray)
 	if (is_x > is_y)
 	{
 		if (ray->angle > R_E && ray->angle < R_W)
-			ray->wall.color = 0x33c47fff;
+			ray->wall.color = 0xff33c47f;
 		else
-			ray->wall.color = 0xff6950ff;
+			ray->wall.color = 0xffff6950;
 		return (is_y);
 	}
 	else
 	{
 		if (ray->angle > R_N && ray->angle < R_S)
-			ray->wall.color = 0x1c4f99ff;
+			ray->wall.color = 0xff1c4f99;
 		else
-			ray->wall.color = 0xa061d1ff;
+			ray->wall.color = 0xffa061d1;
 		return (is_x);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: reda-con <reda-con@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/22 17:14:58 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:51:54 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void		draw_rc(t_pos start, t_pos end, t_sdl sdl, int clr)
 	while (current.y < HEIGHT)
 	{
 		if (current.y < start.y)
-			color = 0x00ffffff;
+			color = 0xff00ffff;
 		else if (current.y >= start.y && current.y <= end.y)
 			color = clr;
 		else
-			color = 0xc8c8c8ff;
+			color = 0xffc8c8c8;
 		sdl.pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
 		++current.y;
 	}

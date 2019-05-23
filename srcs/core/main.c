@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/23 10:37:34 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:54:41 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char **av)
 	t_env	*env;
 
 	loop = 1;
-	printf("%lu\n", sizeof(uint32_t));
 	if (ac == 2)
 	{
 		if (ft_strcmp(av[0], "./wolf3d"))

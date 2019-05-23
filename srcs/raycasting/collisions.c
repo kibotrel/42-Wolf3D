@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 18:16:08 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/22 16:59:44 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:55:33 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void		y_collisions(t_pos *hit_y, t_pos *gap_y, double angle, t_cam cam)
 {
 	if (angle > R_E && angle < R_W)
-		hit_y->y = floor(cam.coord.y / CELL) * CELL - 0.00001;
+		hit_y->y = floor(cam.coord.y / CELL) * CELL - 0.0000001;
 	else
 		hit_y->y = floor(cam.coord.y / CELL) * CELL + CELL;
 	gap_y->y = (angle > R_E && angle < R_W) ? -CELL : CELL;
@@ -29,7 +29,7 @@ void		y_collisions(t_pos *hit_y, t_pos *gap_y, double angle, t_cam cam)
 void		x_collisions(t_pos *hit_x, t_pos *gap_x, double angle, t_cam cam)
 {
 	if (angle > R_N && angle < R_S)
-		hit_x->x = floor(cam.coord.x / CELL) * CELL - 0.00001;
+		hit_x->x = floor(cam.coord.x / CELL) * CELL - 0.0000001;
 	else
 		hit_x->x = floor(cam.coord.x / CELL) * CELL + CELL;
 	gap_x->x = (angle > R_N && angle < R_S) ? -CELL : CELL;
