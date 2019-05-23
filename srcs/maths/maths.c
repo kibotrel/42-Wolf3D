@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/22 17:18:50 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:40:49 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ double					pow2(double n)
 	return (n * n);
 }
 
-double					length(t_pos col_x, t_pos col_y, t_pos coord, t_ray *ray)
+double					length(t_pos col_x, t_pos col_y, t_pos coor, t_ray *ray)
 {
 	double	is_y;
 	double	is_x;
 
-	is_x = sqrt(pow(col_x.x - coord.x, 2) + pow(col_x.y - coord.y, 2));
-	is_y = sqrt(pow(col_y.x - coord.x, 2) + pow(col_y.y - coord.y, 2));
+	is_x = sqrt(pow(col_x.x - coor.x, 2) + pow(col_x.y - coor.y, 2));
+	is_y = sqrt(pow(col_y.x - coor.x, 2) + pow(col_y.y - coor.y, 2));
 	if (is_x > is_y)
 	{
 		if (ray->angle > R_E && ray->angle < R_W)

@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/22 17:07:52 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:42:13 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void	check_bounds(double *x, double *y, int max_x, int max_y)
+static void		check_bounds(double *x, double *y, int max_x, int max_y)
 {
 	if (*x > (max_x - 1) * CELL)
 		*x = (max_x - 1) * CELL;
@@ -26,9 +26,7 @@ static void	check_bounds(double *x, double *y, int max_x, int max_y)
 		*y = 0;
 }
 
-#include <stdio.h>
-#include <unistd.h>
-static void				check_collisions(t_ray *rc, int **map, int max_y, int max_x)
+static void		check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 {
 	t_pos	hit;
 
@@ -57,13 +55,12 @@ static void				check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 	}
 }
 
-static void				setup_line(t_ray *ray, t_cam *cam, int x)
-
+static void		setup_line(t_ray *ray, t_cam *cam, int x)
 {
 	double	angle;
 
-	angle = (ray->angle > cam->angle) ? to_rad(-30) : to_rad(30);
-	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, ray) * cos(cam->angle - ray->angle);
+	angle = cam->angle - ray->angle;
+	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, ray) * cos(angle);
 	ray->wall.size = ceil((CELL / ray->dist) * ray->screen - cam->height);
 	ray->wall.start.x = x;
 	ray->wall.start.y = ((HEIGHT / 2) - (ray->wall.size / 2)) + cam->height;
@@ -71,7 +68,7 @@ static void				setup_line(t_ray *ray, t_cam *cam, int x)
 	ray->wall.end.y = (ray->wall.start.y + ray->wall.size) + cam->height;
 }
 
-void		raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
+void			raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 {
 	int		x;
 

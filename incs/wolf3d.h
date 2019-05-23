@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/22 17:16:00 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:36:44 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct		s_pos
 
 typedef struct		s_cam
 {
-	t_pos			pos;	// Position in **map
-	t_pos			coord;	// Position of player in the scene
-	double			angle;	// Direction
+	t_pos			pos;
+	t_pos			coord;
+	double			angle;
 	double			height;
 }					t_cam;
 
@@ -39,13 +39,13 @@ typedef struct		s_wall
 
 typedef struct		s_ray
 {
-	t_pos			gap_x;	// Shift to the next collumn
-	t_pos			gap_y;	// Shift to the next row
-	t_pos			hit_x;	// Collisions on columns
-	t_pos			hit_y;	// Collisions on rows
+	t_pos			gap_x;
+	t_pos			gap_y;
+	t_pos			hit_x;
+	t_pos			hit_y;
 	t_wall			wall;
-	double			dist;	// True distance between player and nearest wall
-	double			angle;	// Angle of the ray at instant t
+	double			dist;
+	double			angle;
 	double			screen;
 }					t_ray;
 

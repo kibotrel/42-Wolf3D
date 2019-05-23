@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/23 08:10:50 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:45:11 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@
 # define HEIGHT			1080
 
 /*
-**	Maths macros
-*/
-
-# define R_E			0
-# define R_N			M_PI_2
-# define R_W			M_PI
-# define R_S			3 * M_PI_2 // to change l8er
-
-/*
 **	Useful macros
 */
 
@@ -42,6 +33,12 @@
 # define RESIZE			0x00000200
 # define S_UINT			4
 # define STREAM			1
+
+# define R_E 0
+# define R_N M_PI_2
+# define R_W M_PI
+# define R_S 3 * R_N
+
 /*
 **	Color macros
 */

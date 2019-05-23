@@ -6,14 +6,13 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/22 17:09:41 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:37:07 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SDL.h"
 #include "env.h"
 #include "wolf3d.h"
-
 
 static void		keypress(t_env *env, SDL_Keysym key)
 {

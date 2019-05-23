@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/23 08:12:37 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:46:47 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static void	sdl_setup(t_sdl *sdl)
 	sdl->ren = SDL_CreateRenderer(sdl->win, -1, SDL_RENDERER_TARGETTEXTURE);
 		//ERRORS
 	sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, WIDTH, HEIGHT);
-	if (!(sdl->pixels = (uint32_t*)malloc(sizeof(uint32_t) * ((WIDTH + 1) * HEIGHT))))
+	if (!(sdl->pixels = (uint32_t*)malloc(4 * ((WIDTH + 1) * HEIGHT))))
 		return ;
 }
 
-void	cam_setup(t_cam *cam)
+void		cam_setup(t_cam *cam)
 {
 	cam->pos.x = 1.5;
 	cam->pos.y = 3.5;

@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 17:40:03 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:37:34 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include "wolf3d.h"
 
 // PENSER A PROTECT LE MOVE DU BINAIRE !!!
-// ADD SPAWNPOINT
 
-#include <stdio.h>
 int	main(int ac, char **av)
 {
 	int		loop;

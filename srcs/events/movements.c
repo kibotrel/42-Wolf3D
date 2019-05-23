@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/22 17:08:10 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:37:51 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		coll_wall(t_env *env, t_pos coord, SDL_Keycode key)
 	return (1);
 }
 
-void	move(t_env *env, SDL_Keycode key)
+void			move(t_env *env, SDL_Keycode key)
 {
 	if (key == SDLK_w)
 	{
