@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/24 16:17:21 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 15:10:53 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ static void		keypress(t_env *env, SDL_Keysym key)
 		change_height(env, key.sym, &env->cam.height, 1);
 	if (key.sym == SDLK_SPACE)
 		place_block(env);
-	if (key.sym == SDLK_r)
-	{
-		cam_setup(&env->cam);
-		raycast(env->map, env, &env->cam, &env->ray);
-	}
 }
 */
 
@@ -70,7 +65,14 @@ void			hooks(t_env *env, int *loop, char *key)
 	if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
 		change_angle(env, key, &env->cam.angle, mouse);
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S] || key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
-		move(env, key);
+		move(env, key, 0);
 	if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
 		change_height(env, key, &env->cam.height, 1, mouse);
+	if (key[SDL_SCANCODE_R])
+	{
+		cam_setup(&env->cam);
+		raycast(env->map, env, &env->cam, &env->ray);
+	}
+	if (key[SDL_SCANCODE_SPACE])
+		place_block(env);
 }

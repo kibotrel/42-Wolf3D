@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/24 16:10:33 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 10:29:03 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void				usage(void);
 /*
 **	events/movements.c
 */
-void				move(t_env *env, char *key);
+void				move(t_env *env, char *key, int fl);
 /*
 **	events/update_cam.c
 */
