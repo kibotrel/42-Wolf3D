@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 16:25:41 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:54:11 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 #include "wolf3d.h"
 
 // PENSER A PROTECT LE MOVE DU BINAIRE !!!
-
+#include <stdio.h>
 int	main(int ac, char **av)
 {
 	int		loop;
 	t_env	*env;
-	char	*key;
 
 	loop = 1;
-	key = ft_strnew(SDL_NUM_SCANCODES);
 	if (ac == 2)
 	{
 		if (ft_strcmp(av[0], "./wolf3d"))
@@ -35,7 +33,7 @@ int	main(int ac, char **av)
 		setup(env);
 		raycast(env);
 		while (loop)
-			hooks(env, &loop, key);
+			hooks(env, &loop, env->inputs);
 		fun_exit(env->sdl.render, env->sdl.win);
 	}
 	else

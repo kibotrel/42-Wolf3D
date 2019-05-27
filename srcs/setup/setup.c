@@ -6,13 +6,14 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 16:52:06 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:59:09 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <math.h>
 #include "SDL.h"
+#include "libft.h"
 #include "env.h"
 #include "wolf3d.h"
 
@@ -45,18 +46,20 @@ void		cam_setup(t_cam *cam)
 	cam->fov = 60.0;
 }
 
-void		setup_raycasting(t_cam *cam, t_ray *ray)
+static void	data_setup(t_data *data)
 {
-	if (cam->angle >= 330)
-		ray->angle = cam->angle - radians(330);
-	else
-		ray->angle = cam->angle + radians(30);
-	ray->step = radians(cam->fov / WIDTH);
+	data->east = 0.0;
+	data->north = M_PI_2;
+	data->west = M_PI;
+	data->south = M_PI_2 * 3;
+	data->two_pi = M_PI * 2;
 }
 
 void		setup(t_env *env)
 {
 	sdl_setup(&env->sdl);
 	cam_setup(&env->cam);
+	data_setup(&env->data);
+	ft_bzero(env->inputs, SDL_NUM_SCANCODES);
 	env->ray.screen = ((WIDTH / 2) / tan(radians(env->cam.fov / 2)));
 }
