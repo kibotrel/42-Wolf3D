@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 17:08:23 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 18:07:54 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 
-void			change_cam(t_env *env, t_mouse *mouse, char *key, int *fl)
+void			change_cam(t_env *env, t_mouse *mouse, char *key, t_pos *fl)
 {
 	mouse->old.x = mouse->new.x;
 	mouse->old.y = mouse->new.y;
@@ -27,12 +27,11 @@ void			change_cam(t_env *env, t_mouse *mouse, char *key, int *fl)
 		change_angle(key, &env->cam.angle, mouse->new);
 	if (mouse->new.y != mouse->old.y)
 		change_height(key, &env->cam.height, 5, mouse->new);
-	*fl = 1;
+	fl->y = 1;
 	SDL_WarpMouseInWindow(env->sdl.win, WIDTH / 2, HEIGHT / 2);
-//	printf("%f; %f; %f; %f\n", old->x, old->y, new->x, new->y);
 }
 
-void			all_ev(char *key, t_env *env, t_mouse *mouse, int *fl)
+void			trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 {
 	while (SDL_PollEvent(&env->sdl.event))
 	{
@@ -45,42 +44,49 @@ void			all_ev(char *key, t_env *env, t_mouse *mouse, int *fl)
 	}
 }
 
-void			hooks(t_env *env, int *loop, char *key, t_mouse *mouse)
+void			next_process(char *key, t_env *env, t_pos *fl)
 {
-	int		fl;
+	if (key[SDL_SCANCODE_R])
+	{
+		cam_setup(&env->cam);
+		raycast(env->map, env, &env->cam, &env->ray);
+		fl->y = 1;
+	}
+	if (key[SDL_SCANCODE_SPACE])
+	{
+		place_block(env);
+		fl->y = 1;
+	}
+}
 
-	fl = 0;
-	all_ev(key, env, mouse, &fl);
+void			process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
+{
 	if (key[SDL_SCANCODE_ESCAPE]\
 		|| env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
-		*loop = 0;
+		fl->x = 0;
 	if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
 	{
 		change_angle(key, &env->cam.angle, mouse->new);
-		fl = 1;
+		fl->y = 1;
 	}
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
 		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 	{
 		move(env, key, 0);
-		fl = 1;
+		fl->y = 1;
 	}
 	if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
 	{
 		change_height(key, &env->cam.height, 1, mouse->new);
-		fl = 1;
+		fl->y = 1;
 	}
-	if (key[SDL_SCANCODE_R])
-	{
-		cam_setup(&env->cam);
+	next_process(key, env, fl);
+	if (fl->y == 1)
 		raycast(env->map, env, &env->cam, &env->ray);
-		fl = 1;
-	}
-	if (key[SDL_SCANCODE_SPACE])
-	{
-		place_block(env);
-		fl = 1;
-	}
-	if (fl == 1)
-		raycast(env->map, env, &env->cam, &env->ray);
+}
+
+void			hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
+{
+	trigger_event(key, env, mouse, flags);
+	process_event(key, env, mouse, flags);
 }

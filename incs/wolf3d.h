@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 17:10:14 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 18:01:32 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct		s_env
 **	core/hooks.c
 */
 
-void				hooks(t_env *env, int *loop, char *key, t_mouse *mouse);
+void				hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse);
 
 /*
 **	parsing/map.c

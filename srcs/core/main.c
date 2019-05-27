@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 17:10:29 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 18:01:01 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 int	main(int ac, char **av)
 {
-	int		loop;
 	t_env	*env;
 	char	*key;
 	t_mouse	mouse;
+	t_pos	flags;
 
 	setup_mouse(&mouse);
-	loop = 1;
+	flags.x = 1;
 	key = ft_strnew(SDL_NUM_SCANCODES);
 	if (ac == 2)
 	{
@@ -36,8 +36,8 @@ int	main(int ac, char **av)
 		parse_file(av[1], env);
 		setup(env);
 		raycast(env->map, env, &env->cam, &env->ray);
-		while (loop)
-			hooks(env, &loop, key, &mouse);
+		while (flags.x)
+			hooks(env, &flags, key, &mouse);
 		fun_exit(env->sdl.ren, env->sdl.win);
 	}
 	else
