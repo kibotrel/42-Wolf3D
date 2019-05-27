@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/23 10:36:44 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/24 16:10:33 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct		s_env
 **	core/hooks.c
 */
 
-void				hooks(t_env *env, int *loop);
+void				hooks(t_env *env, int *loop, char *key);
 
 /*
 **	parsing/map.c
@@ -114,13 +114,13 @@ void				usage(void);
 /*
 **	events/movements.c
 */
-void				move(t_env *env, SDL_Keycode key);
+void				move(t_env *env, char *key);
 /*
 **	events/update_cam.c
 */
 
-void				change_angle(t_env *env, SDL_Keycode key, double *angle);
-void				change_height(t_env *env, SDL_Keycode key, double *height);
+void				change_angle(t_env *env, char  *key, double *angle, t_pos mouse);
+void				change_height(t_env *env, char *key, double *height, int speed, t_pos mouse);
 
 /*
 **	events/place_blocks.c

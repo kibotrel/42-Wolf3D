@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/23 10:54:41 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/24 15:58:33 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	main(int ac, char **av)
 {
 	int		loop;
 	t_env	*env;
+	char	*key;
 
 	loop = 1;
+	key = ft_strnew(SDL_NUM_SCANCODES);
 	if (ac == 2)
 	{
 		if (ft_strcmp(av[0], "./wolf3d"))
@@ -33,7 +35,7 @@ int	main(int ac, char **av)
 		setup(env);
 		raycast(env->map, env, &env->cam, &env->ray);
 		while (loop)
-			hooks(env, &loop);
+			hooks(env, &loop, key);
 		fun_exit(env->sdl.ren, env->sdl.win);
 	}
 	else

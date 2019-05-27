@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/23 10:46:47 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/24 15:39:16 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	sdl_setup(t_sdl *sdl)
 	sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, WIDTH, HEIGHT);
 	if (!(sdl->pixels = (uint32_t*)malloc(4 * ((WIDTH + 1) * HEIGHT))))
 		return ;
+	SDL_WarpMouseInWindow(sdl->win, WIDTH / 2, HEIGHT / 2);
+	SDL_ShowCursor(SDL_DISABLE);
 }
 
 void		cam_setup(t_cam *cam)
@@ -34,7 +36,7 @@ void		cam_setup(t_cam *cam)
 	cam->pos.y = 3.5;
 	cam->coord.x = cam->pos.x * CELL;
 	cam->coord.y = cam->pos.y * CELL;
-	cam->angle = to_rad(90);
+	cam->angle = to_rad(315);
 	cam->height = 0;
 }
 
