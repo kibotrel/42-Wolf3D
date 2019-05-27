@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 16:11:19 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 18:10:49 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@
 # define S_UINT			4
 # define STREAM			1
 # define HEIGHT_CAM		200
-
-# define R_E 0
-# define R_N M_PI_2
-# define R_W M_PI
-# define R_S 3 * R_N
 
 /*
 **	Color macros

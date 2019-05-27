@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 16:48:56 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:54:05 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,25 @@ typedef struct		s_sdl
 	uint32_t		*pixels;
 }					t_sdl;
 
+typedef struct		s_data
+{
+	double			east;
+	double			west;
+	double			north;
+	double			south;
+	double			two_pi;
+}					t_data;
+
 typedef struct		s_env
 {
 	int				**map;
 	int				height;
 	int				width;
+	char			inputs[SDL_NUM_SCANCODES];
 	t_sdl			sdl;
 	t_cam			cam;
 	t_ray			ray;
+	t_data			data;
 }					t_env;
 
 /*
@@ -87,7 +98,6 @@ void				parse_file(char *file, t_env *env);
 */
 
 void				setup(t_env *env);
-void				setup_raycasting(t_cam *cam, t_ray *ray);
 void				cam_setup(t_cam *cam);
 
 /*
@@ -137,10 +147,10 @@ void				place_block(t_env *env);
 void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				double_abs(double i);
-double				length(t_pos col_x, t_pos col_y, t_pos coord, t_ray *ray);
+double				length(t_pos col_x, t_pos col_y, t_pos coord, t_env *env);
 void				raycast(t_env *env);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
-void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);
-void				x_collisions(t_pos *x, t_pos *px, double angle, t_cam cam);
+void				y_collisions(t_ray *ray, t_cam cam, t_data data);
+void				x_collisions(t_ray *ray, t_cam cam, t_data data);
 double				radians(double degre);
 #endif
