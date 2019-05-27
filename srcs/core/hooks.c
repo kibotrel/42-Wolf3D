@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 16:26:42 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 19:09:02 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void			change_cam(t_env *env, char *key, t_pos *mickey)
 	mickey->x = env->sdl.event.motion.x;
 	mickey->y = env->sdl.event.motion.y;
 	change_angle(env, key, &env->cam.angle, *mickey);
-	change_height(env, key, &env->cam.height, 5, *mickey);
+	change_height(env, key, &env->cam.offset, 5, *mickey);
 	SDL_WarpMouseInWindow(env->sdl.win, WIDTH / 2, HEIGHT / 2);
 }
 
@@ -69,7 +69,7 @@ void			hooks(t_env *env, int *loop, char *key)
 		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 		move(env, key);
 	if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
-		change_height(env, key, &env->cam.height, 1, mouse);
+		change_height(env, key, &env->cam.offset, 1, mouse);
 	if (key[SDL_SCANCODE_R])
 	{
 		cam_setup(&env->cam);

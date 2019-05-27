@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 17:59:09 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 19:21:01 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		cam_setup(t_cam *cam)
 	cam->coord.x = cam->pos.x * CELL;
 	cam->coord.y = cam->pos.y * CELL;
 	cam->angle = radians(315);
-	cam->height = 0;
+	cam->offset = HEIGHT / 2;
 	cam->fov = 60.0;
 }
 
