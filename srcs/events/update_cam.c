@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 16:46:01 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 18:05:23 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,9 @@
 void	change_angle(t_env *env, char *key, double *angle, t_pos mouse)
 {
 	if (key[SDL_SCANCODE_COMMA] || mouse.x < WIDTH / 2)
-	{
-		*angle += radians(2);
-		*angle = (*angle >= radians(360) ? radians(360) - *angle : *angle);
-	}
+		*angle = fmod(*angle + radians(2), radians(360));
 	else if (key[SDL_SCANCODE_PERIOD] || mouse.x > WIDTH / 2)
-	{
-		*angle -= radians(2);
-		*angle = (*angle < 0 ? radians(360) + *angle : *angle);
-	}
+		*angle = fmod(*angle - radians(2), radians(360));
 	raycast(env);
 }
 

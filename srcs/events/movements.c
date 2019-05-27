@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/27 16:30:29 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:18:02 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void			move_backward(t_env *env)
 
 void			move_left(t_env *env)
 {
-		env->cam.coord.x += cos(env->cam.angle + R_N) * 8;
-		env->cam.coord.y -= sin(env->cam.angle + R_N) * 8;
+		env->cam.coord.x += cos(env->cam.angle + env->data.north) * 8;
+		env->cam.coord.y -= sin(env->cam.angle + env->data.north) * 8;
 }
 
 void			move_right(t_env *env)
 {
-		env->cam.coord.x -= cos(env->cam.angle + R_N) * 8;
-		env->cam.coord.y += sin(env->cam.angle + R_N) * 8;
+		env->cam.coord.x -= cos(env->cam.angle + env->data.north) * 8;
+		env->cam.coord.y += sin(env->cam.angle + env->data.north) * 8;
 }
 
 static void		coll_wall(t_env *env, t_pos coord, char *key)
