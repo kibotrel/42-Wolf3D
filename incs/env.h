@@ -6,14 +6,12 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 18:10:49 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 19:21:49 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
-
-# include <math.h>
 
 /*
 **	Window parameters macros
@@ -32,7 +30,6 @@
 # define RESIZE			0x00000200
 # define S_UINT			4
 # define STREAM			1
-# define HEIGHT_CAM		200
 
 /*
 **	Color macros

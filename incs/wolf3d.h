@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 17:54:05 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/27 19:13:05 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_cam
 	t_pos			coord;
 	double			fov;
 	double			angle;
-	double			height;
+	double			offset;
 }					t_cam;
 
 typedef struct		s_wall
@@ -153,4 +153,5 @@ void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_ray *ray, t_cam cam, t_data data);
 void				x_collisions(t_ray *ray, t_cam cam, t_data data);
 double				radians(double degre);
+void				check_collisions(t_ray *rc, int **map, int max_y, int max_x);
 #endif
