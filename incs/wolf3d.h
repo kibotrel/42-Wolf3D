@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 10:29:03 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:48:56 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_cam
 {
 	t_pos			pos;
 	t_pos			coord;
+	double			fov;
 	double			angle;
 	double			height;
 }					t_cam;
@@ -44,6 +45,7 @@ typedef struct		s_ray
 	t_pos			hit_x;
 	t_pos			hit_y;
 	t_wall			wall;
+	double			step;
 	double			dist;
 	double			angle;
 	double			screen;
@@ -52,8 +54,8 @@ typedef struct		s_ray
 typedef struct		s_sdl
 {
 	SDL_Window		*win;
-	SDL_Renderer	*ren;
-	SDL_Texture		*text;
+	SDL_Renderer	*render;
+	SDL_Texture		*texture;
 	SDL_Event		event;
 	uint32_t		*pixels;
 }					t_sdl;
@@ -114,7 +116,7 @@ void				usage(void);
 /*
 **	events/movements.c
 */
-void				move(t_env *env, char *key, int fl);
+void				move(t_env *env, char *key);
 /*
 **	events/update_cam.c
 */
@@ -136,9 +138,9 @@ void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				double_abs(double i);
 double				length(t_pos col_x, t_pos col_y, t_pos coord, t_ray *ray);
-void				raycast(int **map, t_env *env, t_cam *cam, t_ray *all);
+void				raycast(t_env *env);
 void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
 void				y_collisions(t_pos *y, t_pos *py, double angle, t_cam cam);
 void				x_collisions(t_pos *x, t_pos *px, double angle, t_cam cam);
-double				to_rad(double degre);
+double				radians(double degre);
 #endif
