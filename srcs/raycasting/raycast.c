@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/23 10:49:28 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:51:06 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,24 @@ static void		setup_line(t_ray *ray, t_cam *cam, int x)
 	ray->wall.end.y = (ray->wall.start.y + ray->wall.size) + cam->height;
 }
 
-void			raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
+void			raycast(t_env *env)
 {
 	int		x;
 
 	x = -1;
-	setup_raycasting(cam, ray);
+	setup_raycasting(&env->cam, &env->ray);
 	while (++x < WIDTH)
 	{
-		y_collisions(&ray->hit_y, &ray->gap_y, ray->angle, *cam);
-		x_collisions(&ray->hit_x, &ray->gap_x, ray->angle, *cam);
-		check_collisions(ray, map, env->height, env->width);
-		setup_line(ray, cam, x);
-		draw_rc(ray->wall.start, ray->wall.end, env->sdl, ray->wall.color);
-		ray->angle -= (to_rad(60.0) / WIDTH);
-		if (ray->angle >= 6.283185)
-			ray->angle -= 6.283185;
+		y_collisions(&env->ray.hit_y, &env->ray.gap_y, env->ray.angle, env->cam);
+		x_collisions(&env->ray.hit_x, &env->ray.gap_x, env->ray.angle, env->cam);
+		check_collisions(&env->ray, env->map, env->height, env->width);
+		setup_line(&env->ray, &env->cam, x);
+		draw_rc(env->ray.wall.start, env->ray.wall.end, env->sdl, env->ray.wall.color);
+		env->ray.angle -= env->ray.step;
+		if (env->ray.angle >= 6.283185)
+			env->ray.angle -= 6.283185;
 	}
-	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, WIDTH * S_UINT);
-	SDL_RenderCopy(env->sdl.ren, env->sdl.text, NULL, NULL);
-	SDL_RenderPresent(env->sdl.ren);
+	SDL_UpdateTexture(env->sdl.texture, NULL, env->sdl.pixels, WIDTH * S_UINT);
+	SDL_RenderCopy(env->sdl.render, env->sdl.texture, NULL, NULL);
+	SDL_RenderPresent(env->sdl.render);
 }
