@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 10:29:03 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:10:14 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ typedef struct		s_pos
 	double			x;
 	double			y;
 }					t_pos;
+
+typedef struct		s_mouse
+{
+	t_pos			old;
+	t_pos			new;
+}					t_mouse;
 
 typedef struct		s_cam
 {
@@ -72,7 +78,7 @@ typedef struct		s_env
 **	core/hooks.c
 */
 
-void				hooks(t_env *env, int *loop, char *key);
+void				hooks(t_env *env, int *loop, char *key, t_mouse *mouse);
 
 /*
 **	parsing/map.c
@@ -87,6 +93,7 @@ void				parse_file(char *file, t_env *env);
 void				setup(t_env *env);
 void				setup_raycasting(t_cam *cam, t_ray *ray);
 void				cam_setup(t_cam *cam);
+void				setup_mouse(t_mouse *mouse);
 
 /*
 **	utils/clean.c
@@ -119,8 +126,8 @@ void				move(t_env *env, char *key, int fl);
 **	events/update_cam.c
 */
 
-void				change_angle(t_env *env, char  *key, double *angle, t_pos mouse);
-void				change_height(t_env *env, char *key, double *height, int speed, t_pos mouse);
+void				change_angle(char  *key, double *angle, t_pos mouse);
+void				change_height(char *key, double *height, int speed, t_pos mouse);
 
 /*
 **	events/place_blocks.c

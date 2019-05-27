@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/24 16:10:14 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:52:22 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-void	change_angle(t_env *env, char *key, double *angle, t_pos mouse)
+void	change_angle(char *key, double *angle, t_pos mouse)
 {
 	if (key[SDL_SCANCODE_COMMA] || mouse.x < WIDTH / 2)
 	{
@@ -26,10 +26,9 @@ void	change_angle(t_env *env, char *key, double *angle, t_pos mouse)
 		*angle -= to_rad(2);
 		*angle = (*angle < 0) ? to_rad(360) + *angle : *angle;
 	}
-	raycast(env->map, env, &env->cam, &env->ray);
 }
 
-void	change_height(t_env *env, char *key, double *height, int speed, t_pos mouse)
+void	change_height(char *key, double *height, int speed, t_pos mouse)
 {
 	if (key[SDL_SCANCODE_PAGEUP] || mouse.y < HEIGHT / 2)
 		*height += 2 * speed;
@@ -39,5 +38,4 @@ void	change_height(t_env *env, char *key, double *height, int speed, t_pos mouse
 		*height = HEIGHT_CAM;
 	else if (*height < -HEIGHT_CAM)
 		*height = -HEIGHT_CAM;
-	raycast(env->map, env, &env->cam, &env->ray);
 }

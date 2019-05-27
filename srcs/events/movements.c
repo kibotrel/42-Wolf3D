@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/27 15:07:31 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:50:49 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ void			move(t_env *env, char *key, int fl)
 		move_left(env);
 	if (key[SDL_SCANCODE_D] || fl == 4)
 		move_right(env);
-	if (coll_wall(env, env->cam.coord, key))
-		raycast(env->map, env, &env->cam, &env->ray);
+	coll_wall(env, env->cam.coord, key);
 }
