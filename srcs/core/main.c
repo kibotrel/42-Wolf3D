@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/24 15:58:33 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:25:41 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	main(int ac, char **av)
 			ft_print_error(ERR_MALLOC, 5);
 		parse_file(av[1], env);
 		setup(env);
-		raycast(env->map, env, &env->cam, &env->ray);
+		raycast(env);
 		while (loop)
 			hooks(env, &loop, key);
-		fun_exit(env->sdl.ren, env->sdl.win);
+		fun_exit(env->sdl.render, env->sdl.win);
 	}
 	else
 		usage();

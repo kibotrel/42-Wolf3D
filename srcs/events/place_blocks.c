@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 10:00:19 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/23 10:39:12 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:30:49 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ void			place_block(t_env *env)
 		is_block(env->map, &env->cam.coord, 1, 0);
 	else
 		is_block(env->map, &env->cam.coord, 1, -1);
-	raycast(env->map, env, &env->cam, &env->ray);
+	raycast(env);
 }

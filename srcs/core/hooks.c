@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 15:10:53 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/27 16:26:42 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,20 @@ void			hooks(t_env *env, int *loop, char *key)
 	mouse.x = WIDTH / 2;
 	mouse.y = HEIGHT / 2;
 	all_ev(key, &env->sdl.event, env, &mouse);
-	if (key[SDL_SCANCODE_ESCAPE] || env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
+	if (key[SDL_SCANCODE_ESCAPE]
+		|| env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
 		*loop = 0;
 	if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
 		change_angle(env, key, &env->cam.angle, mouse);
-	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S] || key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
-		move(env, key, 0);
+	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]
+		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
+		move(env, key);
 	if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
 		change_height(env, key, &env->cam.height, 1, mouse);
 	if (key[SDL_SCANCODE_R])
 	{
 		cam_setup(&env->cam);
-		raycast(env->map, env, &env->cam, &env->ray);
+		raycast(env);
 	}
 	if (key[SDL_SCANCODE_SPACE])
 		place_block(env);
