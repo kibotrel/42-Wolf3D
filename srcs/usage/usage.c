@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:30:44 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/14 10:43:49 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/29 01:41:01 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,36 @@ static void	file_format(void)
 	ft_putendl("\t1 0 0 0 0 0 0 0 1");
 	ft_putendl("\t1 0 0 0 1 0 0 0 1");
 	ft_putendl("\t1 0 1 1 1 1 1 0 1");
-	ft_putendl("\t1 0 0 1 1 0 0 0 1");
+	ft_putendl("\t1 0 0 1 1 9 0 0 1");
 	ft_putendl("\t1 1 1 1 1 1 1 1 1");
 	ft_putendl("\n\tThe map must be bounded by walls which are represented by");
-	ft_putendl("\tthe vallue 1. The folowing values are handled in parsing :");
+	ft_putendl("\tthe value 1. The folowing values are handled in parsing :");
 	ft_putendl("\n\t- Empty cell in which you can move (0)");
 	ft_putendl("\t- Walls that you can't go through (1)");
+	ft_putendl("\t- Spawnpoint (9)");
 	ft_putendl("\n\tW.I.P\n");
 }
 
 static void	error_handling(void)
 {
 	ft_putendl("\033[0m\033[32;1mError handling:\033[0;36m");
-	ft_putendl("\n\tEach following error code are handled by the program");
+	ft_putendl("\n\tEach following error code are handled by the program...");
 	ft_putendl("\n\t- Wrong directory (1)\n\t- Wrong filename (2)");
 	ft_putendl("\t- Can't open file (3)\n\t- Can't close file (4)");
 	ft_putendl("\t- Can't allocate memory (5)\n\t- Empty line (6)");
 	ft_putendl("\t- Incorrect format (7)\n\t- Can't retrieve line infos (8)");
 	ft_putendl("\t- Uneven width (9)\n\t- Empty file (10)");
 	ft_putendl("\t- Unbounded map (11)");
-	ft_putendl("\n\tUse \"echo $?\" to know the last process returned value");
+	ft_putendl("\n\tUse \"echo $?\" to know the last process returned value.");
 }
 
 static void	keyboard_controls(void)
 {
 	ft_putendl("\n\033[0m\033[32;1mKeyboard controls:\033[0;36m");
 	ft_putendl("\n\tThe following inputs are handled in window :");
+	ft_putendl("\n\t- Moving in the map (W / A / S / D)");
+	ft_putendl("\t- Rotate the camera angle (< / >)");
+	ft_putendl("\t- Modify camera's height (Page_Up / Page_Down)");
 	ft_putendl("\n\tW.I.P");
 }
 
@@ -60,11 +64,11 @@ static void	mouse_controls(void)
 void		usage(void)
 {
 	ft_putendl("\n\033[32;1musage: ./wolf3d \'map.w3d\'\033[0;36m");
-	ft_putendl("\n\tmap.w3d : array of values");
+	ft_putendl("\n\tmap.w3d : array of values.");
 	file_format();
 	error_handling();
 	keyboard_controls();
 	mouse_controls();
 	ft_putendl("\n\033[0m\033[32;1mCredits:\033[0;36m");
-	ft_putendl("\n\tMade by kibotrel, reda-con and nde-jesu\n\033[0m");
+	ft_putendl("\n\tMade by kibotrel, reda-con and nde-jesu.\n\033[0m");
 }
