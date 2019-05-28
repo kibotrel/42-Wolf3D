@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/28 15:02:00 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/28 19:14:24 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define WOLF3D_H
 
 # include "SDL.h"
+
+typedef struct		s_color
+{
+	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
+}					t_color;
 
 typedef struct		s_pos
 {
