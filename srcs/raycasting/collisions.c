@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 18:16:08 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 18:37:22 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 01:21:56 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 #include "env.h"
 #include "wolf3d.h"
 
-void			y_collisions(t_ray *ray, t_cam cam, t_data data)
+void			y_collisions(t_ray *ray, t_cam cam)
 {
-	if (ray->angle > data.east && ray->angle < data.west)
+	if (ray->angle > 0 && ray->angle < M_PI)
 		ray->hit_y.y = floor(cam.coord.y / CELL) * CELL - 0.0000001;
 	else
 		ray->hit_y.y = floor(cam.coord.y / CELL) * CELL + CELL;
-	ray->gap_y.y = (ray->angle > data.east && ray->angle < data.west) ? -CELL : CELL;
+	ray->gap_y.y = CELL;
+	if (ray->angle > 0 && ray->angle < M_PI)
+		ray->gap_y.y *= -1;
 	ray->hit_y.x = cam.coord.x + (cam.coord.y - ray->hit_y.y) / tan(ray->angle);
-	ray->gap_y.x = CELL / tan(ray->angle);
-	ray->gap_y.x = (ray->angle > data.east && ray->angle < data.west ? ray->gap_y.x : -ray->gap_y.x);
+	ray->gap_y.x = -(CELL / tan(ray->angle));
+	if (ray->angle > 0 && ray->angle < M_PI)
+		ray->gap_y.x *= -1;
 }
 
 void			x_collisions(t_ray *ray, t_cam cam, t_data data)
@@ -32,10 +35,13 @@ void			x_collisions(t_ray *ray, t_cam cam, t_data data)
 		ray->hit_x.x = floor(cam.coord.x / CELL) * CELL - 0.0000001;
 	else
 		ray->hit_x.x = floor(cam.coord.x / CELL) * CELL + CELL;
-	ray->gap_x.x = (ray->angle > data.north && ray->angle < data.south) ? -CELL : CELL;
+	ray->gap_x.x = CELL;
+	if (ray->angle > data.north && ray->angle < data.south)
+		ray->gap_x.x *= -1;
 	ray->hit_x.y = cam.coord.y + (cam.coord.x - ray->hit_x.x) * tan(ray->angle);
-	ray->gap_x.y = CELL * tan(ray->angle);
-	ray->gap_x.y = (ray->angle > data.north && ray->angle < data.south ? ray->gap_x.y : -ray->gap_x.y);
+	ray->gap_x.y = -(CELL * tan(ray->angle));
+	if (ray->angle > data.north && ray->angle < data.south)
+		ray->gap_x.y *= -1;
 }
 
 static void		check_bounds(double *x, double *y, int max_x, int max_y)
@@ -62,14 +68,14 @@ void			check_collisions(t_ray *ray, int **map, int height, int width)
 			check_bounds(&ray->hit_x.x, &ray->hit_x.y, width, height);
 		if (hit.y == 0)
 			check_bounds(&ray->hit_y.x, &ray->hit_y.y, width, height);
-		if (map[(int)ray->hit_x.y / CELL][(int)ray->hit_x.x / CELL])
+		if (map[(int)ray->hit_x.y / CELL][(int)ray->hit_x.x / CELL] == 1)
 			hit.x = 1;
 		else if (hit.x == 0)
 		{
 			ray->hit_x.x += ray->gap_x.x;
 			ray->hit_x.y += ray->gap_x.y;
 		}
-		if (map[(int)ray->hit_y.y / CELL][(int)ray->hit_y.x / CELL])
+		if (map[(int)ray->hit_y.y / CELL][(int)ray->hit_y.x / CELL] == 1)
 			hit.y = 1;
 		else if (hit.y == 0)
 		{

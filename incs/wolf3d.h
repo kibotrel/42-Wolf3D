@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/28 23:28:53 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 01:15:52 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_pos
 typedef struct		s_cam
 {
 	t_pos			pos;
+	t_pos			spawn;
 	t_pos			coord;
 	double			fov;
 	double			angle;
@@ -45,6 +46,7 @@ typedef struct		s_ray
 	t_pos			gap_y;
 	t_pos			hit_x;
 	t_pos			hit_y;
+	t_pos			slope;
 	t_wall			wall;
 	double			step;
 	double			distance;
@@ -62,8 +64,6 @@ typedef struct		s_sdl
 
 typedef struct		s_data
 {
-	double			east;
-	double			west;
 	double			north;
 	double			south;
 	double			two_pi;
@@ -167,7 +167,7 @@ void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
 double				smallest_distance(t_ray *ray, t_data data, t_pos coord);
 void				raycast(t_env *env, t_sdl *sdl, t_ray *ray);
-void				y_collisions(t_ray *ray, t_cam cam, t_data data);
+void				y_collisions(t_ray *ray, t_cam cam);
 void				x_collisions(t_ray *ray, t_cam cam, t_data data);
 double				radians(double degre);
 void				check_collisions(t_ray *rc, int **map, int max_y, int max_x);

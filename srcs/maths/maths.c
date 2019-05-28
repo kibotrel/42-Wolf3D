@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 22:44:39 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:56:30 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 	y = fabs(fabs(coord.x - ray->hit_y.x) / cos(ray->angle));
 	if (x > y)
 	{
-		if (ray->angle > data.east && ray->angle < data.west)
+		if (ray->angle > 0 && ray->angle < M_PI)
 			ray->wall.color = WALL_ALLIANCE;
 		else
 			ray->wall.color = WALL_ORDER;

@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/28 23:24:33 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 00:10:13 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		raycast(t_env *env, t_sdl *sdl, t_ray *ray)
 	setup_raycasting(&env->cam, &env->ray);
 	while (++x < WIDTH)
 	{
-		y_collisions(ray, env->cam, env->data);
+		y_collisions(ray, env->cam);
 		x_collisions(ray, env->cam, env->data);
 		check_collisions(ray, env->map, env->height, env->width);
 		setup_slice(ray, &env->cam, x, env);
