@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 19:21:49 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:31:21 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,30 @@
 **	Window parameters macros
 */
 
-# define HEIGHT			1080
-# define WIDTH			1920
+# define HEIGHT				1080
+# define WIDTH				1920
 
 /*
 **	Useful macros
 */
 
-# define CELL			64
-# define ARGB			372645892
-# define RESIZE			0x00000200
-# define RESIZE			0x00000200
-# define S_UINT			4
-# define STREAM			1
+# define CELL				64
+# define ARGB				372645892
+# define RESIZE				0x00000200
+# define RESIZE				0x00000200
+# define S_UINT				4
+# define STREAM				1
 
 /*
 **	Color macros
 */
 
-# define DARK_GRAY		0x575757ff
+# define SKY				0xff00ffff
+# define FLOOR				0xffc8c8c8
+# define WALL_ORDER			0xffff6950
+# define WALL_ALLIANCE		0xff33c47f
+# define WALL_ASSEMBLY		0xffa061d1
+# define WALL_FEDERATION	0xff1c4f99
 
 /*
 **	Error codes

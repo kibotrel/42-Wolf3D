@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/27 19:13:05 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:28:53 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_cam
 	double			fov;
 	double			angle;
 	double			offset;
+	double			distance;
 }					t_cam;
 
 typedef struct		s_wall
@@ -46,9 +47,8 @@ typedef struct		s_ray
 	t_pos			hit_y;
 	t_wall			wall;
 	double			step;
-	double			dist;
+	double			distance;
 	double			angle;
-	double			screen;
 }					t_ray;
 
 typedef struct		s_sdl
@@ -98,7 +98,25 @@ void				parse_file(char *file, t_env *env);
 */
 
 void				setup(t_env *env);
+
+/*
+**	setup/raycasting.c
+*/
+
+void				setup_raycasting(t_cam *cam, t_ray *ray);
+void				setup_slice(t_ray *ray, t_cam *cam, int x, t_env *env);
+
+/*
+**	setup/camera.c
+*/
+
 void				cam_setup(t_cam *cam);
+
+/*
+**	setup/graphic.c
+*/
+
+void				sdl_setup(t_sdl *sdl);
 
 /*
 **	utils/clean.c
@@ -107,6 +125,7 @@ void				cam_setup(t_cam *cam);
 int					free_switch(t_env *env, int code);
 int					free_parse(char *row, char **coords, t_env *env, int code);
 void				free_split(char **coords);
+void				free_sdl(SDL_Renderer *ren, SDL_Window *win);
 
 /*
 **	utils/parsing.c
@@ -146,10 +165,8 @@ void				place_block(t_env *env);
 
 void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
 double				sq(double n);
-double				double_abs(double i);
-double				length(t_pos col_x, t_pos col_y, t_pos coord, t_env *env);
-void				raycast(t_env *env);
-void				fun_exit(SDL_Renderer *ren, SDL_Window *win);
+double				smallest_distance(t_ray *ray, t_data data, t_pos coord);
+void				raycast(t_env *env, t_sdl *sdl, t_ray *ray);
 void				y_collisions(t_ray *ray, t_cam cam, t_data data);
 void				x_collisions(t_ray *ray, t_cam cam, t_data data);
 double				radians(double degre);
