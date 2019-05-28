@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 18:07:54 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/28 07:59:43 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void			next_process(char *key, t_env *env, t_pos *fl)
 		place_block(env);
 		fl->y = 1;
 	}
+	if (key[SDL_SCANCODE_LSHIFT])
+		env->cam.sprint = 2;
+	if (key[SDL_SCANCODE_LSHIFT] == 0)
+		env->cam.sprint = 1;
 }
 
 void			process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
