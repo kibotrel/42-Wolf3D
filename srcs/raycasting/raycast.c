@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/27 19:19:31 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:24:33 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,26 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void		setup_line(t_ray *ray, t_cam *cam, int x, t_env *env)
+static void	draw_slice(t_wall wall, t_sdl *sdl)
 {
-	double	angle;
+	int		color;
+	t_pos	current;
 
-	angle = cam->angle - ray->angle;
-	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, env) * cos(angle);
-	ray->wall.size = ceil((CELL / ray->dist) * ray->screen);
-	ray->wall.start.x = x;
-	ray->wall.start.y = cam->offset - (ray->wall.size / 2);
-	ray->wall.end.x = x;
-	ray->wall.end.y = (ray->wall.start.y + ray->wall.size);
+	current.x = wall.start.x;
+	current.y = -1;
+	while (++current.y < HEIGHT)
+	{
+		if (current.y < wall.start.y)
+			color = SKY;
+		else if (current.y >= wall.start.y && current.y <= wall.end.y)
+			color = wall.color;
+		else
+			color = FLOOR;
+		sdl->pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
+	}
 }
 
-static void		setup_raycasting(t_cam *cam, t_ray *ray)
-{
-	if (cam->angle >= radians(330))
-		ray->angle = cam->angle - radians(330);
-	else
-		ray->angle = cam->angle + radians(30);
-	ray->step = radians(cam->fov / WIDTH);
-}
-
-void			raycast(t_env *env)
+void		raycast(t_env *env, t_sdl *sdl, t_ray *ray)
 {
 	int		x;
 
@@ -44,16 +41,16 @@ void			raycast(t_env *env)
 	setup_raycasting(&env->cam, &env->ray);
 	while (++x < WIDTH)
 	{
-		y_collisions(&env->ray, env->cam, env->data);
-		x_collisions(&env->ray, env->cam, env->data);
-		check_collisions(&env->ray, env->map, env->height, env->width);
-		setup_line(&env->ray, &env->cam, x, env);
-		draw_rc(env->ray.wall.start, env->ray.wall.end, env->sdl, env->ray.wall.color);
-		env->ray.angle -= env->ray.step;
+		y_collisions(ray, env->cam, env->data);
+		x_collisions(ray, env->cam, env->data);
+		check_collisions(ray, env->map, env->height, env->width);
+		setup_slice(ray, &env->cam, x, env);
+		draw_slice(ray->wall, sdl);
+		ray->angle -= ray->step;
 		if (env->ray.angle >= env->data.two_pi)
 			env->ray.angle -= env->data.two_pi;
 	}
-	SDL_UpdateTexture(env->sdl.texture, NULL, env->sdl.pixels, WIDTH * S_UINT);
-	SDL_RenderCopy(env->sdl.render, env->sdl.texture, NULL, NULL);
-	SDL_RenderPresent(env->sdl.render);
+	SDL_UpdateTexture(sdl->texture, 0, sdl->pixels, WIDTH * sizeof(uint32_t));
+	SDL_RenderCopy(sdl->render, sdl->texture, 0, 0);
+	SDL_RenderPresent(sdl->render);
 }
