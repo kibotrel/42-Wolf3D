@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 10:03:58 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/28 14:49:06 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,19 @@ double					length(t_pos col_x, t_pos col_y, t_pos coor, t_ray *ray)
 	if (is_x > is_y)
 	{
 		if (ray->angle > R_E && ray->angle < R_W)
-			ray->what_wall = 0;
+			ray->which_wall = 0;
 		else
-			ray->what_wall = 1;
+			ray->which_wall = 1;
+		ray->offset = (int)col_y.x % CELL;
 		return (is_y);
 	}
 	else
 	{
 		if (ray->angle > R_N && ray->angle < R_S)
-			ray->what_wall = 2;
+			ray->which_wall = 2;
 		else
-			ray->what_wall = 3;
+			ray->which_wall = 3;
+		ray->offset = (int)col_x.y % CELL;
 		return (is_x);
 	}
 }

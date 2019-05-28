@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/28 10:33:52 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:02:00 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef struct		s_ray
 	double			dist;
 	double			angle;
 	double			screen;
-	int				what_wall;
+	int				offset;
+	int				which_wall;
 }					t_ray;
 
 typedef struct		s_sdl
@@ -135,8 +136,8 @@ void				move(t_env *env, char *key, int fl);
 **	events/update_cam.c
 */
 
-void				change_angle(char  *key, double *angle, t_pos mouse);
-void				change_height(char *key, double *height, int speed, t_pos mouse);
+void				change_angle(char  *key, double *angle, t_pos mouse, t_env *env);
+void				change_height(char *key, t_env *env, int speed, t_pos mouse);
 
 /*
 **	events/place_blocks.c
