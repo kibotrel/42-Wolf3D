@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 17:31:35 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 22:44:39 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,27 @@ double	radians(double angle)
 	return (angle * M_PI / 180);
 }
 
-double	length(t_pos col_x, t_pos col_y, t_pos coord, t_env *env)
+double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 {
-	double	is_y;
-	double	is_x;
+	double	y;
+	double	x;
 
-	is_x = fabs(fabs(coord.x - col_x.x) / cos(env->ray.angle));
-	is_y = fabs(fabs(coord.x - col_y.x) / cos(env->ray.angle));
-	if (is_x > is_y)
+	x = fabs(fabs(coord.x - ray->hit_x.x) / cos(ray->angle));
+	y = fabs(fabs(coord.x - ray->hit_y.x) / cos(ray->angle));
+	if (x > y)
 	{
-		if (env->ray.angle > env->data.east && env->ray.angle < env->data.west)
-			env->ray.wall.color = 0xff33c47f;
+		if (ray->angle > data.east && ray->angle < data.west)
+			ray->wall.color = WALL_ALLIANCE;
 		else
-			env->ray.wall.color = 0xffff6950;
-		return (is_y);
+			ray->wall.color = WALL_ORDER;
+		return (y);
 	}
 	else
 	{
-		if (env->ray.angle > env->data.north && env->ray.angle < env->data.south)
-			env->ray.wall.color = 0xff1c4f99;
+		if (ray->angle > data.north && ray->angle < data.south)
+			ray->wall.color = WALL_FEDERATION;
 		else
-			env->ray.wall.color = 0xffa061d1;
-		return (is_x);
+			ray->wall.color = WALL_ASSEMBLY;
+		return (x);
 	}
 }
