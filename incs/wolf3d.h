@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/29 01:15:52 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 01:29:36 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,9 @@ void				usage(void);
 /*
 **	events/movements.c
 */
+
 void				move(t_env *env, char *key);
+
 /*
 **	events/update_cam.c
 */
@@ -160,15 +162,23 @@ void				change_height(t_env *env, char *key, double *height, int speed, t_pos mo
 void				place_block(t_env *env);
 
 /*
-**	Raycasting side-functions
+**	maths/maths.c
 */
 
-void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
-double				sq(double n);
+double				radians(double degre);
 double				smallest_distance(t_ray *ray, t_data data, t_pos coord);
+
+/*
+**	raycasting/raycast.c
+*/
+
 void				raycast(t_env *env, t_sdl *sdl, t_ray *ray);
+
+/*
+**	raycasting/collisions.c
+*/
+
 void				y_collisions(t_ray *ray, t_cam cam);
 void				x_collisions(t_ray *ray, t_cam cam, t_data data);
-double				radians(double degre);
-void				check_collisions(t_ray *rc, int **map, int max_y, int max_x);
+void				check_collisions(t_ray *ray, int **map, int y, int x);
 #endif
