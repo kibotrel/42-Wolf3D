@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/23 10:51:41 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/28 10:03:58 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ double					length(t_pos col_x, t_pos col_y, t_pos coor, t_ray *ray)
 	if (is_x > is_y)
 	{
 		if (ray->angle > R_E && ray->angle < R_W)
-			ray->wall.color = 0xff33c47f;
+			ray->what_wall = 0;
 		else
-			ray->wall.color = 0xffff6950;
+			ray->what_wall = 1;
 		return (is_y);
 	}
 	else
 	{
 		if (ray->angle > R_N && ray->angle < R_S)
-			ray->wall.color = 0xff1c4f99;
+			ray->what_wall = 2;
 		else
-			ray->wall.color = 0xffa061d1;
+			ray->what_wall = 3;
 		return (is_x);
 	}
 }

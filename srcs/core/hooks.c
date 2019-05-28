@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 07:59:43 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/28 10:34:34 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void			change_cam(t_env *env, t_mouse *mouse, char *key, t_pos *fl)
 	if (mouse->new.y != mouse->old.y)
 		change_height(key, &env->cam.height, 5, mouse->new);
 	fl->y = 1;
-	SDL_WarpMouseInWindow(env->sdl.win, WIDTH / 2, HEIGHT / 2);
+	SDL_WarpMouseInWindow(env->sdl.win, env->w / 2, env->h / 2);
 }
 
 void			trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
@@ -39,12 +39,14 @@ void			trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			key[env->sdl.event.key.keysym.scancode] = 1;
 		if (env->sdl.event.type == SDL_KEYUP)
 			key[env->sdl.event.key.keysym.scancode] = 0;
-		if (env->sdl.event.type == SDL_MOUSEMOTION)
+		if (env->sdl.event.type == SDL_MOUSEMOTION && mouse->toggle_mouse == 1)
 			change_cam(env, mouse, key, fl);
+		if (env->sdl.event.type == SDL_WINDOWEVENT_RESIZED)
+			resize(env, &env->sdl);
 	}
 }
 
-void			next_process(char *key, t_env *env, t_pos *fl)
+static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 {
 	if (key[SDL_SCANCODE_R])
 	{
@@ -56,6 +58,12 @@ void			next_process(char *key, t_env *env, t_pos *fl)
 	{
 		place_block(env);
 		fl->y = 1;
+	}
+	mouse->curr_time = SDL_GetTicks();
+	if (key[SDL_SCANCODE_TAB] && mouse->curr_time > mouse->old_time + 100)
+	{
+		mouse->old_time = mouse->curr_time;
+		enable_mouse(mouse);
 	}
 	if (key[SDL_SCANCODE_LSHIFT])
 		env->cam.sprint = 2;
@@ -84,7 +92,7 @@ void			process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 		change_height(key, &env->cam.height, 1, mouse->new);
 		fl->y = 1;
 	}
-	next_process(key, env, fl);
+	next_process(key, env, fl, mouse);
 	if (fl->y == 1)
 		raycast(env->map, env, &env->cam, &env->ray);
 }

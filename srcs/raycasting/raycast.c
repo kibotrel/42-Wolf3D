@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/23 10:49:28 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:41:19 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void		check_collisions(t_ray *rc, int **map, int max_y, int max_x)
 	}
 }
 
-static void		setup_line(t_ray *ray, t_cam *cam, int x)
+static void		setup_line(t_env *env, t_ray *ray, t_cam *cam, int x)
 {
 	double	angle;
 
@@ -63,7 +63,7 @@ static void		setup_line(t_ray *ray, t_cam *cam, int x)
 	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, ray) * cos(angle);
 	ray->wall.size = ceil((CELL / ray->dist) * ray->screen - cam->height);
 	ray->wall.start.x = x;
-	ray->wall.start.y = ((HEIGHT / 2) - (ray->wall.size / 2)) + cam->height;
+	ray->wall.start.y = ((env->h / 2) - (ray->wall.size / 2)) + cam->height;
 	ray->wall.end.x = x;
 	ray->wall.end.y = (ray->wall.start.y + ray->wall.size) + cam->height;
 }
@@ -71,21 +71,20 @@ static void		setup_line(t_ray *ray, t_cam *cam, int x)
 void			raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 {
 	int		x;
-
 	x = -1;
 	setup_raycasting(cam, ray);
-	while (++x < WIDTH)
+	while (++x < env->w)
 	{
 		y_collisions(&ray->hit_y, &ray->gap_y, ray->angle, *cam);
 		x_collisions(&ray->hit_x, &ray->gap_x, ray->angle, *cam);
 		check_collisions(ray, map, env->height, env->width);
-		setup_line(ray, cam, x);
-		draw_rc(ray->wall.start, ray->wall.end, env->sdl, ray->wall.color);
+		setup_line(env, ray, cam, x);
+		draw_rc(ray->wall.start, ray->wall.end, env, ray);
 		ray->angle -= (to_rad(60.0) / WIDTH);
 		if (ray->angle >= 6.283185)
 			ray->angle -= 6.283185;
 	}
-	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, WIDTH * S_UINT);
+	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, env->w * S_UINT);
 	SDL_RenderCopy(env->sdl.ren, env->sdl.text, NULL, NULL);
 	SDL_RenderPresent(env->sdl.ren);
 }

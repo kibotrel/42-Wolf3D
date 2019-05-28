@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
+#    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/22 17:55:11 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/05/28 09:44:31 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRC			= core/main.c					core/hooks.c						\
 			  raycasting/raycast.c			raycasting/collisions.c				\
 																				\
 			  events/update_cam.c			events/movements.c					\
-			  events/place_blocks.c												\
+			  events/place_blocks.c			events/resize.c						\
 			  setup/setup.c														\
 																				\
 			  parsing/map.c														\

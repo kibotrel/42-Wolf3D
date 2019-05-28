@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/28 07:57:54 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/28 10:33:52 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct		s_mouse
 {
 	t_pos			old;
 	t_pos			new;
+	int				toggle_mouse;
+	unsigned int	curr_time;
+	unsigned int	old_time;
 }					t_mouse;
 
 typedef struct		s_cam
@@ -54,6 +57,7 @@ typedef struct		s_ray
 	double			dist;
 	double			angle;
 	double			screen;
+	int				what_wall;
 }					t_ray;
 
 typedef struct		s_sdl
@@ -61,6 +65,7 @@ typedef struct		s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	SDL_Texture		*text;
+	SDL_Surface		*surf[4];
 	SDL_Event		event;
 	uint32_t		*pixels;
 }					t_sdl;
@@ -73,6 +78,8 @@ typedef struct		s_env
 	t_sdl			sdl;
 	t_cam			cam;
 	t_ray			ray;
+	int				h;
+	int				w;
 }					t_env;
 
 /*
@@ -94,7 +101,7 @@ void				parse_file(char *file, t_env *env);
 void				setup(t_env *env);
 void				setup_raycasting(t_cam *cam, t_ray *ray);
 void				cam_setup(t_cam *cam);
-void				setup_mouse(t_mouse *mouse);
+void				setup_mouse(t_mouse *mouse, t_env *env);
 
 /*
 **	utils/clean.c
@@ -122,6 +129,7 @@ void				usage(void);
 /*
 **	events/movements.c
 */
+
 void				move(t_env *env, char *key, int fl);
 /*
 **	events/update_cam.c
@@ -137,10 +145,17 @@ void				change_height(char *key, double *height, int speed, t_pos mouse);
 void				place_block(t_env *env);
 
 /*
+**	events/resize.c
+*/
+
+void				resize(t_env *env, t_sdl *sdl);
+void				enable_mouse(t_mouse *mouse);
+
+/*
 **	Raycasting side-functions
 */
 
-void				draw_rc(t_pos a, t_pos b, t_sdl sdl, int clr);
+void				draw_rc(t_pos a, t_pos b, t_env *env, t_ray *ray);
 double				sq(double n);
 double				double_abs(double i);
 double				length(t_pos col_x, t_pos col_y, t_pos coord, t_ray *ray);

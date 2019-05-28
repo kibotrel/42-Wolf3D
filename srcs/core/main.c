@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 18:01:01 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:42:55 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int ac, char **av)
 	t_mouse	mouse;
 	t_pos	flags;
 
-	setup_mouse(&mouse);
 	flags.x = 1;
 	key = ft_strnew(SDL_NUM_SCANCODES);
 	if (ac == 2)
@@ -35,6 +34,7 @@ int	main(int ac, char **av)
 			ft_print_error(ERR_MALLOC, 5);
 		parse_file(av[1], env);
 		setup(env);
+		setup_mouse(&mouse, env);
 		raycast(env->map, env, &env->cam, &env->ray);
 		while (flags.x)
 			hooks(env, &flags, key, &mouse);
