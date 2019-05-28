@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/27 19:28:08 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:15:53 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,10 @@
 void	change_angle(t_env *env, char *key, double *angle, t_pos mouse)
 {
 	if (key[SDL_SCANCODE_COMMA] || mouse.x < WIDTH / 2)
-	{
-		*angle += radians(2);
-		*angle = (*angle >= env->data.two_pi) ? env->data.two_pi - *angle : *angle;
-
-	}
+		*angle = (*angle >= 358 ? 362 - *angle : *angle + 2);
 	else if (key[SDL_SCANCODE_PERIOD] || mouse.x > WIDTH / 2)
-	{
-		*angle -= radians(2);
-		*angle = (*angle < 0) ? env->data.two_pi + *angle : *angle;
-	}
-	raycast(env);
+		*angle = (*angle < 2 ? 358 + *angle : *angle - 2);
+	raycast(env, &env->sdl, &env->ray);
 }
 
 void	change_height(t_env *env, char *key, double *height, int speed, t_pos mouse)
@@ -40,5 +33,5 @@ void	change_height(t_env *env, char *key, double *height, int speed, t_pos mouse
 		*height = HEIGHT / 2 * 1.75;
 	else if (*height < HEIGHT / 8)
 		*height = HEIGHT / 8;
-	raycast(env);
+	raycast(env, &env->sdl, &env->ray);
 }

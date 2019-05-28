@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/06 17:22:21 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:28:18 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ void	free_split(char **coords)
 	while (coords[y])
 		free(coords[y++]);
 	free(coords);
+}
+
+void		free_sdl(SDL_Renderer *ren, SDL_Window *win)
+{
+	SDL_DestroyRenderer(ren);
+	SDL_DestroyWindow(win);
 }

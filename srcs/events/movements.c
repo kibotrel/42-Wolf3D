@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/27 18:42:22 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/28 23:16:08 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 
 void			move_forward(t_env *env)
 {
-		env->cam.coord.x += cos(env->cam.angle) * 10;
-		env->cam.coord.y -= sin(env->cam.angle) * 10;
+		env->cam.coord.x += cos(radians(env->cam.angle)) * 8;
+		env->cam.coord.y -= sin(radians(env->cam.angle)) * 8;
 }
 
 void			move_backward(t_env *env)
 {
-		env->cam.coord.x -= cos(env->cam.angle) * 10;
-		env->cam.coord.y += sin(env->cam.angle) * 10;
+		env->cam.coord.x -= cos(radians(env->cam.angle)) * 8;
+		env->cam.coord.y += sin(radians(env->cam.angle)) * 8;
 }
 
 void			move_left(t_env *env)
 {
-		env->cam.coord.x += cos(env->cam.angle + env->data.north) * 8;
-		env->cam.coord.y -= sin(env->cam.angle + env->data.north) * 8;
+		env->cam.coord.x += cos(radians(env->cam.angle + 90)) * 4;
+		env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * 4;
 }
 
 void			move_right(t_env *env)
 {
-		env->cam.coord.x -= cos(env->cam.angle + env->data.north) * 8;
-		env->cam.coord.y += sin(env->cam.angle + env->data.north) * 8;
+		env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * 4;
+		env->cam.coord.y += sin(radians(env->cam.angle + 90)) * 4;
 }
 
 static void		coll_wall(t_env *env, t_pos coord, char *key)
@@ -63,5 +63,5 @@ void			move(t_env *env, char *key)
 	if (key[SDL_SCANCODE_D])
 		move_right(env);
 	coll_wall(env, env->cam.coord, key);
-	raycast(env);
+	raycast(env, &env->sdl, &env->ray);
 }
