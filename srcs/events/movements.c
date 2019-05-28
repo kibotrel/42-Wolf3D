@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/28 23:16:08 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 01:31:39 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 
 void			move_forward(t_env *env)
 {
-		env->cam.coord.x += cos(radians(env->cam.angle)) * 8;
-		env->cam.coord.y -= sin(radians(env->cam.angle)) * 8;
+	env->cam.coord.x += cos(radians(env->cam.angle)) * 8;
+	env->cam.coord.y -= sin(radians(env->cam.angle)) * 8;
 }
 
 void			move_backward(t_env *env)
 {
-		env->cam.coord.x -= cos(radians(env->cam.angle)) * 8;
-		env->cam.coord.y += sin(radians(env->cam.angle)) * 8;
+	env->cam.coord.x -= cos(radians(env->cam.angle)) * 8;
+	env->cam.coord.y += sin(radians(env->cam.angle)) * 8;
 }
 
 void			move_left(t_env *env)
 {
-		env->cam.coord.x += cos(radians(env->cam.angle + 90)) * 4;
-		env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * 4;
+	env->cam.coord.x += cos(radians(env->cam.angle + 90)) * 4;
+	env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * 4;
 }
 
 void			move_right(t_env *env)
 {
-		env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * 4;
-		env->cam.coord.y += sin(radians(env->cam.angle + 90)) * 4;
+	env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * 4;
+	env->cam.coord.y += sin(radians(env->cam.angle + 90)) * 4;
 }
 
 static void		coll_wall(t_env *env, t_pos coord, char *key)

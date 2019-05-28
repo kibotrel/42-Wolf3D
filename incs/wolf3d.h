@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/29 01:29:36 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 01:30:53 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void				move(t_env *env, char *key);
 **	events/update_cam.c
 */
 
-void				change_angle(t_env *env, char  *key, double *angle, t_pos mouse);
+void				change_angle(t_env *env, char *key, double *angle, t_pos mouse);
 void				change_height(t_env *env, char *key, double *height, int speed, t_pos mouse);
 
 /*
