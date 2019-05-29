@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/29 04:54:17 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 05:16:29 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 
 void	sdl_setup(t_sdl *sdl, t_env *env)
 {
-	if (SDL_Init(SDL_INIT_VIDEO) && free_switch(env, 1))
+	if (SDL_Init(SDL_INIT_VIDEO))
+	{
+		free_switch(env, 1);
 		ft_print_error(ERR_INIT, 12);
+	}
 	if (!(sdl->win = SDL_CreateWindow("Wolf3D", 0, 0, WIDTH, HEIGHT, RESIZE)))
 		free_sdl(env, 1, ERR_WIN, 13);
 	if (!(sdl->ren = SDL_CreateRenderer(sdl->win, -1, TARGETTEXTURE)))
