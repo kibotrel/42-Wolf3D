@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 15:45:37 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/29 08:14:31 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void			trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			key[env->sdl.event.key.keysym.scancode] = 0;
 		if (env->sdl.event.type == SDL_MOUSEMOTION && mouse->toggle_mouse == 1)
 			change_cam(env, mouse, key, fl);
-		// if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
-		// 	resize(env, &env->sdl);
+		if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
+			resize(env, &env->sdl);
 	}
 }
 
@@ -54,17 +54,11 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 		raycast(env->map, env, &env->cam, &env->ray);
 		fl->y = 1;
 	}
-	mouse->curr_time = SDL_GetTicks();	
 	if (key[SDL_SCANCODE_SPACE] && mouse->curr_time > mouse->old_time + 100)
 	{
 		mouse->old_time = mouse->curr_time;
 		place_block(env);
 		fl->y = 1;
-	}
-	if (key[SDL_SCANCODE_TAB] && mouse->curr_time > mouse->old_time + 100)
-	{
-		mouse->old_time = mouse->curr_time;
-		enable_mouse(mouse);
 	}
 	if (key[SDL_SCANCODE_LSHIFT])
 		env->cam.sprint = 2;
@@ -74,28 +68,37 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 
 void			process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 {
+	mouse->curr_time = SDL_GetTicks();	
 	if (key[SDL_SCANCODE_ESCAPE]\
 		|| env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
 		fl->x = 0;
-	if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
+	if (key[SDL_SCANCODE_TAB] && mouse->curr_time > mouse->old_time + 100)
 	{
-		change_angle(key, &env->cam.angle, mouse->new, env);
-		fl->y = 1;
-	}
-	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
-		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
+		mouse->old_time = mouse->curr_time;
+		enable_mouse(mouse);
+	}	
+	if (mouse->toggle_mouse == 1)
 	{
-		move(env, key, 0);
-		fl->y = 1;
+		if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
+		{
+			change_angle(key, &env->cam.angle, mouse->new, env);
+			fl->y = 1;
+		}
+		if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
+			|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
+		{
+			move(env, key, 0);
+			fl->y = 1;
+		}
+		if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
+		{
+			change_height(key, env, 1, mouse->new);
+			fl->y = 1;
+		}
+		next_process(key, env, fl, mouse);
+		if (fl->y == 1)
+			raycast(env->map, env, &env->cam, &env->ray);
 	}
-	if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
-	{
-		change_height(key, env, 1, mouse->new);
-		fl->y = 1;
-	}
-	next_process(key, env, fl, mouse);
-	if (fl->y == 1)
-		raycast(env->map, env, &env->cam, &env->ray);
 }
 
 void			hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)

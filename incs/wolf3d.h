@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/28 19:14:24 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/29 08:14:36 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,16 @@ void				usage(void);
 */
 
 void				move(t_env *env, char *key, int fl);
+
+/*
+**	events/movements_calc.c
+*/
+
+void				move_forward(t_env *env);
+void				move_backward(t_env *env);
+void				move_left(t_env *env);
+void				move_right(t_env *env);
+
 /*
 **	events/update_cam.c
 */

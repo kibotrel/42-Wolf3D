@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 14:30:15 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/29 08:10:25 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		cam_setup(t_cam *cam)
 	cam->coord.y = cam->pos.y * CELL;
 	cam->angle = to_rad(315);
 	cam->height = 0;
+	cam->sprint = 1;
 }
 
 void		setup_raycasting(t_cam *cam, t_ray *ray)
