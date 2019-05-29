@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/29 10:16:13 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:04:25 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,52 +21,47 @@ void			fun_exit(SDL_Renderer *ren, SDL_Window *win)
 	exit(0);
 }
 
-static int	get_pixel_surface(SDL_Surface *surf, int x, int y)
+static int	get_color(SDL_Surface *surf, int x, int y)
 {
 	uint8_t	*p;
+	t_color		clr;
 
 	p = surf->pixels + y * surf->pitch - x * surf->format->BytesPerPixel;
-	return (*p);
+	SDL_GetRGB(*p, surf->format, &clr.r, &clr.g, &clr.b);
+	return (clr.r << 16 | clr.g << 8 | clr.b);
 }
+
 #include <stdio.h>
 void			draw_rc(t_pos start, t_pos end, t_env *env, t_ray *ray)
 {
 	t_pos		current;
 	int			color;
-	t_color		clr;
-	int			wall_unit;
+	double		i;
 	int			j;
-	int			i;
+	double		unit;
 
 	current.x = start.x;
 	current.y = -1;
-	wall_unit = (int)ray->wall.size / CELL;
-	i = wall_unit;
-	j = 0;
-	// printf("%i %f %f\n",(int)ray->wall.size, wall_unit, wall_unit * 64);
+	j = 1;
+	unit = ray->wall.size / CELL;
+	i = unit;
 	while (++current.y < env->h)
 	{
 		if (current.y < start.y)
 			color = 0xff00ffff;
 		else if (current.y >= start.y && current.y < end.y)
 		{
-			if (i == wall_unit && j < 64)
+			if (i <= unit && j <= CELL)
 			{
-				i = -1;
-				color = get_pixel_surface(env->sdl.surf[ray->which_wall],
-					ray->offset, j);
-				SDL_GetRGB(color,env->sdl.surf[ray->which_wall]->format, &clr.r, 
-					&clr.g, &clr.b);
-				color = clr.r << 16 | clr.g << 8 | clr.b;
+				i = -unit;
+				color = get_color(env->sdl.surf[ray->which_wall],
+					ray->offset + 1, j);
 				++j;
 			}
-			++i;
-			if (ray->offset == 0 || ray->offset == 	63)
-				color = 0xffffffff;
+			i += 1;
 		}
 		else
 			color = 0xffc8c8c8;
 		env->sdl.pixels[(int)(current.x + (current.y * (env->w)))] = color;
 	}
-	// exit(1);
 }
