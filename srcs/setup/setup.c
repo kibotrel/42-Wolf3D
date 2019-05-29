@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/29 01:21:12 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 02:07:58 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	data_setup(t_env *env)
 
 void		setup(t_env *env)
 {
-	sdl_setup(&env->sdl);
+	sdl_setup(&env->sdl, env);
 	spawn_setup(env);
 	cam_setup(&env->cam);
 	data_setup(env);

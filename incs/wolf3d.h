@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/29 01:30:53 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 02:37:42 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct		s_ray
 typedef struct		s_sdl
 {
 	SDL_Window		*win;
-	SDL_Renderer	*render;
-	SDL_Texture		*texture;
+	SDL_Renderer	*ren;
+	SDL_Texture		*text;
 	SDL_Event		event;
 	uint32_t		*pixels;
 }					t_sdl;
@@ -116,7 +116,7 @@ void				cam_setup(t_cam *cam);
 **	setup/graphic.c
 */
 
-void				sdl_setup(t_sdl *sdl);
+void				sdl_setup(t_sdl *sdl, t_env *env);
 
 /*
 **	utils/clean.c
@@ -125,7 +125,7 @@ void				sdl_setup(t_sdl *sdl);
 int					free_switch(t_env *env, int code);
 int					free_parse(char *row, char **coords, t_env *env, int code);
 void				free_split(char **coords);
-void				free_sdl(SDL_Renderer *ren, SDL_Window *win);
+void				free_sdl(t_env *env, int state, char *error, int code);
 
 /*
 **	utils/parsing.c

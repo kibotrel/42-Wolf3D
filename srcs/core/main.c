@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 23:33:03 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 04:56:18 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 		raycast(env, &env->sdl, &env->ray);
 		while (loop)
 			hooks(env, &loop, env->inputs);
-		free_sdl(env->sdl.render, env->sdl.win);
+		free_sdl(env, 6, NULL, 0);
 	}
 	else
 		usage();

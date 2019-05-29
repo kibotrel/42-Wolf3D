@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/29 00:10:13 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 04:55:34 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void		raycast(t_env *env, t_sdl *sdl, t_ray *ray)
 		if (env->ray.angle >= env->data.two_pi)
 			env->ray.angle -= env->data.two_pi;
 	}
-	SDL_UpdateTexture(sdl->texture, 0, sdl->pixels, WIDTH * sizeof(uint32_t));
-	SDL_RenderCopy(sdl->render, sdl->texture, 0, 0);
-	SDL_RenderPresent(sdl->render);
+	if (SDL_UpdateTexture(sdl->text, 0, sdl->pixels, WIDTH * S_UINT) < 0)
+		free_sdl(env, 5, ERR_UPDATE, 17);
+	if (SDL_RenderCopy(sdl->ren, sdl->text, 0, 0) < 0)
+		free_sdl(env, 5, ERR_COPY, 18);
+	SDL_RenderPresent(sdl->ren);
 }
