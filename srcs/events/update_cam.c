@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_cam.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 15:04:25 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:09:35 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,11 @@
 
 void	change_angle(char *key, double *angle, t_pos mouse, t_env *env)
 {
-	if (key[SDL_SCANCODE_COMMA] || mouse.x <  env->w / 2)
-	{
-		*angle += to_rad(2);
-		*angle = (*angle >= to_rad(360)) ? to_rad(360) - *angle : *angle;
-	}
-	else if (key[SDL_SCANCODE_PERIOD] || mouse.x > env->w / 2)
-	{
-		*angle -= to_rad(2);
-		*angle = (*angle < 0) ? to_rad(360) + *angle : *angle;
-	}
+	if (key[SDL_SCANCODE_COMMA] || mouse.x < WIDTH / 2)
+		*angle = (*angle >= 358 ? 362 - *angle : *angle + 2);
+	else if (key[SDL_SCANCODE_PERIOD] || mouse.x > WIDTH / 2)
+		*angle = (*angle < 2 ? 358 + *angle : *angle - 2);
+	raycast(env, &env->sdl, &env->ray);
 }
 
 void	change_height(char *key, t_env *env, int speed, t_pos mouse)
@@ -37,8 +32,9 @@ void	change_height(char *key, t_env *env, int speed, t_pos mouse)
 		*height += 2 * speed;
 	else if (key[SDL_SCANCODE_PAGEDOWN] || mouse.y > env->h / 2)
 		*height -= 2 * speed;
-	if (*height > HEIGHT_CAM)
-		*height = HEIGHT_CAM;
-	else if (*height < -HEIGHT_CAM)
-		*height = -HEIGHT_CAM;
+	if (*height > HEIGHT / 2 * 1.75)
+		*height = HEIGHT / 2 * 1.75;
+	else if (*height < HEIGHT / 8)
+		*height = HEIGHT / 8;
+	raycast(env, &env->sdl, &env->ray);
 }

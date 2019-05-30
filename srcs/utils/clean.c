@@ -6,11 +6,12 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/06 17:22:21 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/29 04:55:26 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 #include <wolf3d.h>
 
 int		free_parse(char *row, char **coords, t_env *env, int code)
@@ -32,7 +33,7 @@ int		free_switch(t_env *env, int code)
 	{
 		if (env->height > 1)
 		{
-			while (y < env->height - 1)
+			while (y < env->height)
 				free(env->map[y++]);
 			free(env->map);
 		}
@@ -49,4 +50,19 @@ void	free_split(char **coords)
 	while (coords[y])
 		free(coords[y++]);
 	free(coords);
+}
+
+void	free_sdl(t_env *env, int state, char *error, int code)
+{
+	if (state > 1)
+		SDL_DestroyWindow(env->sdl.win);
+	if (state > 2)
+		SDL_DestroyRenderer(env->sdl.ren);
+	if (state > 3)
+		SDL_DestroyTexture(env->sdl.text);
+	if (state > 4)
+		free(env->sdl.pixels);
+	SDL_Quit();
+	free_switch(env, 1);
+	(state == 6 ? exit(code) : ft_print_error(error, code));
 }

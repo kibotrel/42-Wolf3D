@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 14:49:06 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:10:13 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,19 @@
 #include "env.h"
 #include "wolf3d.h"
 
-extern inline double	to_rad(double angle)
+double	radians(double angle)
 {
 	return (angle * M_PI / 180);
 }
 
-double					double_abs(double i)
+double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 {
-	return ((i > 0) ? i : -i);
-}
+	double	y;
+	double	x;
 
-double					pow2(double n)
-{
-	return (n * n);
-}
-
-double					length(t_pos col_x, t_pos col_y, t_pos coor, t_ray *ray)
-{
-	double	is_y;
-	double	is_x;
-
-	is_x = sqrt(pow(col_x.x - coor.x, 2) + pow(col_x.y - coor.y, 2));
-	is_y = sqrt(pow(col_y.x - coor.x, 2) + pow(col_y.y - coor.y, 2));
-	if (is_x > is_y)
+	x = fabs(fabs(coord.x - ray->hit_x.x) / cos(ray->angle));
+	y = fabs(fabs(coord.x - ray->hit_y.x) / cos(ray->angle));
+	if (x > y)
 	{
 		if (ray->angle > R_E && ray->angle < R_W)
 			ray->which_wall = 0;

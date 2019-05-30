@@ -3,70 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 14:30:15 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:14:26 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <math.h>
 #include "SDL.h"
+#include "libft.h"
 #include "env.h"
 #include "wolf3d.h"
 
-static void	sdl_setup(t_sdl *sdl)
+static void	spawn_setup(t_env *env)
 {
-	SDL_Init(SDL_INIT_VIDEO);
-		//ERROR
-	sdl->win = SDL_CreateWindow("Wolf3D", 0, 0, WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE);
-	sdl->ren = SDL_CreateRenderer(sdl->win, -1, SDL_RENDERER_TARGETTEXTURE);
-		//ERRORS
-	sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, WIDTH, HEIGHT);
-	if (!(sdl->pixels = (uint32_t*)malloc(4 * ((WIDTH + 1) * HEIGHT))))
-		return ;
-	sdl->surf[0] = SDL_LoadBMP("01.bmp");
-	sdl->surf[1] = SDL_LoadBMP("05.bmp");
-	sdl->surf[2] = SDL_LoadBMP("13.bmp");
-	sdl->surf[3] = SDL_LoadBMP("23.bmp");
-	SDL_WarpMouseInWindow(sdl->win, WIDTH / 2, HEIGHT / 2);
-	SDL_ShowCursor(SDL_DISABLE);
+	int	x;
+	int	y;
+	int set;
+
+	y = -1;
+	set = 0;
+	while (++y < env->height)
+	{
+		x = -1;
+		while (++x < env->width)
+		{
+			if (env->map[y][x] == 9)
+			{
+				env->cam.spawn.y = y;
+				env->cam.spawn.x = x;
+				return ;
+			}
+			if (!set && env->map[y][x] == 0)
+			{
+				env->cam.spawn.y = y;
+				env->cam.spawn.x = x;
+				set = 1;
+			}
+		}
+	}
 }
 
-void		cam_setup(t_cam *cam)
+static void	data_setup(t_env *env)
 {
-	cam->pos.x = 1.5;
-	cam->pos.y = 3.5;
-	cam->coord.x = cam->pos.x * CELL;
-	cam->coord.y = cam->pos.y * CELL;
-	cam->angle = to_rad(315);
-	cam->height = 0;
-}
-
-void		setup_raycasting(t_cam *cam, t_ray *ray)
-{
-	if (cam->angle >= to_rad(330))
-		ray->angle = cam->angle - to_rad(330);
-	else
-		ray->angle = cam->angle + to_rad(30);
+	env->data.north = M_PI_2;
+	env->data.south = M_PI_2 * 3;
+	env->data.two_pi = M_PI * 2;
+	ft_bzero(env->inputs, SDL_NUM_SCANCODES);
+	env->cam.distance = (WIDTH / 2) / tan(radians(env->cam.fov / 2));
 }
 
 void		setup(t_env *env)
 {
-	sdl_setup(&env->sdl);
+	sdl_setup(&env->sdl, env);
+	spawn_setup(env);
 	cam_setup(&env->cam);
-	env->ray.screen = ((WIDTH / 2) / tan(to_rad(30)));
-	env->w = WIDTH;
-	env->h = HEIGHT;
-}
-
-void		setup_mouse(t_mouse *mouse, t_env *env)
-{
-	mouse->new.x = env->w / 2;
-	mouse->new.y = env->h / 2;
-	mouse->old.x = env->w / 2;
-	mouse->old.y = env->h / 2;
-	mouse->toggle_mouse = 1;
-	mouse->old_time = 0;
+	data_setup(env);
 }

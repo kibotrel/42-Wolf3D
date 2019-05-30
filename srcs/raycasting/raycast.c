@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/28 09:41:19 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:10:49 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,44 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void		check_bounds(double *x, double *y, int max_x, int max_y)
+static void	draw_slice(t_wall wall, t_sdl *sdl)
 {
-	if (*x > (max_x - 1) * CELL)
-		*x = (max_x - 1) * CELL;
-	else if (*x < 0)
-		*x = 0;
-	if (*y > (max_y - 1) * CELL)
-		*y = (max_y - 1) * CELL;
-	else if (*y < 0)
-		*y = 0;
-}
+	int		color;
+	t_pos	current;
 
-static void		check_collisions(t_ray *rc, int **map, int max_y, int max_x)
-{
-	t_pos	hit;
-
-	hit.x = 0;
-	hit.y = 0;
-	while (hit.x == 0 || hit.y == 0)
+	current.x = wall.start.x;
+	current.y = -1;
+	while (++current.y < HEIGHT)
 	{
-		if (hit.x == 0)
-			check_bounds(&rc->hit_x.x, &rc->hit_x.y, max_x, max_y);
-		if (hit.y == 0)
-			check_bounds(&rc->hit_y.x, &rc->hit_y.y, max_x, max_y);
-		if (map[(int)rc->hit_x.y / CELL][(int)rc->hit_x.x / CELL])
-			hit.x = 1;
-		else if (hit.x == 0)
-		{
-			rc->hit_x.x += rc->gap_x.x;
-			rc->hit_x.y += rc->gap_x.y;
-		}
-		if (map[(int)rc->hit_y.y / CELL][(int)rc->hit_y.x / CELL])
-			hit.y = 1;
-		else if (hit.y == 0)
-		{
-			rc->hit_y.x += rc->gap_y.x;
-			rc->hit_y.y += rc->gap_y.y;
-		}
+		if (current.y < wall.start.y)
+			color = SKY;
+		else if (current.y >= wall.start.y && current.y <= wall.end.y)
+			color = wall.color;
+		else
+			color = FLOOR;
+		sdl->pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
 	}
 }
 
-static void		setup_line(t_env *env, t_ray *ray, t_cam *cam, int x)
-{
-	double	angle;
-
-	angle = cam->angle - ray->angle;
-	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, ray) * cos(angle);
-	ray->wall.size = ceil((CELL / ray->dist) * ray->screen - cam->height);
-	ray->wall.start.x = x;
-	ray->wall.start.y = ((env->h / 2) - (ray->wall.size / 2)) + cam->height;
-	ray->wall.end.x = x;
-	ray->wall.end.y = (ray->wall.start.y + ray->wall.size) + cam->height;
-}
-
-void			raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
+void		raycast(t_env *env, t_sdl *sdl, t_ray *ray)
 {
 	int		x;
 	x = -1;
-	setup_raycasting(cam, ray);
-	while (++x < env->w)
+	setup_raycasting(&env->cam, &env->ray);
+	while (++x < WIDTH)
 	{
-		y_collisions(&ray->hit_y, &ray->gap_y, ray->angle, *cam);
-		x_collisions(&ray->hit_x, &ray->gap_x, ray->angle, *cam);
-		check_collisions(ray, map, env->height, env->width);
-		setup_line(env, ray, cam, x);
-		draw_rc(ray->wall.start, ray->wall.end, env, ray);
-		ray->angle -= (to_rad(60.0) / WIDTH);
-		if (ray->angle >= 6.283185)
-			ray->angle -= 6.283185;
+		y_collisions(ray, env->cam);
+		x_collisions(ray, env->cam, env->data);
+		check_collisions(ray, env->map, env->height, env->width);
+		setup_slice(ray, &env->cam, x, env);
+		draw_slice(ray->wall, sdl);
+		ray->angle -= ray->step;
+		if (env->ray.angle >= env->data.two_pi)
+			env->ray.angle -= env->data.two_pi;
 	}
-	SDL_UpdateTexture(env->sdl.text, NULL, env->sdl.pixels, env->w * S_UINT);
-	SDL_RenderCopy(env->sdl.ren, env->sdl.text, NULL, NULL);
-	SDL_RenderPresent(env->sdl.ren);
+	if (SDL_UpdateTexture(sdl->text, 0, sdl->pixels, WIDTH * 4) < 0)
+		free_sdl(env, 5, ERR_UPDATE, 17);
+	if (SDL_RenderCopy(sdl->ren, sdl->text, 0, 0) < 0)
+		free_sdl(env, 5, ERR_COPY, 18);
+	SDL_RenderPresent(sdl->ren);
 }

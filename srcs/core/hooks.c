@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/28 15:45:37 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:00:38 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 		raycast(env->map, env, &env->cam, &env->ray);
 		fl->y = 1;
 	}
-	mouse->curr_time = SDL_GetTicks();	
+	mouse->curr_time = SDL_GetTicks();
 	if (key[SDL_SCANCODE_SPACE] && mouse->curr_time > mouse->old_time + 100)
 	{
 		mouse->old_time = mouse->curr_time;

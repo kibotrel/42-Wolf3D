@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
+#    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/28 09:44:31 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/05/30 14:56:27 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,13 @@ INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
 
 SRC			= core/main.c					core/hooks.c						\
 																				\
-			  raycasting/raycast_tools.c										\
 			  raycasting/raycast.c			raycasting/collisions.c				\
 																				\
 			  events/update_cam.c			events/movements.c					\
-			  events/place_blocks.c			events/resize.c						\
-			  setup/setup.c														\
+			  events/place_blocks.c												\
+																				\
+			  setup/setup.c					setup/raycasting.c					\
+			  setup/camera.c				setup/graphic.c						\
 																				\
 			  parsing/map.c														\
 																				\
