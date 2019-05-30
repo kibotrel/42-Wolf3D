@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/29 05:16:29 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 13:27:38 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	sdl_setup(t_sdl *sdl, t_env *env)
 		free_sdl(env, 2, ERR_RENDERER, 14);
 	if (!(sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, WIDTH, HEIGHT)))
 		free_sdl(env, 3, ERR_TEXTURE, 15);
-	if (!(sdl->pixels = (uint32_t*)malloc(S_UINT * ((WIDTH + 1) * HEIGHT))))
+	if (!(sdl->pixels = (uint32_t*)malloc(4 * ((WIDTH + 1) * HEIGHT))))
 		free_sdl(env, 4, ERR_MALLOC, 5);
 	if (SDL_ShowCursor(SDL_DISABLE) < 0)
 		free_sdl(env, 5, ERR_CURSOR, 16);
