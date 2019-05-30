@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:00:38 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:55:50 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			change_cam(t_env *env, t_mouse *mouse, char *key, t_pos *fl)
 	SDL_WarpMouseInWindow(env->sdl.win, env->w / 2, env->h / 2);
 }
 
-void			trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
+void		trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 {
 	while (SDL_PollEvent(&env->sdl.event))
 	{
@@ -41,8 +41,8 @@ void			trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			key[env->sdl.event.key.keysym.scancode] = 0;
 		if (env->sdl.event.type == SDL_MOUSEMOTION && mouse->toggle_mouse == 1)
 			change_cam(env, mouse, key, fl);
-		// if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
-		// 	resize(env, &env->sdl);
+		if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
+			resize(env, &env->sdl);
 	}
 }
 
@@ -51,7 +51,6 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 	if (key[SDL_SCANCODE_R])
 	{
 		cam_setup(&env->cam);
-		raycast(env->map, env, &env->cam, &env->ray);
 		fl->y = 1;
 	}
 	mouse->curr_time = SDL_GetTicks();
@@ -85,7 +84,7 @@ void			process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
 		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 	{
-		move(env, key, 0);
+		move(env, key);
 		fl->y = 1;
 	}
 	if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
@@ -95,7 +94,7 @@ void			process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 	}
 	next_process(key, env, fl, mouse);
 	if (fl->y == 1)
-		raycast(env->map, env, &env->cam, &env->ray);
+		raycast(env, &env->sdl, &env->ray);
 }
 
 void			hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)

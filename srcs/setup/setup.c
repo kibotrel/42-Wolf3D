@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:14:26 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:33:17 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,23 @@ static void	data_setup(t_env *env)
 	env->cam.distance = (WIDTH / 2) / tan(radians(env->cam.fov / 2));
 }
 
+static void	mouse_setup(t_env *env)
+{
+	env->mouse.new.x = env->w / 2;
+	env->mouse.new.y = env->h / 2;
+	env->mouse.old.x = env->w / 2;
+	env->mouse.old.y = env->h / 2;
+	env->mouse.toggle_mouse = 1;
+	env->mouse.old_time = 0;
+}
+
 void		setup(t_env *env)
 {
+	env->w = WIDTH;
+	env->h = HEIGHT;
 	sdl_setup(&env->sdl, env);
 	spawn_setup(env);
+	mouse_setup(env);
 	cam_setup(&env->cam);
 	data_setup(env);
 }

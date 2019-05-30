@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:10:13 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:34:41 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 	y = fabs(fabs(coord.x - ray->hit_y.x) / cos(ray->angle));
 	if (x > y)
 	{
-		if (ray->angle > R_E && ray->angle < R_W)
+		if (ray->angle > 0 && ray->angle < M_PI)
 			ray->which_wall = 0;
 		else
 			ray->which_wall = 1;
-		ray->offset = (int)col_y.x % CELL;
-		return (is_y);
+		ray->offset = (int)ray->hit_y.x % CELL;
+		return (y);
 	}
 	else
 	{
-		if (ray->angle > R_N && ray->angle < R_S)
+		if (ray->angle > data.north && ray->angle < data.south)
 			ray->which_wall = 2;
 		else
 			ray->which_wall = 3;
-		ray->offset = (int)col_x.y % CELL;
-		return (is_x);
+		ray->offset = (int)ray->hit_x.y % CELL;
+		return (x);
 	}
 }

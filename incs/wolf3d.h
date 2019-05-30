@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/30 14:59:36 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:40:48 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ typedef struct		s_pos
 
 typedef struct		s_mouse
 {
+	int				toggle_mouse;
 	t_pos			old;
 	t_pos			new;
-	int				toggle_mouse;
 	unsigned int	curr_time;
 	unsigned int	old_time;
 }					t_mouse;
@@ -45,6 +45,7 @@ typedef struct		s_cam
 	double			fov;
 	double			angle;
 	double			offset;
+	double			sprint;
 	double			distance;
 }					t_cam;
 
@@ -91,6 +92,8 @@ typedef struct		s_data
 
 typedef struct		s_env
 {
+	int				h;
+	int				w;
 	int				**map;
 	int				height;
 	int				width;
@@ -98,8 +101,8 @@ typedef struct		s_env
 	t_sdl			sdl;
 	t_cam			cam;
 	t_ray			ray;
-	int				h;
-	int				w;
+	t_data			data;
+	t_mouse			mouse;
 }					t_env;
 
 /*
@@ -168,7 +171,7 @@ void				usage(void);
 **	events/movements.c
 */
 
-void				move(t_env *env, char *key, int fl);
+void				move(t_env *env, char *key);
 /*
 **	events/update_cam.c
 */
@@ -181,6 +184,13 @@ void				change_height(char *key, t_env *env, int speed, t_pos mouse);
 */
 
 void				place_block(t_env *env);
+
+/*
+**	events/resize.c
+*/
+
+void				enable_mouse(t_mouse *mouse);
+void				resize(t_env *env, t_sdl *sdl);
 
 /*
 **	maths/maths.c

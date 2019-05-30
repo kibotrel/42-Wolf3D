@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:04:50 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:23:23 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 
 int	main(int ac, char **av)
 {
+	t_pos	flags;
 	t_env	*env;
 
-	loop = 1;
+	flags.x = 1;
 	if (ac == 2)
 	{
 		if (ft_strcmp(av[0], "./wolf3d"))
@@ -29,8 +30,8 @@ int	main(int ac, char **av)
 		parse_file(av[1], env);
 		setup(env);
 		raycast(env, &env->sdl, &env->ray);
-		while (loop)
-			hooks(env, &loop, env->inputs);
+		while (flags.x)
+			hooks(env, &flags, env->inputs, &env->mouse);
 		free_sdl(env, 6, NULL, 0);
 	}
 	else

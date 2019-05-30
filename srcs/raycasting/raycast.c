@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/30 15:10:49 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:45:19 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,36 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void	draw_slice(t_wall wall, t_sdl *sdl)
+static int	get_pixel_surface(SDL_Surface *surf, int x, int y)
 {
-	int		color;
-	t_pos	current;
+	uint8_t	*p;
 
-	current.x = wall.start.x;
+	p = surf->pixels + y * surf->pitch - x * surf->format->BytesPerPixel;
+	return (*p);
+}
+
+static void	draw_slice(t_pos start, t_pos end, t_env *env, t_ray *ray)
+{
+	t_pos		current;
+	int			color;
+	t_color		clr;
+
+	current.x = start.x;
 	current.y = -1;
-	while (++current.y < HEIGHT)
+	while (++current.y < env->h)
 	{
-		if (current.y < wall.start.y)
+		if (current.y < start.y)
 			color = SKY;
-		else if (current.y >= wall.start.y && current.y <= wall.end.y)
-			color = wall.color;
+		else if (current.y >= start.y && current.y <= end.y)
+		{
+			SDL_GetRGB(get_pixel_surface(env->sdl.surf[ray->which_wall],
+				ray->offset, (int)current.y % CELL),
+				env->sdl.surf[ray->which_wall]->format, &clr.r, &clr.g, &clr.b);
+			color = clr.r << 16 | clr.g << 8 | clr.b;
+		}
 		else
 			color = FLOOR;
-		sdl->pixels[(int)(current.x + (current.y * (WIDTH)))] = color;
+		env->sdl.pixels[(int)(current.x + (current.y * (env->w)))] = color;
 	}
 }
 
@@ -44,7 +58,7 @@ void		raycast(t_env *env, t_sdl *sdl, t_ray *ray)
 		x_collisions(ray, env->cam, env->data);
 		check_collisions(ray, env->map, env->height, env->width);
 		setup_slice(ray, &env->cam, x, env);
-		draw_slice(ray->wall, sdl);
+		draw_slice(ray->wall.start, ray->wall.end, env, ray);
 		ray->angle -= ray->step;
 		if (env->ray.angle >= env->data.two_pi)
 			env->ray.angle -= env->data.two_pi;
