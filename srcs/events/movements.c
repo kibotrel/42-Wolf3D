@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/30 15:50:07 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 18:06:16 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void			move_backward(t_env *env, t_cam cam)
 
 void			move_left(t_env *env, t_cam cam)
 {
-	env->cam.coord.x += cos(radians(env->cam.angle + 90)) * (4 * cam.sprint);
-	env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * (4 * cam.sprint);
+	env->cam.coord.x += cos(radians(env->cam.angle + 90)) * (8 * cam.sprint);
+	env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * (8 * cam.sprint);
 }
 
 void			move_right(t_env *env, t_cam cam)
 {
-	env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * (4 * cam.sprint);
-	env->cam.coord.y += sin(radians(env->cam.angle + 90)) * (4 * cam.sprint);
+	env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * (8 * cam.sprint);
+	env->cam.coord.y += sin(radians(env->cam.angle + 90)) * (8 * cam.sprint);
 }
 
 static void		coll_wall(t_env *env, t_pos coord, char *key)

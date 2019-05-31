@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:55:12 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/30 17:57:43 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 void	change_angle(char *key, double *angle, t_pos mouse, t_env *env)
 {
 	if (key[SDL_SCANCODE_COMMA] || mouse.x < env->w / 2)
-		*angle = (*angle >= 358 ? 362 - *angle : *angle + 2);
+		*angle = (*angle >= 357 ? 363 - *angle : *angle + 3);
 	else if (key[SDL_SCANCODE_PERIOD] || mouse.x > env->w / 2)
-		*angle = (*angle < 2 ? 358 + *angle : *angle - 2);
+		*angle = (*angle < 3 ? 357 + *angle : *angle - 3);
 }
 
 void	change_height(char *key, t_env *env, int speed, t_pos mouse)

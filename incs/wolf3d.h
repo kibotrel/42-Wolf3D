@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/30 15:40:48 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 13:45:17 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct		s_mouse
 
 typedef struct		s_cam
 {
-	t_pos			pos;
 	t_pos			spawn;
 	t_pos			coord;
 	double			fov;
@@ -212,4 +211,17 @@ void				raycast(t_env *env, t_sdl *sdl, t_ray *ray);
 void				y_collisions(t_ray *ray, t_cam cam);
 void				x_collisions(t_ray *ray, t_cam cam, t_data data);
 void				check_collisions(t_ray *ray, int **map, int y, int x);
+
+/*
+**	hud/hud.c
+*/
+
+void				hud(t_env *env);
+
+/*
+**	hud/minimap.c
+*/
+
+void				minimap(t_env *env);
+
 #endif
