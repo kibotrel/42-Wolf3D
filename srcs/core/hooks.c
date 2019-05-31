@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/29 16:53:08 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/30 15:57:05 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 	if (key[SDL_SCANCODE_R])
 	{
 		cam_setup(&env->cam);
-		raycast(env->map, env, &env->cam, &env->ray);
 		fl->y = 1;
 	}
 	if (key[SDL_SCANCODE_SPACE] && mouse->curr_time > mouse->old_time + 100)

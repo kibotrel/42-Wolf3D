@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/31 08:56:48 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:06:30 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ static void		setup_line(t_env *env, t_ray *ray, t_cam *cam, int x)
 
 	angle = cam->angle - ray->angle;
 	ray->dist = length(ray->hit_x, ray->hit_y, cam->coord, ray) * cos(angle);
-	ray->wall.size = ceil((CELL / ray->dist) * ray->screen - cam->height);
+	ray->wall.size = ceil((CELL / ray->dist) * ray->screen);
 	ray->wall.start.x = x;
 	ray->wall.start.y = ((env->h / 2) - (ray->wall.size / 2)) + cam->height;
 	ray->wall.end.x = x;
-	ray->wall.end.y = (ray->wall.start.y + ray->wall.size) + cam->height;
+	ray->wall.end.y = ray->wall.start.y + ray->wall.size;
 }
 
 void			raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
