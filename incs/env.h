@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/05/30 14:56:40 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:19:56 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define ERR_COPY		"\033[31;1mError:\033[0m Can't update SDL renderer"
 # define ERR_OPEN		"\033[31;1mError:\033[0m Can't open file."
 # define ERR_INIT		"\033[31;1mError:\033[0m Can't connect with SDL's API."
+# define ERR_FULL		"\033[31;1mError:\033[0m No spawnable cell in the map."
 # define ERR_CLOSE		"\033[31;1mError:\033[0m Can't close file."
 # define ERR_WIDTH 		"\033[31;1mError:\033[0m Map width uneven on each row."
 # define ERR_SPLIT 		"\033[31;1mError:\033[0m Can't retrieve all points."

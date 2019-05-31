@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:33:17 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:17:44 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static void	spawn_setup(t_env *env)
+static int	spawn_setup(t_env *env)
 {
 	int	x;
 	int	y;
@@ -33,7 +33,7 @@ static void	spawn_setup(t_env *env)
 			{
 				env->cam.spawn.y = y;
 				env->cam.spawn.x = x;
-				return ;
+				return (1);
 			}
 			if (!set && env->map[y][x] == 0)
 			{
@@ -43,6 +43,7 @@ static void	spawn_setup(t_env *env)
 			}
 		}
 	}
+	return (set);
 }
 
 static void	data_setup(t_env *env)
@@ -68,8 +69,9 @@ void		setup(t_env *env)
 {
 	env->w = WIDTH;
 	env->h = HEIGHT;
+	if (!spawn_setup(env) && free_switch(env, 1))
+		ft_print_error(ERR_FULL, 19);
 	sdl_setup(&env->sdl, env);
-	spawn_setup(env);
 	mouse_setup(env);
 	cam_setup(&env->cam);
 	data_setup(env);
