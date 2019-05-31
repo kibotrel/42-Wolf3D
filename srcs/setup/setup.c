@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/29 08:10:25 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:27:19 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	sdl_setup(t_sdl *sdl)
 
 void		cam_setup(t_cam *cam)
 {
-	cam->pos.x = 1.5;
+	cam->pos.x = 1.5;	
 	cam->pos.y = 3.5;
 	cam->coord.x = cam->pos.x * CELL;
 	cam->coord.y = cam->pos.y * CELL;
