@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/31 14:13:06 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:32:43 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	draw_slice(t_pos start, t_pos end, t_env *env, t_ray *ray)
 void		raycast(t_env *env, t_sdl *sdl, t_ray *ray)
 {
 	int		x;
+
 	x = -1;
 	setup_raycasting(&env->cam, &env->ray);
 	while (++x < WIDTH)

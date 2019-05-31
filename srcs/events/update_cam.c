@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 17:57:43 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:32:20 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	change_height(char *key, t_env *env, int speed, t_pos mouse)
 
 	height = &env->cam.offset;
 	if (key[SDL_SCANCODE_PAGEUP] || mouse.y < env->h / 2)
-		*height += 2 * speed;
+		*height += 4 * speed;
 	else if (key[SDL_SCANCODE_PAGEDOWN] || mouse.y > env->h / 2)
 		*height -= 2 * speed;
 	if (*height > HEIGHT / 2 * 1.75)
