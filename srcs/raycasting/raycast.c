@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/31 12:06:30 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/31 12:09:20 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void		setup_line(t_env *env, t_ray *ray, t_cam *cam, int x)
 void			raycast(int **map, t_env *env, t_cam *cam, t_ray *ray)
 {
 	int		x;
+
 	x = -1;
 	setup_raycasting(cam, ray);
 	while (++x < env->w)
