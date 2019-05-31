@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 14:31:49 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:41:29 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "env.h"
 #include "wolf3d.h"
 #include "libft.h"
-
-#include <stdio.h>
 
 static void	change_cam(t_env *env, t_mouse *mouse, char *key, t_pos *fl)
 {
@@ -67,7 +65,7 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
 			|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 	{
-		move(env, key, 0);
+		move(env, key);
 		fl->y = 1;
 	}
 }
@@ -101,9 +99,6 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			change_height(key, env, 1, mouse->new);
 			fl->y = 1;
 		}
-		next_process(key, env, fl, mouse);
-		if (fl->y == 1)
-			raycast(env->map, env, &env->cam, &env->ray);
 	}
 	next_process(key, env, fl, mouse);
 	if (fl->y == 1)

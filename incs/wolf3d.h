@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/31 14:30:19 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:51:15 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void				setup(t_env *env);
 **	setup/raycasting.c
 */
 
-void				setup_raycasting(t_cam *cam, t_ray *ray);
+void				setup_raycasting(t_cam *cam, t_ray *ray, int width);
 void				setup_slice(t_ray *ray, t_cam *cam, int x, t_env *env);
 
 /*
