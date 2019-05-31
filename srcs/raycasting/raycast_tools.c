@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 13:14:59 by reda-con          #+#    #+#             */
-/*   Updated: 2019/05/29 19:04:25 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/05/31 09:04:54 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,20 @@ void			draw_rc(t_pos start, t_pos end, t_env *env, t_ray *ray)
 {
 	t_pos		current;
 	int			color;
-	double		i;
-	int			j;
-	double		unit;
+	int			i;
+	int			tex_y;
 
 	current.x = start.x;
 	current.y = -1;
-	j = 1;
-	unit = ray->wall.size / CELL;
-	i = unit;
 	while (++current.y < env->h)
 	{
-		if (current.y < start.y)
+		if (current.y <= start.y)
 			color = 0xff00ffff;
-		else if (current.y >= start.y && current.y < end.y)
+		else if (current.y > start.y && current.y < end.y)
 		{
-			if (i <= unit && j <= CELL)
-			{
-				i = -unit;
-				color = get_color(env->sdl.surf[ray->which_wall],
-					ray->offset + 1, j);
-				++j;
-			}
-			i += 1;
+			i = current.y * (CELL * 4) - env->h * (CELL * 2) + ray->wall.size * (CELL * 2);
+			tex_y = (((i * CELL) / ray->wall.size) / 256);
+			color = get_color(env->sdl.surf[ray->which_wall], ray->offset + 1, tex_y);
 		}
 		else
 			color = 0xffc8c8c8;
