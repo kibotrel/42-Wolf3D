@@ -6,36 +6,12 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/31 14:32:04 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:10:45 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "wolf3d.h"
-
-void			move_forward(t_env *env, t_cam cam)
-{
-	env->cam.coord.x += cos(radians(env->cam.angle)) * (8 * cam.sprint);
-	env->cam.coord.y -= sin(radians(env->cam.angle)) * (8 * cam.sprint);
-}
-
-void			move_backward(t_env *env, t_cam cam)
-{
-	env->cam.coord.x -= cos(radians(env->cam.angle)) * (8 * cam.sprint);
-	env->cam.coord.y += sin(radians(env->cam.angle)) * (8 * cam.sprint);
-}
-
-void			move_left(t_env *env, t_cam cam)
-{
-	env->cam.coord.x += cos(radians(env->cam.angle + 90)) * (8 * cam.sprint);
-	env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * (8 * cam.sprint);
-}
-
-void			move_right(t_env *env, t_cam cam)
-{
-	env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * (8 * cam.sprint);
-	env->cam.coord.y += sin(radians(env->cam.angle + 90)) * (8 * cam.sprint);
-}
 
 static void		coll_wall(t_env *env, t_pos coord, char *key)
 {

@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 17:58:19 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:14:54 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	change_height(char *key, t_env *env, int speed, t_pos mouse)
 		env->cam.offset += 4 * speed;
 	else if (key[SDL_SCANCODE_PAGEDOWN] || mouse.y > env->h / 2)
 		env->cam.offset -= 2 * speed;
-	if (env->cam.offset > env->h  / 2 * 1.75)
-		env->cam.offset = env->h  / 2 * 1.75;
+	if (env->cam.offset > env->h / 2 * 1.75)
+		env->cam.offset = env->h / 2 * 1.75;
 	else if (env->cam.offset < env->h / 8)
-		env->cam.offset = env->h  / 8;
+		env->cam.offset = env->h / 8;
 }

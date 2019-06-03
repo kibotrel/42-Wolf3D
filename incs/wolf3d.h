@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/03 12:59:29 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:12:47 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,8 @@ void				move(t_env *env, char *key);
 **	events/update_cam.c
 */
 
-void				change_angle(char  *key, double *angle, t_pos mouse, t_env *env);
-void				change_height(char *key, t_env *env, int speed, t_pos mouse);
+void				change_angle(char *key, double *agl, t_pos m, t_env *env);
+void				change_height(char *key, t_env *env, int speed, t_pos m);
 
 /*
 **	events/place_blocks.c
@@ -197,6 +197,15 @@ void				place_block(t_env *env);
 
 void				enable_mouse(t_mouse *mouse);
 void				resize(t_env *env, t_sdl *sdl);
+
+/*
+**	events/movements_calculs.c
+*/
+
+void				move_forward(t_env *env, t_cam cam);
+void				move_backward(t_env *env, t_cam cam);
+void				move_left(t_env *env, t_cam cam);
+void				move_right(t_env *env, t_cam cam);
 
 /*
 **	maths/maths.c

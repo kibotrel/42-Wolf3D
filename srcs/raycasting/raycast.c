@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/03 11:13:07 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/03 13:15:47 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@ void		draw_slice(t_pos start, t_pos end, t_env *env, t_ray *ray)
 			color = 0xff00ffff;
 		else if (current.y > start.y && current.y < end.y)
 		{
-			i = (current.y - env->cam.offset) * 256 - env->h * 128 + ray->wall.size * 128;
+			i = (current.y - env->cam.offset) * 256 - env->h * 128\
+				+ ray->wall.size * 128;
 			tex_y = i * CELL / ray->wall.size / 256;
-			color = get_color(env->sdl.surf[ray->which_wall], ray->offset + 1, tex_y + 1);
+			color = get_color(env->sdl.surf[ray->which_wall], ray->offset + 1,\
+				tex_y + 1);
 		}
 		else
 			color = 0xffc8c8c8;
 		env->sdl.pixels[(int)(current.x + (current.y * (env->w)))] = color;
 	}
 }
-
 
 void		raycast(t_env *env, t_ray *ray)
 {
