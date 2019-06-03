@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/03 11:12:58 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/03 12:59:29 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,12 @@ void				check_row(char *row, t_env *env);
 void				limits(char *row, char **coords, t_env *env);
 
 /*
+**	utils/image.c
+*/
+
+void				upload_image(t_env *env, int i);
+
+/*
 **	usage/usage.c
 */
 
@@ -171,6 +177,7 @@ void				usage(void);
 */
 
 void				move(t_env *env, char *key);
+
 /*
 **	events/update_cam.c
 */
