@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 16:41:29 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:20:51 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 
 static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 {
+	int		i;
+
+	i = 0;
 	mouse->curr_time = SDL_GetTicks();
 	if (key[SDL_SCANCODE_ESCAPE]\
 			|| env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
@@ -79,12 +82,6 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 	if (key[SDL_SCANCODE_P] && mouse->curr_time > mouse->old_time + 100)
 	{
 		change_angle(key, &env->cam.angle, mouse->new, env);
-		fl->y = 1;
-	}
-	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
-		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
-	{
-		move(env, key);
 		fl->y = 1;
 	}
 	if (mouse->toggle_mouse == 1)
@@ -100,9 +97,20 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			fl->y = 1;
 		}
 	}
+	if (key[SDL_SCANCODE_TAB] && env->height <= 20 && env->width <= 25)
+		i = 1;
 	next_process(key, env, fl, mouse);
 	if (fl->y == 1)
-		raycast(env, &env->sdl, &env->ray);
+	{
+		raycast(env, &env->ray);
+		if (i == 1)
+			minimap(env);
+		if (SDL_UpdateTexture(env->sdl.text, 0, env->sdl.pixels, WIDTH * 4) < 0)
+			free_sdl(env, 5, ERR_UPDATE, 17);
+		if (SDL_RenderCopy(env->sdl.ren, env->sdl.text, 0, 0) < 0)
+			free_sdl(env, 5, ERR_COPY, 18);
+		SDL_RenderPresent(env->sdl.ren);
+	}
 }
 
 void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)

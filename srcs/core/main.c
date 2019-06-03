@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:23:23 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:20:35 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 			ft_print_error(ERR_MALLOC, 5);
 		parse_file(av[1], env);
 		setup(env);
-		raycast(env, &env->sdl, &env->ray);
+		raycast(env, &env->ray);
 		while (flags.x)
 			hooks(env, &flags, env->inputs, &env->mouse);
 		free_sdl(env, 6, NULL, 0);

@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 09:23:03 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/31 14:32:10 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:15:07 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	resize(t_env *env, t_sdl *sdl)
 	sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, env->w, env->h);
 	if (!(sdl->pixels = (uint32_t*)malloc(4 * ((env->w + 1) * env->h))))
 		return ;
-		raycast(env, &env->sdl, &env->ray);
+		raycast(env, &env->ray);
 }

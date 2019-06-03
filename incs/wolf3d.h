@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/31 14:51:15 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/03 11:12:58 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ double				smallest_distance(t_ray *ray, t_data data, t_pos coord);
 **	raycasting/raycast.c
 */
 
-void				raycast(t_env *env, t_sdl *sdl, t_ray *ray);
+void				raycast(t_env *env, t_ray *ray);
 
 /*
 **	raycasting/collisions.c
