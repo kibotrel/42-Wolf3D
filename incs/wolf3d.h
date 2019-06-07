@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/03 13:12:47 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/07 13:18:25 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct		s_cam
 	double			offset;
 	double			sprint;
 	double			distance;
+	int				crouch;
 }					t_cam;
 
 typedef struct		s_wall
@@ -176,20 +177,20 @@ void				usage(void);
 **	events/movements.c
 */
 
-void				move(t_env *env, char *key);
+void				move(t_env *env, char *key, t_pos *flags);
 
 /*
 **	events/update_cam.c
 */
 
 void				change_angle(char *key, double *agl, t_pos m, t_env *env);
-void				change_height(char *key, t_env *env, int speed, t_pos m);
+void				change_height(char *key, t_env *env, t_pos m, t_pos *fl);
 
 /*
 **	events/place_blocks.c
 */
 
-void				place_block(t_env *env);
+void				place_block(t_env *env, t_pos *flags);
 
 /*
 **	events/resize.c

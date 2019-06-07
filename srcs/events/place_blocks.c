@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 10:00:19 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/30 15:06:39 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/07 13:20:43 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		is_block(int **map, t_pos *coord, int new_x, int new_y)
 	map[(int)(coord->y / CELL) + new_y][(int)coord->x / CELL + new_x] = block;
 }
 
-void			place_block(t_env *env)
+void			place_block(t_env *env, t_pos *flags)
 {
 	double angle;
 
@@ -46,4 +46,5 @@ void			place_block(t_env *env)
 		is_block(env->map, &env->cam.coord, 1, 0);
 	else
 		is_block(env->map, &env->cam.coord, 1, -1);
+	flags->y = 1;
 }

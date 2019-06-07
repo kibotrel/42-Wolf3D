@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:50:59 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 14:50:18 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/04 14:29:32 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	cam_setup(t_cam *cam)
 	cam->offset = 0;
 	cam->fov = 60.0;
 	cam->sprint = 1.0;
+	cam->crouch = 2;
 }

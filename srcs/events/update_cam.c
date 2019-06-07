@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/03 13:14:54 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/07 13:17:01 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void	change_angle(char *key, double *angle, t_pos mouse, t_env *env)
 		*angle = (*angle < 2 ? 358 + *angle : *angle - 2);
 }
 
-void	change_height(char *key, t_env *env, int speed, t_pos mouse)
+void	change_height(char *key, t_env *env, t_pos mouse, t_pos *flags)
 {
 	if (key[SDL_SCANCODE_PAGEUP] || mouse.y < env->h / 2)
-		env->cam.offset += 4 * speed;
+		env->cam.offset += 8;
 	else if (key[SDL_SCANCODE_PAGEDOWN] || mouse.y > env->h / 2)
-		env->cam.offset -= 2 * speed;
-	if (env->cam.offset > env->h / 2 * 1.75)
-		env->cam.offset = env->h / 2 * 1.75;
-	else if (env->cam.offset < env->h / 8)
-		env->cam.offset = env->h / 8;
+		env->cam.offset -= 8;
+	if (env->cam.offset > env->h / 2)
+		env->cam.offset = env->h / 2;
+	else if (env->cam.offset < -(env->h / 2))
+		env->cam.offset = -(env->h / 2);
+	flags->y = 1;
 }
