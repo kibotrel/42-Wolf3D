@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/31 14:29:58 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/06/07 12:10:41 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,30 +20,46 @@ OBJDIR		= objs/
 OBJSUBDIRS	= core usage parsing utils raycasting setup events maths hud
 SRCDIR		= srcs/
 LFTDIR		= libft/
-SDLDIR		= $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
-INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
+
+SDLDIR		= ./frameworks/SDL2.framework/lib/
+SDLHEAD		= -I ./frameworks/SDL2.framework/Versions/A/Headers					\
+				-I ./frameworks/SDL2_ttf.framework/Versions/A/Headers			\
+				-I ./frameworks/SDL2_image.framework/Versions/A/Headers			\
+				-I ./frameworks/SDL2_mixer.framework/Headers					\
+				-I ./frameworks/SDL2_net.framework/Headers						\
+				-F ./frameworks
+
+FRAMEWORKS	= -F ./frameworks													\
+			-rpath ./frameworks													\
+			-framework OpenGL -framework AppKit -framework OpenCl				\
+			-framework SDL2 -framework SDL2_ttf -framework SDL2_image			\
+			-framework SDL2_mixer -framework SDL2_net
+
+INCDIR		= ./incs/ ./libft/incs/ $(HOME)/Downloads/SDL2-2.0.3/include/
 
 # Source files (Can be changed)
 
 SRC			= core/main.c					core/hooks.c						\
+			 																	\
+			raycasting/raycast.c			raycasting/collisions.c				\
 																				\
-			  raycasting/raycast.c			raycasting/collisions.c				\
+			events/update_cam.c			events/movements.c						\
+			events/place_blocks.c			events/resize.c						\
+			events/movements_calculs.c											\
 																				\
-			  events/update_cam.c			events/movements.c					\
-			  events/place_blocks.c			events/resize.c						\
+			setup/setup.c					setup/raycasting.c					\
+			setup/camera.c				setup/graphic.c							\
 																				\
-			  setup/setup.c					setup/raycasting.c					\
-			  setup/camera.c				setup/graphic.c						\
+			parsing/map.c														\
 																				\
-			  parsing/map.c														\
+			hud/hud.c						hud/minimap.c						\
 																				\
-			  hud/hud.c						hud/minimap.c						\
+			utils/clean.c					utils/parsing.c						\
+			utils/image.c														\
 																				\
-			  utils/clean.c					utils/parsing.c						\
+			maths/maths.c														\
 																				\
-			  maths/maths.c														\
-																				\
-			  usage/usage.c
+			usage/usage.c
 
 LFT			= ./libft/libft.a
 
@@ -58,7 +74,7 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
-LIBS		= -L$(LFTDIR) -lft -L$(SDLDIR) -lSDL2
+LIBS		= -L$(LFTDIR) -lft
 CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror
 
 # Color codes
@@ -72,11 +88,8 @@ YELLOW		= \033[33m
 all:  $(SUBDIRS) $(NAME)
 
 $(NAME): $(LFT) $(OBJDIR) $(COBJ)
-	@if !(brew ls --versions sdl2) > /dev/null; then\
-		brew install sdl2;\
-	fi
 	@echo "$(YELLOW)\n      - Building $(RESET)$(NAME) $(YELLOW)...\n$(RESET)"
-	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(COBJ) -O3 -Ofast -g
+	@$(CC) $(CFLAGS) $(LIBS) $(FRAMEWORKS) -o $(NAME) $(COBJ) -O3 -Ofast -g
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
 
 $(OBJDIR):
@@ -84,6 +97,7 @@ $(OBJDIR):
 
 $(SUBDIRS):
 	@mkdir -p $(SUBDIRS)
+
 # Redefinition of implicit compilation rule to prompt some colors and file names during the said compilation
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
