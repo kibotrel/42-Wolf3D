@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/07 13:19:50 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/10 17:06:01 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,16 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
 		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 		move(env, key, fl);
+	if (key[SDL_SCANCODE_LCTRL])
+	{
+		env->cam.crouch = 500;
+		fl->y = 1;
+	}
+	else
+	{
+		env->cam.crouch = 0;
+		fl->y = 1;
+	}
 }
 
 static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
