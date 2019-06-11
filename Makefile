@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/07 12:10:41 by reda-con         ###   ########.fr        #
+#    Updated: 2019/06/11 09:12:20 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FRAMEWORKS	= -F ./frameworks													\
 			-framework SDL2 -framework SDL2_ttf -framework SDL2_image			\
 			-framework SDL2_mixer -framework SDL2_net
 
-INCDIR		= ./incs/ ./libft/incs/ $(HOME)/Downloads/SDL2-2.0.3/include/
+INCDIR		= ./incs/ ./libft/incs/ ./frameworks/SDL2.framework/Headers/
 
 # Source files (Can be changed)
 
