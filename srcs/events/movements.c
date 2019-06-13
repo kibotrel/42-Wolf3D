@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/13 17:06:34 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/13 17:14:31 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static void		movements(t_cam *cam, t_pos old, t_env *env, t_pos fl)
 	t_pos	new;
 	double	hit;
 
-	new.x = cam->coord.x + (cos(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
-	new.y = cam->coord.y - (sin(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
+	new.x = cam->coord.x\
+		+ (cos(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
+	new.y = cam->coord.y\
+		- (sin(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
 	if (new.y < old.y)
 		hit = -HITBOX;
 	else
