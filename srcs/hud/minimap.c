@@ -6,75 +6,47 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:29 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 13:58:25 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 01:41:51 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "env.h"
 #include "wolf3d.h"
 
 #include <stdio.h>
 
-void	get_player_position(t_env *env)
+void	get_player_position(t_env *env, t_pos *player)
 {
-	t_pos	tmp;
-
-	tmp.x = env->cam.coord.x - (int)env->cam.coord.x;
-	tmp.y = env->cam.coord.y - (int)env->cam.coord.y;
-
-	// printf("%f,%f\n", tmp.y, tmp.x);
+	player->x = env->cam.coord.x / 64 - floor(env->cam.coord.x / 64);
+	player->y = env->cam.coord.y / 64 - floor(env->cam.coord.y / 64);
+	player->x = (int)(map(player->x, fill_data(0, 1, 0, 32)));
+	player->y = (int)(map(player->y, fill_data(0, 1, 0, 32)));
+	player->x += (floor(env->cam.coord.x / 64) * 32) + 16;
+	player->y += (floor(env->cam.coord.y / 64) * 32) + 16;
 }
 
-void	walls(t_env *env)
+void	objects(t_env *env)
 {
-	int		x;
-	int		y;
+	t_pos	pos;
 	t_pos	wall;
 	t_pos	limit;
 
-	y = -1;
-
-	while (++y < env->height)
+	pos.y = -1;
+	while (++pos.y < env->height)
 	{
-		x = -1;
-		while (++x < env->width)
+		pos.x = -1;
+		while (++pos.x < env->width)
 		{
-			if (env->map[y][x] == 1)
-			{
-				wall.y = y * 32 + 15;
-				limit.y = wall.y + 32;
-				limit.x = x * 32 + 47;
-				while (++wall.y < limit.y)
-				{
-					wall.x = x * 32 + 15;
-					while (++wall.x < limit.x)
-						env->sdl.pixels[(int)(wall.x + wall.y * WIDTH)] = 0xffffff;
-				}
-			}
-			if (env->map[y][x] == 9)
-			{
-				wall.y = y * 32 + 15;
-				limit.y = wall.y + 32;
-				limit.x = x * 32 + 47;
-				while (++wall.y < limit.y)
-				{
-					wall.x = x * 32 + 15;
-					while (++wall.x < limit.x)
-						env->sdl.pixels[(int)(wall.x + wall.y * WIDTH)] = 0xffff00ff;
-				}
-			}
-			if (env->map[y][x] == 5)
-			{
-				wall.y = y * 32 + 15;
-				limit.y = wall.y + 32;
-				limit.x = x * 32 + 47;
-				while (++wall.y < limit.y)
-				{
-					wall.x = x * 32 + 15;
-					while (++wall.x < limit.x)
-						env->sdl.pixels[(int)(wall.x + wall.y * WIDTH)] = 0xff7fffff;
-				}
-			}
+			wall.y = pos.y * 32 + 15;
+			limit.y = wall.y + 32;
+			limit.x = pos.x * 32 + 47;
+			if (env->map[(int)pos.y][(int)pos.x] == 1)
+				walls(&env->sdl, wall, limit, pos.x);
+			else if (env->map[(int)pos.y][(int)pos.x] == 9)
+				spawn(&env->sdl, wall, limit, pos.x);
+			else if (env->map[(int)pos.y][(int)pos.x] == 5)
+				end(&env->sdl, wall, limit, pos.x);
 		}
 	}
 }
@@ -83,25 +55,22 @@ void	minimap(t_env *env)
 {
 	t_pos	map;
 	t_pos	player;
-	t_pos	limit;
+	t_pos	pos;
 
-	get_player_position(env);
+	get_player_position(env, &player);
 	map.y = -1;
-	player.y = (floor(floor(env->cam.coord.y) / 64) * 32 + 23);
-	limit.x = (floor(floor(env->cam.coord.x) / 64) + 1) * 32 + 8;
-	limit.y = (floor(floor(env->cam.coord.y) / 64) + 1) * 32 + 8;
+	pos.y = player.y - 4;
 	while (++map.y < env->height * 32 + 33)
 	{
 		map.x = -1;
 		while (++map.x < env->width * 32 + 33)
 			env->sdl.pixels[(int)(map.x + map.y * WIDTH)] = 0;
 	}
-	walls(env);
-	while (++player.y < limit.y)
+	objects(env);
+	while (++pos.y < player.y + 4)
 	{
-		player.x = (floor(floor(env->cam.coord.x) / 64) * 32 + 23);
-		while (++player.x < limit.x)
-			env->sdl.pixels[(int)(player.x + player.y * WIDTH)] = 0xff0000;
+		pos.x = player.x - 4;
+		while (++pos.x < player.x + 4)
+			env->sdl.pixels[(int)(pos.x + pos.y * WIDTH)] = 0xff0000;
 	}
-
 }

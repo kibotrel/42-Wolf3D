@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/05/31 14:51:15 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 03:50:41 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct		s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	SDL_Texture		*text;
-	SDL_Surface		*surf[4];
+	SDL_Surface		*surf[5];
 	SDL_Event		event;
 	uint32_t		*pixels;
 }					t_sdl;
@@ -103,6 +103,14 @@ typedef struct		s_env
 	t_data			data;
 	t_mouse			mouse;
 }					t_env;
+
+typedef struct		s_map
+{
+	double			in_s;
+	double			in_e;
+	double			out_s;
+	double			out_e;
+}					t_map;
 
 /*
 **	core/hooks.c
@@ -195,7 +203,9 @@ void				resize(t_env *env, t_sdl *sdl);
 **	maths/maths.c
 */
 
+t_map				fill_data(double start, double end, double min, double max);
 double				radians(double degre);
+double				map(double n, t_map m);
 double				smallest_distance(t_ray *ray, t_data data, t_pos coord);
 
 /*
@@ -223,5 +233,13 @@ void				hud(t_env *env);
 */
 
 void				minimap(t_env *env);
+
+/*
+**	hud/objects.c
+*/
+
+void				end(t_sdl *sdl, t_pos wall, t_pos limit, int x);
+void				spawn(t_sdl *sdl, t_pos wall, t_pos limit, int x);
+void				walls(t_sdl *sdl, t_pos wall, t_pos limit, int x);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:35 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 17:12:18 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 03:42:04 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	hud(t_env *env)
 {
-	minimap(env);
+	(void)env;
+	// minimap(env);
 }

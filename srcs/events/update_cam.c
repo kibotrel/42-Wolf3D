@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:25:56 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 17:58:19 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:19:58 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	change_angle(char *key, double *angle, t_pos mouse, t_env *env)
 void	change_height(char *key, t_env *env, int speed, t_pos mouse)
 {
 	if (key[SDL_SCANCODE_PAGEUP] || mouse.y < env->h / 2)
-		env->cam.offset += 4 * speed;
+		env->cam.offset += 8 * speed;
 	else if (key[SDL_SCANCODE_PAGEDOWN] || mouse.y > env->h / 2)
-		env->cam.offset -= 2 * speed;
-	if (env->cam.offset > env->h  / 2 * 1.75)
-		env->cam.offset = env->h  / 2 * 1.75;
-	else if (env->cam.offset < env->h / 8)
-		env->cam.offset = env->h  / 8;
+		env->cam.offset -= 8 * speed;
+	if (env->cam.offset > 300)
+		env->cam.offset = 300;
+	else if (env->cam.offset < -300)
+		env->cam.offset = -300;
 }

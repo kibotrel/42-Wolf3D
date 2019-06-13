@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:34:41 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 00:24:25 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,20 @@ double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 		ray->offset = (int)ray->hit_x.y % CELL;
 		return (x);
 	}
+}
+
+t_map	fill_data(double start, double end, double min, double max)
+{
+	t_map	tmp;
+
+	tmp.in_s = start;
+	tmp.in_e = end;
+	tmp.out_s = min;
+	tmp.out_e = max;
+	return (tmp);
+}
+
+double	map(double n, t_map m)
+{
+	return ((n - m.in_s) / (m.in_e - m.in_s) * (m.out_e - m.out_s) + m.out_s);
 }

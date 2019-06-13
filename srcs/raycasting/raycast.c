@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/05/31 14:51:41 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:16:50 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		draw_slice(t_pos start, t_pos end, t_env *env, t_ray *ray)
 	while (++current.y < env->h)
 	{
 		if (current.y <= start.y)
-			color = 0xff00ffff;
+			color = get_color(env->sdl.surf[4], current.x, current.y);
 		else if (current.y > start.y && current.y < end.y)
 		{
 			i = (current.y - env->cam.offset) * 256 - env->h * 128 + ray->wall.size * 128;

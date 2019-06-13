@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/30 15:37:09 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 04:00:42 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	sdl_setup(t_sdl *sdl, t_env *env)
 		free_sdl(env, 5, ERR_CURSOR, 16);
 	SDL_WarpMouseInWindow(sdl->win, WIDTH / 2, HEIGHT / 2);
 	sdl->surf[0] = SDL_LoadBMP("01.bmp");
-	sdl->surf[1] = SDL_LoadBMP("05.bmp");
-	sdl->surf[2] = SDL_LoadBMP("13.bmp");
-	sdl->surf[3] = SDL_LoadBMP("23.bmp");
+	sdl->surf[1] = SDL_LoadBMP("05.BMP");
+	sdl->surf[2] = SDL_LoadBMP("13.BMP");
+	sdl->surf[3] = SDL_LoadBMP("23.BMP");
+	sdl->surf[4] = SDL_LoadBMP("sky3.bmp");
 }

@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/05/31 14:29:58 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/06/13 03:57:26 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC			= core/main.c					core/hooks.c						\
 																				\
 			  parsing/map.c														\
 																				\
-			  hud/hud.c						hud/minimap.c						\
+			  hud/hud.c						 hud/objects.c						\
+			  hud/minimap.c														\
 																				\
 			  utils/clean.c					utils/parsing.c						\
 																				\
