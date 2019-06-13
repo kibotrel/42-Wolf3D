@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 15:16:20 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/06 17:59:21 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:33:20 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static void	expand_map(int **map, t_env *env)
 	free(env->map);
 }
 
-static void	array_to_map(char *row, char **coords, t_env *env)
+static void	array_to_map(char **coords, t_env *env)
 {
 	int		y;
 	int		x;
 	int		**map;
 
-	limits(row, coords, env);
+	limits(coords, env);
 	if (!(map = (int**)malloc(sizeof(int*) * env->height)))
 	{
 		free_switch(env, 0);
@@ -67,16 +67,16 @@ static void	build_map(const int fd, char *row, t_env *env)
 	while (ft_get_next_line(fd, &row))
 	{
 		check_row(row, env);
-		if (!(coords = ft_strsplit(row, ' ')) && free_parse(row, NULL, env, 1))
+		if (!(coords = ft_strsplit(row, ' ')))
 			ft_print_error(ERR_SPLIT, 8);
 		if (env->height == 1)
 			env->width = size(coords);
-		else if (size(coords) != env->width && free_parse(row, coords, env, 2))
+		else if (size(coords) != env->width)
 			ft_print_error(ERR_WIDTH, 9);
-		array_to_map(row, coords, env);
+		array_to_map(coords, env);
 		free_parse(row, coords, env, 3);
 	}
-	if (!env->height && free_switch(env, 0))
+	if (!env->height)
 		ft_print_error(ERR_EMPTY_FILE, 10);
 }
 
