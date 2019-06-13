@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/13 03:57:26 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/06/13 08:23:52 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC			= core/main.c					core/hooks.c						\
 			  hud/minimap.c														\
 																				\
 			  utils/clean.c					utils/parsing.c						\
+			  utils/draw_line.c													\
 																				\
 			  maths/maths.c														\
 																				\

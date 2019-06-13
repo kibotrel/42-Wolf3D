@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/13 03:50:41 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:03:23 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ typedef struct		s_env
 	int				h;
 	int				w;
 	int				**map;
-	int				height;
 	int				width;
+	int				height;
+	int				factor;
 	char			inputs[SDL_NUM_SCANCODES];
 	t_sdl			sdl;
 	t_cam			cam;
@@ -111,6 +112,16 @@ typedef struct		s_map
 	double			out_s;
 	double			out_e;
 }					t_map;
+
+typedef struct	s_line
+{
+	int			error;
+	int			offset;
+	int			sign_y;
+	int			sign_x;
+	int			delta_y;
+	int			delta_x;
+}				t_line;
 
 /*
 **	core/hooks.c
@@ -166,7 +177,13 @@ void				free_sdl(t_env *env, int state, char *error, int code);
 int					size(char **coords);
 void				bottom_border(t_env *env);
 void				check_row(char *row, t_env *env);
-void				limits(char *row, char **coords, t_env *env);
+void				limits(char **coords, t_env *env);
+
+/*
+**	utils/draw_line.c
+*/
+
+void				draw_line(t_pos a, t_pos b, t_env *env);
 
 /*
 **	usage/usage.c
@@ -238,8 +255,8 @@ void				minimap(t_env *env);
 **	hud/objects.c
 */
 
-void				end(t_sdl *sdl, t_pos wall, t_pos limit, int x);
-void				spawn(t_sdl *sdl, t_pos wall, t_pos limit, int x);
-void				walls(t_sdl *sdl, t_pos wall, t_pos limit, int x);
+void				end(t_env *env, t_pos wall, t_pos limit, int x);
+void				spawn(t_env *env, t_pos wall, t_pos limit, int x);
+void				walls(t_env *env, t_pos wall, t_pos limit, int x);
 
 #endif
