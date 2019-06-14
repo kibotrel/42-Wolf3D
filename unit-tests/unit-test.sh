@@ -50,6 +50,7 @@ else
 	./$EXE $TEST/13.w3d
 	./$EXE $TEST/14.w3d
 	echo "\nReading rights"
+	chmod 000 $TEST/15.w3d
 	./$EXE $TEST/15.w3d
 	if [ "$1" == "--hard" ]; then
 		echo "\nHard tests"
