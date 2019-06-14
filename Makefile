@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/13 08:23:52 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/06/14 09:17:54 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
 LIBS		= -L$(LFTDIR) -lft -L$(SDLDIR) -lSDL2
-CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror
+CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -O3 -g
 
 # Color codes
 
