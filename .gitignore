@@ -9,7 +9,6 @@ objs
 # Executables - Scripts
 a.out
 wolf3d
-*.sh
 
 # Debug
 *.dSYM
