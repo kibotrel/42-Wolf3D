@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/14 10:19:13 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/14 14:59:27 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ void	sdl_setup(t_sdl *sdl, t_env *env)
 	sdl->surf[2] = SDL_LoadBMP("assets/13.BMP");
 	sdl->surf[3] = SDL_LoadBMP("assets/23.BMP");
 	sdl->surf[4] = SDL_LoadBMP("assets/sky3.bmp");
+	sdl->surf[5] = NULL;
 }

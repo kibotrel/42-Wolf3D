@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/13 12:03:23 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/14 14:58:00 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct		s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	SDL_Texture		*text;
-	SDL_Surface		*surf[5];
+	SDL_Surface		*surf[6];
 	SDL_Event		event;
 	uint32_t		*pixels;
 }					t_sdl;

@@ -6,11 +6,12 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/29 04:55:26 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/14 14:56:20 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "SDL.h"
 #include "libft.h"
 #include <wolf3d.h>
 
@@ -54,6 +55,9 @@ void	free_split(char **coords)
 
 void	free_sdl(t_env *env, int state, char *error, int code)
 {
+	int	i;
+
+	i = -1;
 	if (state > 1)
 		SDL_DestroyWindow(env->sdl.win);
 	if (state > 2)
@@ -61,7 +65,11 @@ void	free_sdl(t_env *env, int state, char *error, int code)
 	if (state > 3)
 		SDL_DestroyTexture(env->sdl.text);
 	if (state > 4)
+	{
 		free(env->sdl.pixels);
+		while (env->sdl.surf[++i])
+			SDL_FreeSurface(env->sdl.surf[i]);
+	}
 	SDL_Quit();
 	free_switch(env, 1);
 	(state == 6 ? exit(code) : ft_print_error(error, code));
