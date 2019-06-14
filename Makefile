@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/14 11:34:54 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/06/14 15:21:20 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,13 @@ NAME		= wolf3d
 
 # All the directories needed to know where files should be (Can be changed)
 
+ABSDIR		=$(shell pwd)
 OBJDIR		= objs/
 OBJSUBDIRS	= core usage parsing utils raycasting setup events maths hud
 SRCDIR		= srcs/
 LFTDIR		= libft/
-
-FRAMEWORKS	= -F ./frameworks -rpath ./frameworks								\
-				-framework OpenGL -framework AppKit -framework OpenCl			\
-			-framework SDL2 -framework SDL2_ttf
-
-INCDIR		= ./incs/ ./libft/incs/ ./frameworks/SDL2_ttf.framework/Headers/	\
-				./frameworks/SDL2.framework/Headers/
+SDLDIR		= $(ABSDIR)/SDL2-2.0.9/
+INCDIR		= ./incs/ ./libft/incs/ ./SDL2-2.0.9/include/
 
 # Source files (Can be changed)
 
@@ -36,7 +32,6 @@ SRC			= core/main.c					core/hooks.c						\
 																				\
 			events/update_cam.c			events/movements.c						\
 			events/place_blocks.c			events/resize.c						\
-			events/movements_calculs.c											\
 																				\
 			setup/setup.c					setup/raycasting.c					\
 			setup/camera.c				setup/graphic.c							\
@@ -65,7 +60,7 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
-LIBS		= -L$(LFTDIR) -lft
+LIBS		= -L$(LFTDIR) -lft $(shell $(ABSDIR)/SDL2/bin/sdl2-config --libs)
 CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -o3 -g
 
 # Color codes
@@ -74,13 +69,21 @@ RESET		= \033[0m
 GREEN		= \033[32m
 YELLOW		= \033[33m
 
-# Check if object directory exists, build libft and then the Project
+# Check if object directory exists, build libs and then the Project
 
-all:  $(SUBDIRS) $(NAME)
+all: $(SUBDIRS) SDL2 $(NAME)
+
+SDL2:
+	@mkdir -p SDL2/
+	@mkdir -p SDL2/build
+	@cd SDL2/build; \
+		$(SDLDIR)/configure --prefix $(ABSDIR)/SDL2; \
+		make -j6; \
+		make install \
 
 $(NAME): $(LFT) $(OBJDIR) $(COBJ)
 	@echo "$(YELLOW)\n      - Building $(RESET)$(NAME) $(YELLOW)...\n$(RESET)"
-	@$(CC) $(CFLAGS) $(LIBS) $(FRAMEWORKS) -o $(NAME) $(COBJ) -O3 -Ofast -g
+	@$(CC) $(CFLAGS) $(LIBS) $(FRAMEWORKS) -o $(NAME) $(COBJ)
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
 
 $(OBJDIR):
@@ -100,9 +103,13 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 $(LFT):
 	@make -sC $(LFTDIR) -j
 
+$(SDL):
+
 # Deleting all .o files and then the directory where they were located
 
 clean:
+	@make -sC $(LFTDIR) clean
+	@rm -rf SDL2/
 	@echo "$(GREEN)***   Deleting all object from $(NAME)   ...   ***\n$(RESET)"
 	@rm -f $(COBJ)
 
