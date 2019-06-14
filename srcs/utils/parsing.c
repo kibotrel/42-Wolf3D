@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 16:24:06 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/13 12:21:19 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/14 12:12:57 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,13 @@ void	check_row(char *row, t_env *env)
 {
 	int	i;
 
+	i = -1;
 	env->height++;
-	if (!(i = 0) && !*row)
+	if (!row)
 		ft_print_error(ERR_EMPTY_ROW, 6);
-	while (row[i])
-	{
-		if (ft_isdigit(row[i]) || row[i] == ' ')
-			i++;
-		else
+	while (row[++i])
+		if (!ft_isdigit(row[i]) && row[i] != ' ')
 			ft_print_error(ERR_FORMAT, 7);
-	}
 }
 
 void	limits(char **coords, t_env *env)
