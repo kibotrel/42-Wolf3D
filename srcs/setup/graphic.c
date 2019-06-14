@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/07 13:23:15 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/14 11:35:20 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "SDL.h"
+#include "SDL_ttf.h"
 #include "libft.h"
 #include "env.h"
 #include "wolf3d.h"
@@ -23,6 +24,7 @@ void	sdl_setup(t_sdl *sdl, t_env *env)
 		free_switch(env, 1);
 		ft_print_error(ERR_INIT, 12);
 	}
+	TTF_Init();
 	if (!(sdl->win = SDL_CreateWindow("Wolf3D", 0, 0, WIDTH, HEIGHT, RESIZE)))
 		free_sdl(env, 1, ERR_WIN, 13);
 	if (!(sdl->ren = SDL_CreateRenderer(sdl->win, -1, TARGETTEXTURE)))

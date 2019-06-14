@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
+#    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/11 09:12:20 by reda-con         ###   ########.fr        #
+#    Updated: 2019/06/14 11:34:54 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,21 +21,12 @@ OBJSUBDIRS	= core usage parsing utils raycasting setup events maths hud
 SRCDIR		= srcs/
 LFTDIR		= libft/
 
-SDLDIR		= ./frameworks/SDL2.framework/lib/
-SDLHEAD		= -I ./frameworks/SDL2.framework/Versions/A/Headers					\
-				-I ./frameworks/SDL2_ttf.framework/Versions/A/Headers			\
-				-I ./frameworks/SDL2_image.framework/Versions/A/Headers			\
-				-I ./frameworks/SDL2_mixer.framework/Headers					\
-				-I ./frameworks/SDL2_net.framework/Headers						\
-				-F ./frameworks
+FRAMEWORKS	= -F ./frameworks -rpath ./frameworks								\
+				-framework OpenGL -framework AppKit -framework OpenCl			\
+			-framework SDL2 -framework SDL2_ttf
 
-FRAMEWORKS	= -F ./frameworks													\
-			-rpath ./frameworks													\
-			-framework OpenGL -framework AppKit -framework OpenCl				\
-			-framework SDL2 -framework SDL2_ttf -framework SDL2_image			\
-			-framework SDL2_mixer -framework SDL2_net
-
-INCDIR		= ./incs/ ./libft/incs/ ./frameworks/SDL2.framework/Headers/
+INCDIR		= ./incs/ ./libft/incs/ ./frameworks/SDL2_ttf.framework/Headers/	\
+				./frameworks/SDL2.framework/Headers/
 
 # Source files (Can be changed)
 
@@ -75,7 +66,7 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
 LIBS		= -L$(LFTDIR) -lft
-CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror
+CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -o3 -g
 
 # Color codes
 
