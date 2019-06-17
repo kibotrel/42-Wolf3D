@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 14:57:54 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/03 11:20:35 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/13 18:07:59 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	main(int ac, char **av)
 {
 	t_pos	flags;
 	t_env	*env;
+	int		i;
 
 	flags.x = 1;
+	i = 0;
 	if (ac == 2)
 	{
 		if (ft_strcmp(av[0], "./wolf3d"))

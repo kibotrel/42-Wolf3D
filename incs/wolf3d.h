@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/17 11:30:51 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/17 12:01:01 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct		s_mouse
 	t_pos			new;
 	unsigned int	curr_time;
 	unsigned int	old_time;
+	unsigned int	nb_frame;
+	unsigned int	old_frame;
+	unsigned int	cur_frame;
 }					t_mouse;
 
 typedef struct		s_cam

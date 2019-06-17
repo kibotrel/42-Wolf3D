@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/06/13 17:08:12 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:02:15 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define ARGB				372645892
 # define STREAM				1
 # define TARGETTEXTURE		0x00000008
-# define HITBOX				0.125
+# define HITBOX				0.12
 
 /*
 **	Color macros

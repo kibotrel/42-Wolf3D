@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 11:43:27 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/17 12:02:41 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 #include "libft.h"
+#include <unistd.h>
 
 static void	change_cam(t_env *env, t_mouse *mouse, char *key, t_pos *fl)
 {
@@ -94,7 +95,8 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 
 void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 {
-	mouse->curr_time = SDL_GetTicks();	
+	mouse->curr_time = SDL_GetTicks();
+	mouse->cur_frame = SDL_GetTicks();
 	trigger_event(key, env, mouse, flags);
 	if (key[SDL_SCANCODE_ESCAPE])
 		flags->x = 0;
@@ -103,5 +105,14 @@ void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 		enable_mouse(&env->mouse);
 		flags->y = 1;
 	}
+	if (mouse->cur_frame - mouse->old_frame >= 1000)
+	{
+		ft_putstr("fps: ");
+		ft_putnbr(mouse->nb_frame);
+		write(1, "\n", 1);
+		mouse->old_frame = mouse->cur_frame;
+		mouse->nb_frame = 0;
+	}
+	++mouse->nb_frame;
 	process_event(key, env, mouse, flags);
 }
