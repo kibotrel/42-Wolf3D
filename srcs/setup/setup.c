@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/05/31 14:34:13 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/17 12:01:23 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,26 @@
 
 static int	spawn_setup(t_env *env)
 {
-	int	x;
-	int	y;
-	int set;
+	t_pos	pos;
+	int		set;
 
-	y = -1;
+	pos.y = -1;
 	set = 0;
-	while (++y < env->height)
+	while (++pos.y < env->height)
 	{
-		x = -1;
-		while (++x < env->width)
+		pos.x = -1;
+		while (++pos.x < env->width)
 		{
-			if (env->map[y][x] == 9)
+			if (env->map[(int)pos.y][(int)pos.x] == 9)
 			{
-				env->cam.spawn.y = y;
-				env->cam.spawn.x = x;
+				env->cam.spawn.y = pos.y;
+				env->cam.spawn.x = pos.x;
 				return (1);
 			}
-			if (!set && env->map[y][x] == 0)
+			if (!set && env->map[(int)pos.y][(int)pos.x] == 0)
 			{
-				env->cam.spawn.y = y;
-				env->cam.spawn.x = x;
+				env->cam.spawn.y = pos.y;
+				env->cam.spawn.x = pos.x;
 				set = 1;
 			}
 		}
@@ -63,6 +62,8 @@ static void	mouse_setup(t_env *env)
 	env->mouse.old.y = env->h / 2;
 	env->mouse.toggle_mouse = 1;
 	env->mouse.old_time = 0;
+	env->mouse.nb_frame = 0;
+	env->mouse.old_frame = 0;
 }
 
 void		setup(t_env *env)

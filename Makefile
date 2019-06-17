@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
+#    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/14 09:17:54 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/06/17 15:55:02 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,26 +16,29 @@ NAME		= wolf3d
 
 # All the directories needed to know where files should be (Can be changed)
 
+ABSDIR		= $(shell pwd)
 OBJDIR		= objs/
 OBJSUBDIRS	= core usage parsing utils raycasting setup events maths hud
 SRCDIR		= srcs/
 LFTDIR		= libft/
-SDLDIR		= $(HOME)/.brew/Cellar/sdl2/2.0.9_1/lib/
-INCDIR		= ./incs/ ./libft/incs/ /$(HOME)/.brew/Cellar/sdl2/2.0.9_1/include/SDL2
+SDLDIR		= $(ABSDIR)/SDL2-2.0.9/
+INCDIR		= ./incs/ ./libft/incs/ ./SDL2-2.0.9/include/
 
 # Source files (Can be changed)
 
+INCS		= incs/env.h							incs/wolf3d.h
+
 SRC			= core/main.c					core/hooks.c						\
+			 																	\
+			raycasting/raycast.c			raycasting/collisions.c				\
 																				\
-			  raycasting/raycast.c			raycasting/collisions.c				\
+			events/update_cam.c			events/movements.c						\
+			events/place_blocks.c			events/resize.c						\
 																				\
-			  events/update_cam.c			events/movements.c					\
-			  events/place_blocks.c			events/resize.c						\
+			setup/setup.c					setup/raycasting.c					\
+			setup/camera.c				setup/graphic.c							\
 																				\
-			  setup/setup.c					setup/raycasting.c					\
-			  setup/camera.c				setup/graphic.c						\
-																				\
-			  parsing/map.c														\
+			parsing/map.c														\
 																				\
 			  hud/hud.c						 hud/objects.c						\
 			  hud/minimap.c														\
@@ -43,9 +46,9 @@ SRC			= core/main.c					core/hooks.c						\
 			  utils/clean.c					utils/parsing.c						\
 			  utils/draw_line.c													\
 																				\
-			  maths/maths.c														\
+			maths/maths.c														\
 																				\
-			  usage/usage.c
+			usage/usage.c
 
 LFT			= ./libft/libft.a
 
@@ -60,8 +63,8 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
-LIBS		= -L$(LFTDIR) -lft -L$(SDLDIR) -lSDL2
-CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -O3 -g
+LIBS		= -L$(LFTDIR) -lft $(shell $(ABSDIR)/SDL2/bin/sdl2-config --libs)
+CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -o3 -g
 
 # Color codes
 
@@ -69,16 +72,21 @@ RESET		= \033[0m
 GREEN		= \033[32m
 YELLOW		= \033[33m
 
-# Check if object directory exists, build libft and then the Project
+# Check if object directory exists, build libs and then the Project
 
-all:  $(SUBDIRS) $(NAME)
+all: $(SUBDIRS) SDL2 $(NAME)
+
+SDL2:
+	@mkdir -p SDL2/
+	@mkdir -p SDL2/build
+	@cd SDL2/build; \
+		$(SDLDIR)/configure --prefix $(ABSDIR)/SDL2; \
+		make -j6; \
+		make install \
 
 $(NAME): $(LFT) $(OBJDIR) $(COBJ)
-	@if !(brew ls --versions sdl2) > /dev/null; then\
-		brew install sdl2;\
-	fi
 	@echo "$(YELLOW)\n      - Building $(RESET)$(NAME) $(YELLOW)...\n$(RESET)"
-	@$(CC) $(CFLAGS) $(LIBS) -o $(NAME) $(COBJ) -O3 -Ofast -g
+	@$(CC) $(CFLAGS) $(LIBS) $(FRAMEWORKS) -o $(NAME) $(COBJ)
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
 
 $(OBJDIR):
@@ -86,9 +94,10 @@ $(OBJDIR):
 
 $(SUBDIRS):
 	@mkdir -p $(SUBDIRS)
+
 # Redefinition of implicit compilation rule to prompt some colors and file names during the said compilation
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCS)
 	@echo "$(YELLOW)      - Compiling :$(RESET)" $<
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -97,9 +106,12 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 $(LFT):
 	@make -sC $(LFTDIR) -j
 
+$(SDL):
+
 # Deleting all .o files and then the directory where they were located
 
 clean:
+	@make -sC $(LFTDIR) clean
 	@echo "$(GREEN)***   Deleting all object from $(NAME)   ...   ***\n$(RESET)"
 	@rm -f $(COBJ)
 
@@ -107,6 +119,7 @@ clean:
 
 fclean: clean
 	@make -sC $(LFTDIR) fclean
+	@rm -rf SDL2
 	@echo "$(GREEN)***   Deleting executable file from $(NAME)   ...   ***\n$(RESET)"
 	@rm -f $(NAME)
 

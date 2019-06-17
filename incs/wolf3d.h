@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/14 14:58:00 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:47:05 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct		s_mouse
 	t_pos			new;
 	unsigned int	curr_time;
 	unsigned int	old_time;
+	unsigned int	nb_frame;
+	unsigned int	old_frame;
+	unsigned int	cur_frame;
 }					t_mouse;
 
 typedef struct		s_cam
@@ -186,6 +189,12 @@ void				limits(char **coords, t_env *env);
 void				draw_line(t_pos a, t_pos b, t_env *env);
 
 /*
+**	utils/image.c
+*/
+
+void				upload_image(t_env *env, int i);
+
+/*
 **	usage/usage.c
 */
 
@@ -195,19 +204,20 @@ void				usage(void);
 **	events/movements.c
 */
 
-void				move(t_env *env, char *key);
+void				move(t_env *env, char *key, t_pos *flags);
+
 /*
 **	events/update_cam.c
 */
 
-void				change_angle(char  *key, double *angle, t_pos mouse, t_env *env);
-void				change_height(char *key, t_env *env, int speed, t_pos mouse);
+void				change_angle(char *key, double *agl, t_pos m, t_env *env);
+void				change_height(char *key, t_env *env, t_pos m, t_pos *fl);
 
 /*
 **	events/place_blocks.c
 */
 
-void				place_block(t_env *env);
+void				place_block(t_env *env, t_pos *flags);
 
 /*
 **	events/resize.c
@@ -215,6 +225,15 @@ void				place_block(t_env *env);
 
 void				enable_mouse(t_mouse *mouse);
 void				resize(t_env *env, t_sdl *sdl);
+
+/*
+**	events/movements_calculs.c
+*/
+
+void				move_forward(t_env *env, t_cam cam);
+void				move_backward(t_env *env, t_cam cam);
+void				move_left(t_env *env, t_cam cam);
+void				move_right(t_env *env, t_cam cam);
 
 /*
 **	maths/maths.c
@@ -229,7 +248,7 @@ double				smallest_distance(t_ray *ray, t_data data, t_pos coord);
 **	raycasting/raycast.c
 */
 
-void				raycast(t_env *env, t_sdl *sdl, t_ray *ray);
+void				raycast(t_env *env, t_ray *ray);
 
 /*
 **	raycasting/collisions.c

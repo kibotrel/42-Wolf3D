@@ -6,61 +6,58 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/13 01:35:49 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:53:24 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "wolf3d.h"
 
-void			move_forward(t_env *env, t_cam cam)
+t_pos			init_pos(double x, double y)
 {
-	env->cam.coord.x += cos(radians(env->cam.angle)) * (4 * cam.sprint);
-	env->cam.coord.y -= sin(radians(env->cam.angle)) * (4 * cam.sprint);
+	t_pos ret;
+
+	ret.x = x;
+	ret.y = y;
+	return (ret);
 }
 
-void			move_backward(t_env *env, t_cam cam)
+static void		movements(t_cam *cam, t_pos old, t_env *env, t_pos fl)
 {
-	env->cam.coord.x -= cos(radians(env->cam.angle)) * (4 * cam.sprint);
-	env->cam.coord.y += sin(radians(env->cam.angle)) * (4 * cam.sprint);
+	t_pos	new;
+	double	hit;
+
+	new.x = cam->coord.x\
+		+ (cos(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
+	new.y = cam->coord.y\
+		- (sin(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
+	if (new.y < old.y)
+		hit = -HITBOX;
+	else
+		hit = HITBOX;
+	if (env->map[(int)(new.y / CELL + hit)][(int)old.x / CELL] != 1)
+		cam->coord.y = new.y;
+	if (new.x < old.x)
+		hit = -HITBOX;
+	else
+		hit = HITBOX;
+	if (env->map[(int)old.y / CELL][(int)(new.x / CELL + hit)] != 1)
+		cam->coord.x = new.x;
 }
 
-void			move_left(t_env *env, t_cam cam)
+void			move(t_env *env, char *key, t_pos *flags)
 {
-	env->cam.coord.x += cos(radians(env->cam.angle + 90)) * (4 * cam.sprint);
-	env->cam.coord.y -= sin(radians(env->cam.angle + 90)) * (4 * cam.sprint);
-}
+	t_pos	old;
 
-void			move_right(t_env *env, t_cam cam)
-{
-	env->cam.coord.x -= cos(radians(env->cam.angle + 90)) * (4 * cam.sprint);
-	env->cam.coord.y += sin(radians(env->cam.angle + 90)) * (4 * cam.sprint);
-}
-
-static void		coll_wall(t_env *env, t_pos coord, char *key)
-{
-	if (env->map[(int)coord.y / CELL][(int)coord.x / CELL] == 1)
-	{
-		if (key[SDL_SCANCODE_W])
-			move_backward(env, env->cam);
-		if (key[SDL_SCANCODE_S])
-			move_forward(env, env->cam);
-		if (key[SDL_SCANCODE_A])
-			move_right(env, env->cam);
-		if (key[SDL_SCANCODE_D])
-			move_left(env, env->cam);
-	}
-}
-
-void			move(t_env *env, char *key)
-{
+	old.x = env->cam.coord.x;
+	old.y = env->cam.coord.y;
 	if (key[SDL_SCANCODE_W])
-		move_forward(env, env->cam);
+		movements(&env->cam, old, env, init_pos(0, 1));
 	if (key[SDL_SCANCODE_S])
-		move_backward(env, env->cam);
+		movements(&env->cam, old, env, init_pos(0, -1));
 	if (key[SDL_SCANCODE_A])
-		move_left(env, env->cam);
+		movements(&env->cam, old, env, init_pos(90, 1));
 	if (key[SDL_SCANCODE_D])
-		move_right(env, env->cam);
-	coll_wall(env, env->cam.coord, key);
+		movements(&env->cam, old, env, init_pos(90, -1));
+	flags->y = 1;
 }

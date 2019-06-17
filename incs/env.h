@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/06/13 11:23:42 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:54:13 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define HEIGHT				1080
 # define WIDTH				1920
+# define RESIZE				SDL_WINDOW_RESIZABLE
 
 /*
 **	Useful macros
@@ -27,11 +28,10 @@
 # define CELL				64
 # define RAYS				1920
 # define ARGB				372645892
-# define RESIZE				0x00000200
-# define RESIZE				0x00000200
 # define STREAM				1
 # define DISTANCE			2000
 # define TARGETTEXTURE		0x00000008
+# define HITBOX				0.12
 
 /*
 **	Color macros
