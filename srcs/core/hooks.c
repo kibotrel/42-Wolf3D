@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/10 17:06:01 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:43:27 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void		trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			key[env->sdl.event.key.keysym.scancode] = 0;
 		if (env->sdl.event.type == SDL_MOUSEMOTION && mouse->toggle_mouse == 1)
 			change_cam(env, mouse, key, fl);
-		//		if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
-		//			resize(env, &env->sdl);
+		if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
+			resize(env, &env->sdl);
 		if (env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
 			fl->x = 0;
 	}
@@ -53,8 +53,7 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 		cam_setup(&env->cam);
 		fl->y = 1;
 	}
-	mouse->curr_time = SDL_GetTicks();
-	if (key[SDL_SCANCODE_SPACE] && mouse->curr_time > mouse->old_time + 100)
+	if (key[SDL_SCANCODE_SPACE] && mouse->curr_time > mouse->old_time + 1000)
 	{
 		mouse->old_time = mouse->curr_time;
 		place_block(env, fl);
@@ -66,16 +65,6 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
 		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 		move(env, key, fl);
-	if (key[SDL_SCANCODE_LCTRL])
-	{
-		env->cam.crouch = 500;
-		fl->y = 1;
-	}
-	else
-	{
-		env->cam.crouch = 0;
-		fl->y = 1;
-	}
 }
 
 static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
@@ -83,7 +72,6 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 	int		i;
 
 	i = 0;
-	mouse->curr_time = SDL_GetTicks();
 	if (mouse->toggle_mouse == 1)
 	{
 		if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
@@ -106,10 +94,11 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 
 void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 {
+	mouse->curr_time = SDL_GetTicks();	
 	trigger_event(key, env, mouse, flags);
 	if (key[SDL_SCANCODE_ESCAPE])
 		flags->x = 0;
-	if (key[SDL_SCANCODE_P] && mouse->curr_time > mouse->old_time + 100)
+	if (key[SDL_SCANCODE_P] && mouse->curr_time > mouse->old_time + 1000)
 	{
 		enable_mouse(&env->mouse);
 		flags->y = 1;

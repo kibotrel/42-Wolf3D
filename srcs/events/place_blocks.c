@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 10:00:19 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/07 13:20:43 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:44:05 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			place_block(t_env *env, t_pos *flags)
 	double angle;
 
 	angle = env->cam.angle;
+	env->mouse.old_time = env->mouse.curr_time;
 	if (angle > 2 * M_PI / 6 && angle <= 4 * M_PI / 6)
 		is_block(env->map, &env->cam.coord, 0, -1);
 	else if (angle > 4 * M_PI / 6 && angle <= 5 * M_PI / 6)

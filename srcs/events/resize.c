@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 09:23:03 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/05 14:06:20 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:42:27 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	enable_mouse(t_mouse *mouse)
 {
+	mouse->old_time = mouse->curr_time;
 	mouse->toggle_mouse *= -1;
 	if (mouse->toggle_mouse == 1)
 		SDL_ShowCursor(SDL_DISABLE);

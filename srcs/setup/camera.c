@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:50:59 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/04 14:29:32 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/17 11:40:52 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,4 @@ void	cam_setup(t_cam *cam)
 	cam->offset = 0;
 	cam->fov = 60.0;
 	cam->sprint = 1.0;
-	cam->crouch = 2;
 }
