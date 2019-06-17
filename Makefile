@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/14 15:52:15 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/06/17 08:13:43 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		= wolf3d
 
 # All the directories needed to know where files should be (Can be changed)
 
-ABSDIR		=$(shell pwd)
+ABSDIR		= $(shell pwd)
 OBJDIR		= objs/
 OBJSUBDIRS	= core usage parsing utils raycasting setup events maths hud
 SRCDIR		= srcs/
@@ -25,6 +25,8 @@ SDLDIR		= $(ABSDIR)/SDL2-2.0.9/
 INCDIR		= ./incs/ ./libft/incs/ ./SDL2-2.0.9/include/
 
 # Source files (Can be changed)
+
+INCS		= incs/env.h							incs/wolf3d.h
 
 SRC			= core/main.c					core/hooks.c						\
 			 																	\
@@ -60,7 +62,7 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
-LIBS		= -L$(LFTDIR) -lft $(shell $(SDLDIR)/SDL2/bin/sdl2-config --libs)
+LIBS		= -L$(LFTDIR) -lft $(shell $(ABSDIR)/SDL2/bin/sdl2-config --libs)
 CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -o3 -g
 
 # Color codes
@@ -74,9 +76,10 @@ YELLOW		= \033[33m
 all: $(SUBDIRS) SDL2 $(NAME)
 
 SDL2:
-	@mkdir -p $(SDLDIR)SDL2/
-	@cd $(SDLDIR)SDL2/; \
-		$(SDLDIR)/configure --prefix $(SDLDIR)/SDL2; \
+	@mkdir -p SDL2/
+	@mkdir -p SDL2/build
+	@cd SDL2/build; \
+		$(SDLDIR)/configure --prefix $(ABSDIR)/SDL2; \
 		make -j6; \
 		make install \
 
@@ -93,7 +96,7 @@ $(SUBDIRS):
 
 # Redefinition of implicit compilation rule to prompt some colors and file names during the said compilation
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCS)
 	@echo "$(YELLOW)      - Compiling :$(RESET)" $<
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -115,7 +118,7 @@ clean:
 
 fclean: clean
 	@make -sC $(LFTDIR) fclean
-	@rm -rf $(SDLDIR)SDL2
+	@rm -rf SDL2
 	@echo "$(GREEN)***   Deleting executable file from $(NAME)   ...   ***\n$(RESET)"
 	@rm -f $(NAME)
 
