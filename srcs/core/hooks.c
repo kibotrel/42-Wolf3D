@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 15:53:46 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:58:47 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void		trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 			key[env->sdl.event.key.keysym.scancode] = 0;
 		if (env->sdl.event.type == SDL_MOUSEMOTION && mouse->toggle_mouse == 1)
 			change_cam(env, mouse, key, fl);
-		if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
-			resize(env, &env->sdl);
+		// if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
+		// 	resize(env, &env->sdl);
 		if (env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
 			fl->x = 0;
 	}
@@ -70,9 +70,6 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 
 static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 {
-	int		i;
-
-	i = 0;
 	if (mouse->toggle_mouse == 1)
 	{
 		if (key[SDL_SCANCODE_COMMA] || key[SDL_SCANCODE_PERIOD])
@@ -82,25 +79,26 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 		}
 		if (key[SDL_SCANCODE_PAGEUP] || key[SDL_SCANCODE_PAGEDOWN])
 			change_height(key, env, mouse->new, fl);
-		if (key[SDL_SCANCODE_TAB] && env->height <= 20 && env->width <= 25)
+		if (key[SDL_SCANCODE_TAB] && mouse->curr_time > mouse->old_time + 500)
 		{
 			fl->y = 1;
-			i = 1;
+			mouse->toggle_map *= -1;
+			mouse->old_time = mouse->curr_time;
 		}
 		next_process(key, env, fl, mouse);
 	}
 	if (fl->y == 1)
-		upload_image(env, i);
+		upload_image(env, mouse->toggle_map);
 }
 
 void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 {
 	mouse->curr_time = SDL_GetTicks();
-	mouse->cur_frame = SDL_GetTicks();
+	mouse->cur_frame = mouse->curr_time;
 	trigger_event(key, env, mouse, flags);
 	if (key[SDL_SCANCODE_ESCAPE])
 		flags->x = 0;
-	if (key[SDL_SCANCODE_P] && mouse->curr_time > mouse->old_time + 1000)
+	if (key[SDL_SCANCODE_P] && mouse->curr_time > mouse->old_time + 500)
 	{
 		enable_mouse(&env->mouse);
 		flags->y = 1;

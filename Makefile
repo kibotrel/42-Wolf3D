@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/17 15:55:02 by reda-con         ###   ########.fr        #
+#    Updated: 2019/06/18 09:50:03 by nde-jesu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC			= core/main.c					core/hooks.c						\
 			  hud/minimap.c														\
 																				\
 			  utils/clean.c					utils/parsing.c						\
-			  utils/draw_line.c													\
+			  utils/draw_line.c				utils/image.c						\
 																				\
 			maths/maths.c														\
 																				\
@@ -64,7 +64,7 @@ INCLUDES	= $(foreach include, $(INCDIR), -I$(include))
 CC			= gcc
 OBJ			= $(SRC:.c=.o)
 LIBS		= -L$(LFTDIR) -lft $(shell $(ABSDIR)/SDL2/bin/sdl2-config --libs)
-CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -o3 -g
+CFLAGS		= $(INCLUDES) -Wall -Wextra -Werror -O3 -g
 
 # Color codes
 

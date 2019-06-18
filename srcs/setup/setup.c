@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 12:01:23 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:09:40 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	mouse_setup(t_env *env)
 	env->mouse.old.x = env->w / 2;
 	env->mouse.old.y = env->h / 2;
 	env->mouse.toggle_mouse = 1;
+	env->mouse.toggle_map = -1;
 	env->mouse.old_time = 0;
 	env->mouse.nb_frame = 0;
 	env->mouse.old_frame = 0;

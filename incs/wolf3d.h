@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/17 15:47:05 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:10:46 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_pos
 typedef struct		s_mouse
 {
 	int				toggle_mouse;
+	int				toggle_map;
 	t_pos			old;
 	t_pos			new;
 	unsigned int	curr_time;
@@ -80,7 +81,8 @@ typedef struct		s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	SDL_Texture		*text;
-	SDL_Surface		*surf[6];
+	// SDL_Surface		*surf[6];
+	int				colors[6];
 	SDL_Event		event;
 	uint32_t		*pixels;
 }					t_sdl;
@@ -262,7 +264,7 @@ void				check_collisions(t_ray *ray, int **map, int y, int x);
 **	hud/hud.c
 */
 
-void				hud(t_env *env);
+void				crosshair(t_sdl *sdl);
 
 /*
 **	hud/minimap.c

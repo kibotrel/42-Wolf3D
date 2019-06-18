@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:35 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 15:51:02 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/18 10:10:04 by nde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,4 @@ void	crosshair(t_sdl *sdl)
 			if (x < WIDTH / 2 - 1 || x > WIDTH / 2 + 1)
 				negative(&sdl->pixels[x + y * WIDTH]);
 	}
-}
-
-void	hud(t_env *env)
-{
-	minimap(env);
-	crosshair(&env->sdl);
 }
