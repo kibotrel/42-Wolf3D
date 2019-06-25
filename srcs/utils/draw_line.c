@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 08:13:32 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/13 09:04:55 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:11:40 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static t_line	setup_params(t_pos a, t_pos b)
 	return (params);
 }
 
-static int		clip_wall(t_sdl *sdl, int x, int y)
+static int		clip_wall(t_env *env, int x, int y)
 {
-	if (sdl->pixels[x + y * WIDTH] != 0xffffff)
+	if (env->sdl.pixels[x + y * env->w] != 0xffffff)
 	{
-		sdl->pixels[x + y * WIDTH] = 0xffffff00;
+		env->sdl.pixels[x + y * env->w] = 0xffffff00;
 		return (0);
 	}
 	return (1);
-
 }
+
 void			draw_line(t_pos a, t_pos b, t_env *env)
 {
 	t_line	params;
@@ -46,7 +46,7 @@ void			draw_line(t_pos a, t_pos b, t_env *env)
 	p = a;
 	while (p.y != b.y || p.x != b.x)
 	{
-		if (clip_wall(&env->sdl, p.x, p.y))
+		if (clip_wall(env, p.x, p.y))
 			return ;
 		if ((params.error = params.offset * 2) > -params.delta_y)
 		{
@@ -58,7 +58,7 @@ void			draw_line(t_pos a, t_pos b, t_env *env)
 			params.offset += params.delta_x;
 			p.y += params.sign_y;
 		}
-		if (clip_wall(&env->sdl, p.x, p.y))
+		if (clip_wall(env, p.x, p.y))
 			return ;
 	}
 }

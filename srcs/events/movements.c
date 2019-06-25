@@ -6,11 +6,12 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/17 15:53:24 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:02:01 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include "libft.h"
 #include "wolf3d.h"
 
 t_pos			init_pos(double x, double y)
@@ -28,9 +29,9 @@ static void		movements(t_cam *cam, t_pos old, t_env *env, t_pos fl)
 	double	hit;
 
 	new.x = cam->coord.x\
-		+ (cos(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
+			+ (cos(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
 	new.y = cam->coord.y\
-		- (sin(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
+			- (sin(radians(cam->angle + fl.x)) * (8 * cam->sprint)) * fl.y;
 	if (new.y < old.y)
 		hit = -HITBOX;
 	else
@@ -48,6 +49,7 @@ static void		movements(t_cam *cam, t_pos old, t_env *env, t_pos fl)
 void			move(t_env *env, char *key, t_pos *flags)
 {
 	t_pos	old;
+	t_pos	new;
 
 	old.x = env->cam.coord.x;
 	old.y = env->cam.coord.y;
@@ -59,5 +61,15 @@ void			move(t_env *env, char *key, t_pos *flags)
 		movements(&env->cam, old, env, init_pos(90, 1));
 	if (key[SDL_SCANCODE_D])
 		movements(&env->cam, old, env, init_pos(90, -1));
+	new.x = env->cam.coord.x;
+	new.y = env->cam.coord.y;
+	if (env->map[(int)new.y / CELL][(int)new.x / CELL] == 5)
+	{
+		ft_putendl("GOOD JOB, YOU WON !");
+		ft_putstr("You did it in : ");
+		ft_putnbr(env->mouse.cur_frame / 1000);
+		ft_putendl(" second(s)");
+		flags->x = 0;
+	}
 	flags->y = 1;
 }

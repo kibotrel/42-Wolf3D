@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/06/17 15:54:13 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:35:16 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@
 **	Color macros
 */
 
-# define SKY				0xff00ffff
-# define FLOOR				0xffc8c8c8
+# define SKY				0xffd09951
+# define SKY_HITLER			0xff03224c
+# define FLOOR				0xfff942e9
+# define FLOOR_HITLER		0xffd8d8d8
 # define WALL_ORDER			0xffff6950
 # define WALL_ALLIANCE		0xff33c47f
 # define WALL_ASSEMBLY		0xffa061d1

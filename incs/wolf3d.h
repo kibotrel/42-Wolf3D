@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/18 10:10:46 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:04:18 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ typedef struct		s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	SDL_Texture		*text;
-	// SDL_Surface		*surf[6];
-	int				colors[6];
+	SDL_Surface		*surf[5];
+	int				colors[4];
 	SDL_Event		event;
 	uint32_t		*pixels;
+	unsigned int	set_fs;
 }					t_sdl;
 
 typedef struct		s_data
@@ -108,6 +109,7 @@ typedef struct		s_env
 	t_ray			ray;
 	t_data			data;
 	t_mouse			mouse;
+	int				tex_on;
 }					t_env;
 
 typedef struct		s_map
@@ -226,7 +228,8 @@ void				place_block(t_env *env, t_pos *flags);
 */
 
 void				enable_mouse(t_mouse *mouse);
-void				resize(t_env *env, t_sdl *sdl);
+void				resize(t_env *env, t_sdl *sdl, int flag);
+void				set_fullscreen(t_env *env);
 
 /*
 **	events/movements_calculs.c
@@ -264,7 +267,7 @@ void				check_collisions(t_ray *ray, int **map, int y, int x);
 **	hud/hud.c
 */
 
-void				crosshair(t_sdl *sdl);
+void				crosshair(t_sdl *sdl, t_env *env);
 
 /*
 **	hud/minimap.c

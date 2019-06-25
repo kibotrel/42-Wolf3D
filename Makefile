@@ -6,7 +6,7 @@
 #    By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/18 09:50:03 by nde-jesu         ###   ########.fr        #
+#    Updated: 2019/06/25 13:59:18 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,7 @@ $(SDL):
 clean:
 	@make -sC $(LFTDIR) clean
 	@echo "$(GREEN)***   Deleting all object from $(NAME)   ...   ***\n$(RESET)"
-	@rm -f $(COBJ)
+	@rm -rf $(OBJDIR)
 
 # Deleting the executable after cleaning up all .o files
 

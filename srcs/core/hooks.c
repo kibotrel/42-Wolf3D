@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/18 10:58:47 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:37:26 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void		trigger_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 {
 	while (SDL_PollEvent(&env->sdl.event))
 	{
+		if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
+			resize(env, &env->sdl, 1);
 		if (env->sdl.event.type == SDL_KEYDOWN)
 			key[env->sdl.event.key.keysym.scancode] = 1;
 		if (env->sdl.event.type == SDL_KEYUP)
 			key[env->sdl.event.key.keysym.scancode] = 0;
 		if (env->sdl.event.type == SDL_MOUSEMOTION && mouse->toggle_mouse == 1)
 			change_cam(env, mouse, key, fl);
-		// if (env->sdl.event.window.event == SDL_WINDOWEVENT_RESIZED)
-		// 	resize(env, &env->sdl);
 		if (env->sdl.event.window.event == SDL_WINDOWEVENT_CLOSE)
 			fl->x = 0;
 	}
@@ -54,18 +54,24 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 		cam_setup(&env->cam);
 		fl->y = 1;
 	}
-	if (key[SDL_SCANCODE_SPACE] && mouse->curr_time > mouse->old_time + 1000)
-	{
-		mouse->old_time = mouse->curr_time;
-		place_block(env, fl);
-	}
 	if (key[SDL_SCANCODE_LSHIFT])
 		env->cam.sprint = 2;
 	else
 		env->cam.sprint = 1;
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
-		|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
+			|| key[SDL_SCANCODE_A] || key[SDL_SCANCODE_D])
 		move(env, key, fl);
+	if (key[SDL_SCANCODE_T] && mouse->curr_time > mouse->old_time + 500)
+	{
+		env->tex_on *= -1;
+		mouse->old_time = mouse->curr_time;
+	}
+	if (key[SDL_SCANCODE_F] && mouse->curr_time > mouse->old_time + 500)
+	{
+		set_fullscreen(env);
+		mouse->old_time = mouse->curr_time;
+		fl->y = 1;
+	}
 }
 
 static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
@@ -94,7 +100,7 @@ static void	process_event(char *key, t_env *env, t_mouse *mouse, t_pos *fl)
 void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 {
 	mouse->curr_time = SDL_GetTicks();
-	mouse->cur_frame = mouse->curr_time;
+	mouse->cur_frame = SDL_GetTicks();
 	trigger_event(key, env, mouse, flags);
 	if (key[SDL_SCANCODE_ESCAPE])
 		flags->x = 0;
@@ -103,11 +109,14 @@ void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 		enable_mouse(&env->mouse);
 		flags->y = 1;
 	}
-	if (mouse->cur_frame - mouse->old_frame >= 1000)
+	if (mouse->nb_frame > 0)
 	{
-		ft_putstr("fps: ");
-		ft_putnbr(mouse->nb_frame);
-		write(1, "\n", 1);
+		if (mouse->toggle_mouse == 1)
+		{
+			ft_putstr("\e[1000Dfps: ");
+			ft_putnbr(1000 / (mouse->cur_frame - mouse->old_frame));
+			write(1, "\e[2k\n", 2);
+		}
 		mouse->old_frame = mouse->cur_frame;
 		mouse->nb_frame = 0;
 	}

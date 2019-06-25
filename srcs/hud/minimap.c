@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:29 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 15:51:13 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:20:34 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	minimap(t_env *env)
 		{
 			map.x = -1;
 			while (++map.x < env->width * (4 * env->factor) + 33)
-				env->sdl.pixels[(int)(map.x + map.y * WIDTH)] = 0;
+				env->sdl.pixels[(int)(map.x + map.y * env->w)] = 0;
 		}
 		objects(env);
 		fov(env, player);
@@ -109,7 +109,7 @@ void	minimap(t_env *env)
 		{
 			pos.x = player.x - (1 + env->factor / 2);
 			while (++pos.x < player.x + (1 + env->factor / 2))
-				env->sdl.pixels[(int)(pos.x + pos.y * WIDTH)] = 0xff0000;
+				env->sdl.pixels[(int)(pos.x + pos.y * env->w)] = 0xff0000;
 		}
 	}
 }

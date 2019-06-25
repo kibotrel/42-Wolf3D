@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/18 10:03:09 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:06:50 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	free_sdl(t_env *env, int state, char *error, int code)
 	if (state > 4)
 	{
 		free(env->sdl.pixels);
-		// while (env->sdl.surf[++i])
-		// 	SDL_FreeSurface(env->sdl.surf[i]);
+		 while (++i < 4)
+		 	SDL_FreeSurface(env->sdl.surf[i]);
 	}
 	SDL_Quit();
 	free_switch(env, 1);

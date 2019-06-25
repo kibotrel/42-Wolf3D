@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/18 11:53:52 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:04:26 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 #include "libft.h"
 #include "env.h"
 #include "wolf3d.h"
+
+static void	load_textures(t_sdl *sdl)
+{
+	sdl->surf[0] = SDL_LoadBMP("assets/01.bmp");
+	sdl->surf[1] = SDL_LoadBMP("assets/05.BMP");
+	sdl->surf[2] = SDL_LoadBMP("assets/13.BMP");
+	sdl->surf[3] = SDL_LoadBMP("assets/23.BMP");
+	sdl->surf[4] = SDL_LoadBMP("assets/sky3.bmp");
+	sdl->colors[0] = WALL_ORDER;
+	sdl->colors[1] = WALL_ALLIANCE;
+	sdl->colors[2] = WALL_ASSEMBLY;
+	sdl->colors[3] = WALL_FEDERATION;
+}
 
 void	sdl_setup(t_sdl *sdl, t_env *env)
 {
@@ -33,16 +46,7 @@ void	sdl_setup(t_sdl *sdl, t_env *env)
 		free_sdl(env, 4, ERR_MALLOC, 5);
 	if (SDL_ShowCursor(SDL_DISABLE) < 0)
 		free_sdl(env, 5, ERR_CURSOR, 16);
+	sdl->set_fs = 0;
 	SDL_WarpMouseInWindow(sdl->win, WIDTH / 2, HEIGHT / 2);
-	// sdl->surf[0] = SDL_LoadBMP("assets/01.bmp");
-	// sdl->surf[1] = SDL_LoadBMP("assets/05.BMP");
-	// sdl->surf[2] = SDL_LoadBMP("assets/13.BMP");
-	// sdl->surf[3] = SDL_LoadBMP("assets/23.BMP");
-	// sdl->surf[4] = SDL_LoadBMP("assets/sky3.bmp");
-	sdl->colors[0] = 0xff6950;
-	sdl->colors[1] = 0x33c47f;
-	sdl->colors[2] = 0xa061d1;
-	sdl->colors[3] = 0x1c4f99;
-	sdl->colors[4] = 0x00ffff;
-	sdl->colors[5] = 0xc8c8c8;
+	load_textures(sdl);
 }

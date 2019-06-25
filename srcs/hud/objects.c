@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 23:54:51 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/13 10:00:21 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:21:56 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	walls(t_env *env, t_pos wall, t_pos limit, int x)
 	{
 		wall.x = x * (4 * env->factor) + 15;
 		while (++wall.x <= limit.x)
-			env->sdl.pixels[(int)(wall.x + wall.y * WIDTH)] = 0xffffff;
+			env->sdl.pixels[(int)(wall.x + wall.y * env->w)] = 0xffffff;
 	}
 }
 
@@ -29,7 +29,7 @@ void	spawn(t_env *env, t_pos wall, t_pos limit, int x)
 	{
 		wall.x = x * (4 * env->factor) + 15;
 		while (++wall.x <= limit.x)
-			env->sdl.pixels[(int)(wall.x + wall.y * WIDTH)] = 0xffff00ff;
+			env->sdl.pixels[(int)(wall.x + wall.y * env->w)] = 0xffff00ff;
 	}
 }
 
@@ -39,6 +39,6 @@ void	end(t_env *env, t_pos wall, t_pos limit, int x)
 	{
 		wall.x = x * (4 * env->factor) + 15;
 		while (++wall.x <= limit.x)
-			env->sdl.pixels[(int)(wall.x + wall.y * WIDTH)] = 0xff7fffff;
+			env->sdl.pixels[(int)(wall.x + wall.y * env->w)] = 0xff7fffff;
 	}
 }

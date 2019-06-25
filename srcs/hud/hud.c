@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:35 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/18 10:10:04 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:19:24 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,24 @@ void	negative(unsigned int *pixel)
 	*pixel = color;
 }
 
-void	crosshair(t_sdl *sdl)
+void	crosshair(t_sdl *sdl, t_env *env)
 {
 	int	x;
 	int	y;
 
-	y = HEIGHT / 2 - 21;
-	while (++y < HEIGHT / 2 + 21)
+	y = env->h / 2 - 21;
+	while (++y < env->h / 2 + 21)
 	{
-		x = WIDTH / 2 - 2;
-		while (++x < WIDTH / 2 + 2)
-			negative(&sdl->pixels[x + y * WIDTH]);
+		x = env->w / 2 - 2;
+		while (++x < env->w / 2 + 2)
+			negative(&sdl->pixels[x + y * env->w]);
 	}
-	y = HEIGHT / 2 - 2;
-	while (++y < HEIGHT / 2 + 2)
+	y = env->h / 2 - 2;
+	while (++y < env->h / 2 + 2)
 	{
-		x = WIDTH / 2 - 21;
-		while (++x < WIDTH / 2 + 21)
-			if (x < WIDTH / 2 - 1 || x > WIDTH / 2 + 1)
-				negative(&sdl->pixels[x + y * WIDTH]);
+		x = env->w / 2 - 21;
+		while (++x < env->w / 2 + 21)
+			if (x < env->w / 2 - 1 || x > env->w / 2 + 1)
+				negative(&sdl->pixels[x + y * env->w]);
 	}
 }

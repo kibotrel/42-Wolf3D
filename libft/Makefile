@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:35:03 by kibotrel          #+#    #+#              #
-#    Updated: 2019/04/24 15:30:43 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/06/25 13:58:40 by reda-con         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 
 clean:
 	@echo "\n\033[32m***   Deleting all object files   ...   ***\n\033[0m"
-	@rm -rf $(COBJ)
+	@rm -rf $(OBJDIR)
 
 # Deleting the library after cleaning up all .o files
 
