@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/27 16:36:06 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:03:33 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	next_process(char *key, t_env *env, t_pos *fl, t_mouse *mouse)
 		fl->y = 1;
 	}
 	if (key[SDL_SCANCODE_LSHIFT])
-		env->cam.sprint = 2;
+		env->cam.sprint = 3;
 	else
 		env->cam.sprint = 1;
 	if (key[SDL_SCANCODE_W] || key[SDL_SCANCODE_S]\
