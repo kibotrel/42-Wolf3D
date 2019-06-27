@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/27 09:40:21 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 18:31:38 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,34 @@ static int	spawn_setup(t_env *env)
 	return (set);
 }
 
+static int	teleport_setup(t_env *env)
+{
+	int		x;
+	int		y;
+	int		n;
+
+	y = -1;
+	n = 0;
+	while (n < 2 && ++y < env->height)
+	{
+		x = -1;
+		while (n < 2 && ++x < env->width)
+		{
+			if (env->map[y][x] == 2)
+			{
+				if (n < 2)
+				{
+					env->teleport[n].y = y;
+					env->teleport[n].x = x;
+				}
+				n++;
+			}
+		}
+	}
+
+	return ((n == 1 || n > 2) ? 0 : 1);
+}
+
 static void	data_setup(t_env *env)
 {
 	env->data.north = M_PI_2;
@@ -74,6 +102,8 @@ void		set_env(t_env *env)
 	env->h = HEIGHT;
 	if (!spawn_setup(env) && free_switch(env, 1))
 		ft_print_error(E_FULL, 19);
+	if (!teleport_setup(env) && free_switch(env, 1))
+		ft_print_error(E_TP, 20);
 	sdl_setup(&env->sdl, env);
 	mouse_setup(env);
 	cam_setup(&env->cam);

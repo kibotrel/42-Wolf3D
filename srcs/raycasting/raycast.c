@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/27 13:25:52 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:00:27 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,11 @@ static void		draw_slice(t_pos start, t_pos end, t_env *env)
 	while (++current.y < env->h)
 	{
 		if (current.y <= start.y)
-			if (env->tex_on == 1)
-				color = SKY_HITLER;
-			else
-				color = SKY;
+			color = 0xbddcfc;
 		else if (current.y > start.y && current.y < end.y)
 			color = draw_wall(start, end, env, &current);
 		else
-		{
-			if (env->tex_on == 1)
-				color = FLOOR_HITLER;
-			else
-				color = FLOOR;
-		}
+			color = FLOOR_HITLER;
 		env->sdl.pixels[(int)(current.x + (current.y * (env->w)))] = color;
 	}
 }

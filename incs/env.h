@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/06/27 09:39:47 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 18:18:06 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 **	Error codes
 */
 
+# define E_TP			"\033[31;1mError:\033[0m Wrong teleporter amount"
 # define E_EXE			"\033[31;1mError:\033[0m Wrong running directory."
 # define E_MAP			"\033[31;1mError:\033[0m Map isn't surrounded by walls."
 # define E_WIN			"\033[31;1mError:\033[0m Can't create SDL window."

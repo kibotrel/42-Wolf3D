@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/27 10:28:52 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 18:26:22 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct		s_env
 	int				height;
 	int				factor;
 	char			inputs[SDL_NUM_SCANCODES];
+	t_pos			teleport[2];
 	t_sdl			sdl;
 	t_cam			cam;
 	t_ray			ray;
@@ -283,4 +284,5 @@ void				minimap(t_env *env);
 void				spawn(t_env *env, t_pos wall, t_pos limit, int x);
 void				walls(t_env *env, t_pos wall, t_pos limit, int x);
 void				finish(t_env *env, t_pos wall, t_pos limit, int x);
+void				teleport(t_env *env, t_pos wall, t_pos limit, int x);
 #endif
