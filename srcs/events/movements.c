@@ -6,13 +6,14 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/25 19:47:49 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:55:18 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "libft.h"
 #include "wolf3d.h"
+#include <math.h>
 
 t_pos			init_pos(double x, double y)
 {
@@ -46,6 +47,23 @@ static void		movements(t_cam *cam, t_pos old, t_env *env, t_pos fl)
 		cam->coord.x = new.x;
 }
 
+static void		timer(double time)
+{
+	double	sec;
+
+	sec = time / 1000;
+	if (sec > 60)
+	{
+		ft_putnbr(sec / 60);
+		sec = fmod(sec, 60);
+		ft_putchar('\'');
+	}
+	ft_putnbr(sec);
+	ft_putchar('\"');
+	ft_putnbr(fmod(time, 1000));
+	ft_putstr("\n");
+}
+
 void			move(t_env *env, char *key, t_pos *flags)
 {
 	t_pos	old;
@@ -65,10 +83,11 @@ void			move(t_env *env, char *key, t_pos *flags)
 	new.y = env->cam.coord.y;
 	if (env->map[(int)new.y / CELL][(int)new.x / CELL] == 5)
 	{
-		ft_putendl("GOOD JOB, YOU WON !");
-		ft_putstr("You did it in : ");
-		ft_putnbr(env->mouse.cur_frame / 1000);
-		ft_putendl(" second(s)");
+		ft_putstr("\ne");
+		ft_putendl("\033[33mGOOD JOB, YOU WON !\33[0m");
+		ft_putstr("\033[1;31mYour time is : \033[0m\033[35m");
+		timer(env->mouse.cur_frame);
+		ft_putstr("\033[0m");
 		flags->x = 0;
 	}
 	flags->y = 1;

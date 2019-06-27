@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/25 19:51:55 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:36:06 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 	{
 		if (mouse->toggle_mouse == 1)
 		{
-			ft_putstr("fps: ");
+			ft_putstr("\e[1000Dfps: ");
 			ft_putnbr(1000 / (mouse->cur_frame - mouse->old_frame));
-			ft_putchar('\n');
+			write(1, "\e[2k\n", 2);
 		}
 		mouse->old_frame = mouse->cur_frame;
 		mouse->nb_frame = 0;
