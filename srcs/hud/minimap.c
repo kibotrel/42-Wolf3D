@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:29 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/25 14:20:34 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 09:37:33 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	objects(t_env *env)
 			else if (env->map[(int)pos.y][(int)pos.x] == 9)
 				spawn(env, wall, limit, pos.x);
 			else if (env->map[(int)pos.y][(int)pos.x] == 5)
-				end(env, wall, limit, pos.x);
+				finish(env, wall, limit, pos.x);
 		}
 	}
 }

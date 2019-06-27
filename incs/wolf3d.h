@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/25 15:04:18 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:28:52 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define WOLF3D_H
 
 # include "SDL.h"
+# include "png.h"
 
 typedef struct		s_color
 {
@@ -81,7 +82,7 @@ typedef struct		s_sdl
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	SDL_Texture		*text;
-	SDL_Surface		*surf[5];
+	t_png			surf[5];
 	int				colors[4];
 	SDL_Event		event;
 	uint32_t		*pixels;
@@ -146,7 +147,7 @@ void				parse_file(char *file, t_env *env);
 **	setup/setup.c
 */
 
-void				setup(t_env *env);
+void				set_env(t_env *env);
 
 /*
 **	setup/raycasting.c
@@ -279,8 +280,7 @@ void				minimap(t_env *env);
 **	hud/objects.c
 */
 
-void				end(t_env *env, t_pos wall, t_pos limit, int x);
 void				spawn(t_env *env, t_pos wall, t_pos limit, int x);
 void				walls(t_env *env, t_pos wall, t_pos limit, int x);
-
+void				finish(t_env *env, t_pos wall, t_pos limit, int x);
 #endif

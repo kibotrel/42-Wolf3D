@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 15:16:20 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/13 12:33:20 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/27 09:41:36 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ static void	array_to_map(char **coords, t_env *env)
 	if (!(map = (int**)malloc(sizeof(int*) * env->height)))
 	{
 		free_switch(env, 0);
-		ft_print_error("ERR_MALLOC", 5);
+		ft_print_error("E_MALLOC", 5);
 	}
 	y = -1;
 	while (++y < env->height)
 		if (!(map[y] = (int*)malloc(sizeof(int) * (env->width))))
 		{
 			free_switch(env, 1);
-			ft_print_error("ERR_MALLOC", 5);
+			ft_print_error("E_MALLOC", 5);
 		}
 	if (env->height - 1 > 0)
 		expand_map(map, env);
@@ -68,16 +68,16 @@ static void	build_map(const int fd, char *row, t_env *env)
 	{
 		check_row(row, env);
 		if (!(coords = ft_strsplit(row, ' ')))
-			ft_print_error(ERR_SPLIT, 8);
+			ft_print_error(E_SPLIT, 8);
 		if (env->height == 1)
 			env->width = size(coords);
 		else if (size(coords) != env->width)
-			ft_print_error(ERR_WIDTH, 9);
+			ft_print_error(E_WIDTH, 9);
 		array_to_map(coords, env);
 		free_parse(row, coords, env, 3);
 	}
 	if (!env->height)
-		ft_print_error(ERR_EMPTY_FILE, 10);
+		ft_print_error(E_EMPTY_FILE, 10);
 }
 
 void		parse_file(char *file, t_env *env)
@@ -88,11 +88,11 @@ void		parse_file(char *file, t_env *env)
 	env->height = 0;
 	row = NULL;
 	if (!ft_isvalidname(file, ".w3d") && free_switch(env, 0))
-		ft_print_error(ERR_FILENAME, 2);
+		ft_print_error(E_FILENAME, 2);
 	if ((fd = open(file, O_RDONLY)) < 0 && free_switch(env, 0))
-		ft_print_error(ERR_OPEN, 3);
+		ft_print_error(E_OPEN, 3);
 	build_map(fd, row, env);
 	if (close(fd) && free_switch(env, 1))
-		ft_print_error(ERR_CLOSE, 4);
+		ft_print_error(E_CLOSE, 4);
 	bottom_border(env);
 }

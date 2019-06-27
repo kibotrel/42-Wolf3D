@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:50:58 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/25 15:06:50 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:32:01 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void	free_sdl(t_env *env, int state, char *error, int code)
 	if (state > 4)
 	{
 		free(env->sdl.pixels);
-		 while (++i < 4)
-		 	SDL_FreeSurface(env->sdl.surf[i]);
+		while (++i < 4)
+			if (env->sdl.surf[i].pixels)
+				free(env->sdl.surf[i].pixels);
 	}
 	SDL_Quit();
 	free_switch(env, 1);

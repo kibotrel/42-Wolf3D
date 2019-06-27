@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 16:04:04 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 15:49:28 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:48:08 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 			ray->which_wall = 0;
 		else
 			ray->which_wall = 1;
-		ray->offset = (int)ray->hit_y.x % CELL + 1;
+		ray->offset = (int)ray->hit_y.x % CELL;
 		return (y);
 	}
 	else
@@ -41,7 +41,7 @@ double	smallest_distance(t_ray *ray, t_data data, t_pos coord)
 			ray->which_wall = 2;
 		else
 			ray->which_wall = 3;
-		ray->offset = (int)ray->hit_x.y % CELL + 1;
+		ray->offset = (int)ray->hit_x.y % CELL;
 		return (x);
 	}
 }

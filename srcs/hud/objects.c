@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 23:54:51 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/25 14:21:56 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 09:36:48 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	spawn(t_env *env, t_pos wall, t_pos limit, int x)
 	}
 }
 
-void	end(t_env *env, t_pos wall, t_pos limit, int x)
+void	finish(t_env *env, t_pos wall, t_pos limit, int x)
 {
 	while (++wall.y <= limit.y)
 	{

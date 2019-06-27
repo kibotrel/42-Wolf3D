@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/25 15:00:49 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/27 13:25:52 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static int		get_color(SDL_Surface *surf, int x, int y)
+static int		get_color(t_png surf, int x, int y)
 {
-	uint8_t		*p;
-	t_color		clr;
-
-	p = surf->pixels + y * surf->pitch - x * surf->format->BytesPerPixel;
-	SDL_GetRGB(*p, surf->format, &clr.r, &clr.g, &clr.b);
-	return (clr.r << 16 | clr.g << 8 | clr.b);
+	if (surf.pixels)
+		return (surf.pixels[x + y * surf.width]);
+	else
+		return (0);
 }
 
 static unsigned int		draw_wall(t_pos str, t_pos end, t_env *env, t_pos *cur)
@@ -32,16 +30,15 @@ static unsigned int		draw_wall(t_pos str, t_pos end, t_env *env, t_pos *cur)
 
 	if (env->tex_on == 1)
 	{
-		i = (cur->y - env->cam.offset) * 256 - (env->h) * 128\
-			+ env->ray.wall.size * 128;
-		tex = (i * CELL / env->ray.wall.size / 256) + 1;
+		i = (cur->y - env->cam.offset) * 256 - (env->h) * 128 + env->ray.wall.size * 128;
+		tex = (i * CELL / env->ray.wall.size / 256);
 		color = get_color(env->sdl.surf[env->ray.which_wall],
 				env->ray.offset, tex);
 	}
 	else
 	{
-		if (cur->y <= str.y + 5 || cur->y >= end.y - 5\
-				|| env->ray.offset < 2 || env->ray.offset > 63)
+		if (cur->y <= str.y + 11 || cur->y >= end.y - 11\
+				|| env->ray.offset < 1 || env->ray.offset > 62)
 			color = 0x000000;
 		else
 			color = env->sdl.colors[env->ray.which_wall];

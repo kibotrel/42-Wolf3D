@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 18:02:39 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/25 14:37:26 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/25 19:51:55 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ void		hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse)
 	{
 		if (mouse->toggle_mouse == 1)
 		{
-			ft_putstr("\e[1000Dfps: ");
+			ft_putstr("fps: ");
 			ft_putnbr(1000 / (mouse->cur_frame - mouse->old_frame));
-			write(1, "\e[2k\n", 2);
+			ft_putchar('\n');
 		}
 		mouse->old_frame = mouse->cur_frame;
 		mouse->nb_frame = 0;
