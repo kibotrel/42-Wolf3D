@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:34 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/27 17:00:27 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:26:27 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-static int		get_color(t_png surf, int x, int y)
+static int				get_color(t_png surf, int x, int y)
 {
 	if (surf.pixels)
 		return (surf.pixels[x + y * surf.width]);
@@ -30,7 +30,8 @@ static unsigned int		draw_wall(t_pos str, t_pos end, t_env *env, t_pos *cur)
 
 	if (env->tex_on == 1)
 	{
-		i = (cur->y - env->cam.offset) * 256 - (env->h) * 128 + env->ray.wall.size * 128;
+		i = (cur->y - env->cam.offset) * 256 - (env->h) * 128\
+			+ env->ray.wall.size * 128;
 		tex = (i * CELL / env->ray.wall.size / 256);
 		color = get_color(env->sdl.surf[env->ray.which_wall],
 				env->ray.offset, tex);
@@ -46,7 +47,7 @@ static unsigned int		draw_wall(t_pos str, t_pos end, t_env *env, t_pos *cur)
 	return (color);
 }
 
-static void		draw_slice(t_pos start, t_pos end, t_env *env)
+static void				draw_slice(t_pos start, t_pos end, t_env *env)
 {
 	t_pos			current;
 	unsigned int	color;
@@ -65,7 +66,7 @@ static void		draw_slice(t_pos start, t_pos end, t_env *env)
 	}
 }
 
-void			raycast(t_env *env, t_ray *ray)
+void					raycast(t_env *env, t_ray *ray)
 {
 	int		x;
 

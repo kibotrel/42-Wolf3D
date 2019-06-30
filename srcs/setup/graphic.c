@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:53:09 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/27 15:25:06 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:31:05 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	load_textures(t_sdl *sdl)
 	sdl->colors[3] = WALL_FEDERATION;
 }
 
-void	sdl_setup(t_sdl *sdl, t_env *env)
+void		sdl_setup(t_sdl *sdl, t_env *env)
 {
 	if (SDL_Init(SDL_INIT_VIDEO))
 	{
@@ -39,7 +39,7 @@ void	sdl_setup(t_sdl *sdl, t_env *env)
 	}
 	if (!(sdl->win = SDL_CreateWindow("Wolf3D", 0, 0, WIDTH, HEIGHT, RESIZE)))
 		free_sdl(env, 1, E_WIN, 13);
-	if (!(sdl->ren = SDL_CreateRenderer(sdl->win, -1, TARGETTEXTURE | SDL_RENDERER_PRESENTVSYNC)))
+	if (!(sdl->ren = SDL_CreateRenderer(sdl->win, -1, TARGETTEXTURE | VSYNC)))
 		free_sdl(env, 2, E_RENDERER, 14);
 	if (!(sdl->text = SDL_CreateTexture(sdl->ren, ARGB, STREAM, WIDTH, HEIGHT)))
 		free_sdl(env, 3, E_TEXTURE, 15);
