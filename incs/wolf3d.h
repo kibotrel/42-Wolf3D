@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 18:32:24 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 18:58:16 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct		s_env
 {
 	int				h;
 	int				w;
+	int				tp;
 	int				**map;
 	int				width;
 	int				height;
