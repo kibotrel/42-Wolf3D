@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/27 18:26:22 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:21:25 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 typedef struct		s_color
 {
-	uint8_t		r;
-	uint8_t		g;
-	uint8_t		b;
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
 }					t_color;
 
 typedef struct		s_pos
@@ -122,15 +122,15 @@ typedef struct		s_map
 	double			out_e;
 }					t_map;
 
-typedef struct	s_line
+typedef struct		s_line
 {
-	int			error;
-	int			offset;
-	int			sign_y;
-	int			sign_x;
-	int			delta_y;
-	int			delta_x;
-}				t_line;
+	int				error;
+	inct			offset;
+	int				sign_y;
+	int				sign_x;
+	int				delta_y;
+	int				delta_x;
+}					t_line;
 
 /*
 **	core/hooks.c
