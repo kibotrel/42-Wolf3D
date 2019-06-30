@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 16:21:25 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:29:29 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ typedef struct		s_map
 typedef struct		s_line
 {
 	int				error;
-	inct			offset;
+	int				offset;
 	int				sign_y;
 	int				sign_x;
 	int				delta_y;
@@ -185,6 +185,7 @@ void				free_sdl(t_env *env, int state, char *error, int code);
 
 int					size(char **coords);
 void				bottom_border(t_env *env);
+void				teleport_space(t_env *env);
 void				check_row(char *row, t_env *env);
 void				limits(char **coords, t_env *env);
 
