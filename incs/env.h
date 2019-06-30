@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 16:30:30 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/30 18:37:11 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@
 # define E_FULL			"\033[31;1mError:\033[0m No spawnable cell in the map."
 # define E_CLOSE		"\033[31;1mError:\033[0m Can't close file."
 # define E_WIDTH 		"\033[31;1mError:\033[0m Map width uneven on each row."
-# define E_SPACE		"\033[31;1mError:\033[0m No free cell near teleporters"	
+# define E_SPACE		"\033[31;1mError:\033[0m No free cell near teleporters"
 # define E_SPLIT 		"\033[31;1mError:\033[0m Can't retrieve all points."
 # define E_FORMAT		"\033[31;1mError:\033[0m Incorrect map format."
 # define E_CURSOR		"\033[31;1mError:\033[0m Can't hide cursor position."

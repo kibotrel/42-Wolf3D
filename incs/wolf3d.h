@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 17:39:00 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 18:32:24 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void				setup_slice(t_ray *ray, t_cam *cam, int x, t_env *env);
 
 void				cam_setup(t_cam *cam);
 t_pos				init_pos(double x, double y);
-t_tprt				tp_infos(double x, double y, double angle);
+t_tprt				tp_infos(double x, double y, double angle, int way);
 
 /*
 **	setup/graphic.c

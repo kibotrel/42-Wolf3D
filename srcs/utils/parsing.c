@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 16:24:06 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/30 17:47:22 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 18:36:46 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,21 @@ int		teleport_space(t_env *env, int i, int walls)
 		pos.x = env->tp_start[i].x;
 		pos.y = env->tp_start[i].y;
 		if (env->map[(int)pos.y][(int)pos.x + 1] != 1)
-			env->tp_end[i] = tp_infos(pos.x + 1, pos.y, 0);
+			env->tp_end[i] = tp_infos(pos.x + 1, pos.y, 0, 0);
 		else
 			walls++;
 		if (env->map[(int)pos.y - 1][(int)pos.x] != 1)
-			env->tp_end[i] = tp_infos(pos.x, pos.y - 1, 90);
+			env->tp_end[i] = tp_infos(pos.x, pos.y - 1, 90, 1);
 		else
 			walls++;
 		if (env->map[(int)pos.y][(int)pos.x - 1] != 1)
-			env->tp_end[i] = tp_infos(pos.x - 1, pos.y, 180);
+			env->tp_end[i] = tp_infos(pos.x - 1, pos.y, 180, 2);
 		else
 			walls++;
 		if (env->map[(int)pos.y + 1][(int)pos.x] != 1)
-			env->tp_end[i] = tp_infos(pos.x, pos.y + 1, 270);
+			env->tp_end[i] = tp_infos(pos.x, pos.y + 1, 270, 3);
 		else
 			walls++;
 	}
-	return (walls < 4);
+	return (walls < 4 ? 1 : 0);
 }
