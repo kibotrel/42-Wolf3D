@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/30 17:34:54 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:55:31 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static int	teleport_setup(t_env *env)
 
 	y = -1;
 	n = 0;
-	while (n < 2 && ++y < env->height)
+	while (++y < env->height)
 	{
 		x = -1;
-		while (n < 2 && ++x < env->width)
+		while (++x < env->width)
 		{
 			if (env->map[y][x] == 2)
 			{
