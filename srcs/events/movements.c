@@ -6,7 +6,7 @@
 /*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 07:45:26 by nde-jesu          #+#    #+#             */
-/*   Updated: 2019/06/27 16:55:18 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:07:53 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 #include "libft.h"
 #include "wolf3d.h"
 #include <math.h>
-
-t_pos			init_pos(double x, double y)
-{
-	t_pos ret;
-
-	ret.x = x;
-	ret.y = y;
-	return (ret);
-}
 
 static void		movements(t_cam *cam, t_pos old, t_env *env, t_pos fl)
 {

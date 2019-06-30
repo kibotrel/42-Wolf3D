@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 17:17:25 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/27 18:31:38 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:34:54 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,14 @@ static int	teleport_setup(t_env *env)
 			{
 				if (n < 2)
 				{
-					env->teleport[n].y = y;
-					env->teleport[n].x = x;
+					env->tp_start[n].y = y;
+					env->tp_start[n].x = x;
 				}
 				n++;
 			}
 		}
 	}
-
-	return ((n == 1 || n > 2) ? 0 : 1);
+	return (n == 1 || n > 2 ? 0 : 1);
 }
 
 static void	data_setup(t_env *env)
@@ -104,6 +103,8 @@ void		set_env(t_env *env)
 		ft_print_error(E_FULL, 19);
 	if (!teleport_setup(env) && free_switch(env, 1))
 		ft_print_error(E_TP, 20);
+	if (!teleport_space(env, -1, 0) && free_switch(env, 1))
+		ft_print_error(E_SPACE, 21);
 	sdl_setup(&env->sdl, env);
 	mouse_setup(env);
 	cam_setup(&env->cam);

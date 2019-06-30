@@ -3,15 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 22:50:59 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/17 11:40:52 by nde-jesu         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:18:16 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "wolf3d.h"
+
+t_pos	init_pos(double x, double y)
+{
+	t_pos	ret;
+
+	ret.x = x;
+	ret.y = y;
+	return (ret);
+}
+
+t_tprt	tp_infos(double x, double y, double angle)
+{
+	t_tprt	tmp;
+
+	tmp.pos.x = x;
+	tmp.pos.y = y;
+	tmp.angle = angle;
+	return (tmp);
+}
 
 void	cam_setup(t_cam *cam)
 {

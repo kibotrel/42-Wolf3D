@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 16:29:29 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 17:39:00 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ typedef struct		s_data
 	double			two_pi;
 }					t_data;
 
+typedef struct		s_tprt
+{
+	t_pos			pos;
+	double			angle;
+}					t_tprt;
+
 typedef struct		s_env
 {
 	int				h;
@@ -105,11 +111,12 @@ typedef struct		s_env
 	int				height;
 	int				factor;
 	char			inputs[SDL_NUM_SCANCODES];
-	t_pos			teleport[2];
+	t_pos			tp_start[2];
 	t_sdl			sdl;
 	t_cam			cam;
 	t_ray			ray;
 	t_data			data;
+	t_tprt			tp_end[2];
 	t_mouse			mouse;
 	int				tex_on;
 }					t_env;
@@ -162,7 +169,8 @@ void				setup_slice(t_ray *ray, t_cam *cam, int x, t_env *env);
 */
 
 void				cam_setup(t_cam *cam);
-void				setup_mouse(t_mouse *mouse, t_env *env);
+t_pos				init_pos(double x, double y);
+t_tprt				tp_infos(double x, double y, double angle);
 
 /*
 **	setup/graphic.c
@@ -184,8 +192,8 @@ void				free_sdl(t_env *env, int state, char *error, int code);
 */
 
 int					size(char **coords);
+int					teleport_space(t_env *env, int i, int walls);
 void				bottom_border(t_env *env);
-void				teleport_space(t_env *env);
 void				check_row(char *row, t_env *env);
 void				limits(char **coords, t_env *env);
 
