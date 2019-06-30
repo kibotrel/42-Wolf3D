@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:23:35 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 16:28:57 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:30:30 by reda-con         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define DISTANCE			2000
 # define TARGETTEXTURE		0x00000008
 # define HITBOX				0.12
+# define VSYNC				4
 
 /*
 **	Color macros
