@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/06/25 20:26:36 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/07/08 11:04:07 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,7 @@ clean:
 	@make -sC $(LFTDIR) clean
 	@make -sC $(LPNGDIR) clean
 	@echo "$(GREEN)***   Deleting all object from $(NAME)   ...   ***\n$(RESET)"
-	@rm -f $(COBJ)
+	@$(RM) $(COBJ)
 
 # Deleting the executable after cleaning up all .o files
 
@@ -127,7 +127,7 @@ fclean: clean
 	@make -sC $(LPNGDIR) fclean
 	@rm -rf SDL2
 	@echo "$(GREEN)***   Deleting executable file from $(NAME)   ...   ***\n$(RESET)"
-	@rm -f $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
