@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 23:54:51 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/27 18:26:02 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/07/08 10:57:58 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	teleport(t_env *env, t_pos wall, t_pos limit, int x)
 	{
 		wall.x = x * (4 * env->factor) + 15;
 		while (++wall.x <= limit.x)
-			env->sdl.pixels[(int)(wall.x + wall.y * env->w)] = 0xff2310;
+			env->sdl.pixels[(int)(wall.x + wall.y * env->w)] = 0xff00ff00;
 	}
 }
