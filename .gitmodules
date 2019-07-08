@@ -4,3 +4,6 @@
 [submodule "libpng"]
 	path = libpng
 	url = https://github.com/kibotrel/PNG-Parser.git
+[submodule "SDL2-2.0.9"]
+	path = SDL2-2.0.9
+	url = https://github.com/SDL-mirror/SDL.git
