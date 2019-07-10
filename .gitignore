@@ -1,4 +1,5 @@
 # Objects directories - Files
+SDL2
 objs
 *.o
 
