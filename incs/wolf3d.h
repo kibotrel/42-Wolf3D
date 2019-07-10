@@ -6,7 +6,7 @@
 /*   By: grota <grota@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 15:03:46 by grota             #+#    #+#             */
-/*   Updated: 2019/06/30 18:58:16 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:39:41 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 
 # include "SDL.h"
 # include "png.h"
-
-typedef struct		s_color
-{
-	uint8_t			r;
-	uint8_t			g;
-	uint8_t			b;
-}					t_color;
 
 typedef struct		s_pos
 {
@@ -147,6 +140,14 @@ typedef struct		s_line
 void				hooks(t_env *env, t_pos *flags, char *key, t_mouse *mouse);
 
 /*
+**	core/events.c
+*/
+
+void				next_process(char *key, t_env *env, t_pos *fl, t_mouse *m);
+void				trigger_event(char *key, t_env *env, t_mouse *m, t_pos *fl);
+void				process_event(char *key, t_env *env, t_mouse *m, t_pos *fl);
+
+/*
 **	parsing/map.c
 */
 
@@ -226,8 +227,9 @@ void				move(t_env *env, char *key, t_pos *flags);
 **	events/update_cam.c
 */
 
-void				change_angle(char *key, double *agl, t_pos m, t_env *env);
 void				change_height(char *key, t_env *env, t_pos m, t_pos *fl);
+void				change_angle(char *key, double *agl, t_pos m, t_env *env);
+void				change_cam(t_env *env, t_mouse *mouse, char *key, t_pos *f);
 
 /*
 **	events/place_blocks.c
@@ -239,18 +241,27 @@ void				place_block(t_env *env, t_pos *flags);
 **	events/resize.c
 */
 
+void				set_fullscreen(t_env *env);
 void				enable_mouse(t_mouse *mouse);
 void				resize(t_env *env, t_sdl *sdl, int flag);
+
+/*
+**	events/teleport.c
+*/
+
+void				teleport_player(t_env *env, t_pos pos);
+
+/*
+**	events/fullscreen.c
+*/
+
 void				set_fullscreen(t_env *env);
 
 /*
-**	events/movements_calculs.c
+**	events/mouse.c
 */
 
-void				move_forward(t_env *env, t_cam cam);
-void				move_backward(t_env *env, t_cam cam);
-void				move_left(t_env *env, t_cam cam);
-void				move_right(t_env *env, t_cam cam);
+void				enable_mouse(t_mouse *mouse);
 
 /*
 **	maths/maths.c
@@ -279,6 +290,7 @@ void				check_collisions(t_ray *ray, int **map, int y, int x);
 **	hud/hud.c
 */
 
+void				display_time(unsigned int time);
 void				crosshair(t_sdl *sdl, t_env *env);
 
 /*

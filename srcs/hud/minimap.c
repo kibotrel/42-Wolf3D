@@ -6,7 +6,7 @@
 /*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:29 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/27 18:27:42 by kibotrel         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:45:21 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include "env.h"
 #include "wolf3d.h"
 
-#include <stdio.h>
-
-void	player_position(t_env *env, t_pos *player)
+static void	player_position(t_env *env, t_pos *player)
 {
 	player->x = env->cam.coord.x / 64 - floor(env->cam.coord.x / 64);
 	player->y = env->cam.coord.y / 64 - floor(env->cam.coord.y / 64);
@@ -26,7 +24,7 @@ void	player_position(t_env *env, t_pos *player)
 	player->y += (floor(env->cam.coord.y / 64) * (4 * env->factor)) + 16;
 }
 
-void	objects(t_env *env)
+static void	objects(t_env *env)
 {
 	t_pos	pos;
 	t_pos	wall;
@@ -53,7 +51,7 @@ void	objects(t_env *env)
 	}
 }
 
-void	fov(t_env *env, t_pos player)
+static void	fov(t_env *env, t_pos player)
 {
 	int		x;
 	t_pos	limit;
@@ -77,7 +75,7 @@ void	fov(t_env *env, t_pos player)
 	}
 }
 
-int		map_size(int height, int width)
+static int	map_size(int height, int width)
 {
 	if (height <= 16 && width <= 16)
 		return (8);
@@ -88,7 +86,7 @@ int		map_size(int height, int width)
 	return (0);
 }
 
-void	minimap(t_env *env)
+void		minimap(t_env *env)
 {
 	t_pos	map;
 	t_pos	player;

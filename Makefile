@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/07/10 10:55:04 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/07/10 15:39:16 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,13 @@ INCDIR		= ./incs/ ./libft/incs/ ./SDL2.0.9/include/ ./libpng/incs/
 INCS		= incs/env.h incs/wolf3d.h
 
 SRC			= core/main.c					core/hooks.c				\
+			  core/events.c												\
 			 															\
 			  raycasting/raycast.c			raycasting/collisions.c		\
 																		\
 			  events/update_cam.c			events/movements.c			\
-			  events/resize.c											\
+			  events/resize.c				events/teleport.c			\
+			  events/fullscreen.c			events/mouse.c				\
 																		\
 			  setup/setup.c					setup/raycasting.c			\
 			  setup/camera.c				setup/graphic.c				\

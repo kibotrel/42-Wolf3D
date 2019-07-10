@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nde-jesu <nde-jesu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 17:07:35 by kibotrel          #+#    #+#             */
-/*   Updated: 2019/06/25 14:19:24 by reda-con         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:18:10 by kibotrel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,29 @@
 #include "env.h"
 #include "wolf3d.h"
 
-void	negative(unsigned int *pixel)
+
+void		display_time(unsigned int time)
+{
+	double	sec;
+
+	ft_putstr("\ne");
+	ft_putendl("\033[33mGOOD JOB, YOU WON !\33[0m");
+	ft_putstr("\033[1;31mYour time is : \033[0m\033[35m");
+	sec = time / 1000;
+	if (sec > 60)
+	{
+		ft_putnbr(sec / 60);
+		sec = fmod(sec, 60);
+		ft_putchar('\'');
+	}
+	ft_putnbr(sec);
+	ft_putchar('\"');
+	ft_putnbr(fmod(time, 1000));
+	ft_putstr("\n");
+	ft_putstr("\033[0m");
+}
+
+static void	negative(unsigned int *pixel)
 {
 	unsigned char	r;
 	unsigned char	g;
@@ -29,7 +51,7 @@ void	negative(unsigned int *pixel)
 	*pixel = color;
 }
 
-void	crosshair(t_sdl *sdl, t_env *env)
+void		crosshair(t_sdl *sdl, t_env *env)
 {
 	int	x;
 	int	y;
