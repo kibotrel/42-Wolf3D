@@ -1,5 +1,7 @@
 # 42-Wolf3D
 
+![Main](/screenshots/Main.png)
+
 This project was made to learn about 2D raycasting and rendering techniques using [SDL2](https://www.libsdl.org/).
 
 ## Install
@@ -82,4 +84,10 @@ $> echo $?
 
 ## Screenshots
 
-In collaboration with [@nde-jesu](https://github.com/nde-jesu) and [@reda-con](https://github.com/RemiDC)
+![1](/screenshots/01.png)
+![0](/screenshots/00.png)
+![2](/screenshots/02.png)
+
+## Credits
+
+In collaboration with [@nde-jesu](https://github.com/nde-jesu) and [@reda-con](https://github.com/RemiDC)!
