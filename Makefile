@@ -6,7 +6,7 @@
 #    By: kibotrel <kibotrel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/04 22:15:45 by kibotrel          #+#    #+#              #
-#    Updated: 2019/07/08 11:04:07 by kibotrel         ###   ########.fr        #
+#    Updated: 2019/07/10 10:55:04 by kibotrel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ SRCDIR		= srcs/
 LFTDIR		= libft/
 LPNGDIR		= libpng/
 LZDIR		= libpng/ZLIB/lib/
-SDLDIR		= $(ABSDIR)/SDL2-2.0.9/
-INCDIR		= ./incs/ ./libft/incs/ ./SDL2-2.0.9/include/ ./libpng/incs/
+SDLDIR		= $(ABSDIR)/SDL2.0.9/
+INCDIR		= ./incs/ ./libft/incs/ ./SDL2.0.9/include/ ./libpng/incs/
 
 # Source files (Can be changed)
 
