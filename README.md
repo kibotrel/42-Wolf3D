@@ -1,7 +1,7 @@
 # 42-Wolf3D
 
 ![Main](/screenshots/Main.png)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/kibotrel/42-wolf3d/badge)](https://www.codefactor.io/repository/github/kibotrel/png-parser) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 This project was made to learn about 2D raycasting and rendering techniques using [SDL2](https://www.libsdl.org/).
 
 ## Install
