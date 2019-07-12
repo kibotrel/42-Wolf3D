@@ -90,4 +90,6 @@ $> echo $?
 
 ## Credits
 
-In collaboration with [@nde-jesu](https://github.com/nde-jesu) and [@reda-con](https://github.com/RemiDC)!
+In collaboration with [@nde-jesu](https://github.com/nde-jesu) and [@reda-con](https://github.com/RemiDC).
+
+Assets came from a Minecraft Ressource-Pack called [The Galaxy Ressource Pack 1.14](https://resourcepack.net/the-galaxy-resource-pack/).
