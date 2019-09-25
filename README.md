@@ -9,7 +9,7 @@ This project was made to learn about 2D raycasting and rendering techniques usin
 Works on **macOS Sierra 10.12.6** not sure about portability for other operating systems. This project countains several submodules you must initialize them beforehand :
 
 ```shell
-$> git clone --recurse-submodules -j3 https://github.com/kibotrel/42-Wolf3D
+$> git clone --recurse-submodules -j3 https://github.com/kibotrel/42-Wolf3D.git
 $> cd 42-Wolf3d && make
 ```
 
